@@ -4,7 +4,7 @@
       1.某位同学为探究鱼缸中水的溶氧量与哪些因素有关。向如图所示的圆柱体鱼缸中注水，并测量水中的溶氧量。<br /><br />
 
       请你使用“实验模拟器”，拖动“水面高度“按钮，观察数据可知鱼缸中溶氧量最大的位置在
-      <a-dropdown>
+      <a-dropdown :disabled="a_dropdown_disabled">
             <a-button style="margin-left: 8px;"> {{ answer.q1a1 || "" }} <a-icon type="down" /> </a-button>
             <a-menu slot="overlay">
               <a-menu-item
@@ -71,6 +71,7 @@
         placeholder=""
         v-model="answer.input"
         @change="inputChange"
+        :disabled="a_input_disabled"
       />有关。
     </div>
     <div class="w-2/3">
@@ -216,6 +217,8 @@ export default {
   },
   data() {
     return {
+      a_dropdown_disabled:false,
+      a_input_disabled:false,
       marks1: {
         0: '0',
         1: '1',
@@ -514,8 +517,8 @@ export default {
             fish: 0,
             water: 1,
             grass: 0,
-            volume: 100,
-            do: 30,
+            volume: 5,
+            do: 9,
           },
         ];
       }

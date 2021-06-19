@@ -163,7 +163,7 @@
           </a-form-model>
         </div>
       </a-layout-content> -->
-      <step2 v-show="current==2" @recordProcessData="recordProcessData" :processData="processData"/>
+      <step2 v-show="current==2" @recordProcessData="recordProcessData" :processData="processData" ref="step2"/>
       <!-- <a-layout-content
         v-if="current == 2"
         class="bg-white h-4/5 p-6 flex w-full"
@@ -779,6 +779,10 @@ export default {
     },
     next() {
       this.current++;
+      if(this.current===3){
+         this.$refs.step2.a_dropdown_disabled= true;
+         this.$refs.step2.a_input_disabled= true;
+      }
     },
     back() {
       this.current--;

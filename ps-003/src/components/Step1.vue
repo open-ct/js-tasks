@@ -87,6 +87,7 @@
             :pagination="false"
             :columns="columns"
             :data-source="answer.q1TableData || []"
+            size=middle
           >
           </a-table>
         </div>
@@ -111,6 +112,11 @@ const columns = [
     title: "溶氧量",
     dataIndex: "do",
     key: "do",
+  },
+  {
+    title: "删除",
+    dataIndex: "delete",
+    key: "delete",
   },
 ];
 
@@ -492,6 +498,7 @@ export default {
           grass: this.grass,
           volume: this.getVolume,
           do: this.getDo,
+          delete:this.deletedata,
         });
         this.$forceUpdate();
       }

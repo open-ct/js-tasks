@@ -11,8 +11,8 @@
         :default-value="-1"
       >
         <br />
-        <a-radio :value="1"> 同学A.鱼缸放入水草时，鱼缸中含氧量高； </a-radio>
-        <a-radio :value="2">
+        <a-radio :value="2"> 同学A.鱼缸放入水草时，鱼缸中含氧量高； </a-radio>
+        <a-radio :value="1">
           同学B.鱼缸不放入水草时，鱼缸中含氧量高；
         </a-radio> </a-radio-group
       ><br /><br />

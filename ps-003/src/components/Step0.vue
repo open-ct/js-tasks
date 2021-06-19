@@ -1,16 +1,14 @@
 <template>
   <a-layout-content class="bg-white h-4/5 p-6 flex">
-        <video class="float-right" width="640" height="480" loop muted autoplay>
-          <source
-            src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-7d0ddff0-472c-48e1-ad19-ad0d117424d9/9d3c245e-d8ce-467c-adc0-b4096e066506.mp4"
-            type="video/mp4"
-          />
-        </video>
+       
         <div class="text-xl text-left align-middle mt-32 ml-4">
-          在一些家庭中，会使用生态鱼缸来饲养观赏鱼。有人在饲养某类观赏鱼时，
+          在一些家庭中，会使用生态鱼缸来养鱼。有人在饲养某类观赏鱼时，
           根据经验知道，当鱼缸中的溶氧量过低时，该类观赏鱼便会死亡。
           有人认为，鱼缸中水位，鱼的数量，以及水草的数量等因素会影响观赏鱼
           的存活情况。
+           <div>
+          <img src="../assets/head.png" width=640px height=280px>
+        </div>
         </div>
       </a-layout-content>
 </template>
