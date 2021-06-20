@@ -89,6 +89,9 @@
             :data-source="answer.q1TableData || []"
             size=middle
           >
+            <p slot="tags" slot-scope="text,tags,i">
+              <a-button @click="deleteQ1Tabledata(i)">删除</a-button>
+            </p>
           </a-table>
         </div>
       </div>
@@ -114,9 +117,10 @@ const columns = [
     key: "do",
   },
   {
-    title: "删除",
+    title: "删除数据",
     dataIndex: "delete",
     key: "delete",
+    scopedSlots: { customRender: 'tags' },
   },
 ];
 
@@ -455,6 +459,10 @@ export default {
   name: "app",
   mounted() {},
   methods: {
+    deleteQ1Tabledata(index){
+      this.answer.q1TableData.splice(index, 1);
+      this.$forceUpdate();
+    },
     q33RadioChange(e) {
       if (e.target.value == 1 && this.steps.length == 8) {
         this.steps.push({
@@ -498,7 +506,6 @@ export default {
           grass: this.grass,
           volume: this.getVolume,
           do: this.getDo,
-          delete:this.deletedata,
         });
         this.$forceUpdate();
       }

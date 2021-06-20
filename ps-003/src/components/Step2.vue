@@ -123,6 +123,9 @@
             :columns="columns"
             :data-source="answer.q1TableData || []"
           >
+          <p slot="tags" slot-scope="text,tags,i">
+              <a-button @click="deleteQ1Tabledata(i)">删除</a-button>
+            </p>
           </a-table>
         </div>
       </div>
@@ -146,6 +149,12 @@ const columns = [
     title: "溶氧量",
     dataIndex: "do",
     key: "do",
+  },
+    {
+    title: "删除数据",
+    dataIndex: "delete",
+    key: "delete",
+    scopedSlots: { customRender: 'tags' },
   },
 ];
 
@@ -492,6 +501,10 @@ export default {
   mounted() {},
   props:['processData'],
   methods: {
+    deleteQ1Tabledata(index){
+      this.answer.q1TableData.splice(index, 1);
+      this.$forceUpdate();
+    },
     recordProcessData(water){
       // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
       this.processData.answer[3]=[water]
