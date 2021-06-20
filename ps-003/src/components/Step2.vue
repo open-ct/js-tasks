@@ -4,7 +4,7 @@
       1.某位同学为探究鱼缸中水的溶氧量与哪些因素有关。向如图所示的圆柱体鱼缸中注水，并测量水中的溶氧量。<br /><br />
 
       请你使用“实验模拟器”，拖动“水面高度“按钮，观察数据可知鱼缸中溶氧量最大的位置在
-      <a-dropdown :disabled="a_dropdown_disabled">
+      <a-dropdown :disabled="dropdown_disabled">
             <a-button style="margin-left: 8px;"> {{ answer.q1a1 || "" }} <a-icon type="down" /> </a-button>
             <a-menu slot="overlay">
               <a-menu-item
@@ -13,6 +13,7 @@
                     answer.q1a1 = 1;
                     recordProcessData(1)
                     $forceUpdate();
+                    
                   }
                 "
               >
@@ -71,7 +72,7 @@
         placeholder=""
         v-model="answer.input"
         @change="inputChange"
-        :disabled="a_input_disabled"
+        :disabled="input_disabled"
       />有关。
     </div>
     <div class="w-2/3">
@@ -152,6 +153,12 @@ export default {
   components: {},
   provide: {},
   computed: {
+    dropdown_disabled(){
+      return this.a_dropdown_disabled && this.answer.q1a1>0 ? true:false;    //监听父组件下一步的按钮，并判断有没有输入答案
+    },
+    input_disabled(){
+      return this.a_input_disabled && this.answer.input ? true:false;    //监听父组件下一步的按钮，并判断有没有输入答案,还有bug，按了下一页之后回来输入答案，失去焦点会马上不能修改答案
+    },
     getImg() {
       return this.imgList[this.maojinweizhi + "" + this.shuiweiweizhi];
     },
@@ -487,7 +494,6 @@ export default {
   methods: {
     recordProcessData(water){
       // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
-      
       this.processData.answer[3]=[water]
       // localStorage.setItem('processData',JSON.stringify(recordProcessData))
       this.$emit('recordProcessData',this.processData)
@@ -532,7 +538,7 @@ export default {
       });
       this.$forceUpdate();
       // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
-      
+
       this.processData.answer[5]=[this.water]
       // localStorage.setItem('processData',JSON.stringify(recordProcessData))
       this.$emit('recordProcessData',this.processData)
@@ -598,6 +604,7 @@ export default {
     },
   },
 };
+
 </script>
 
 <style>
