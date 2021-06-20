@@ -1,39 +1,53 @@
 <template>
   <a-layout-content class="bg-white h-4/5 p-6 flex">
-        <div class="text-lg text-left mb-8 w-1/2">
-          3.1 某位同学想在球状鱼缸中养鱼，<br />
-          学生A认为：鱼缸放入水草时，鱼缸中含氧量会更高；<br />
-          学生B认为：鱼缸不放入水草时，鱼缸中含氧量会更高；<br /><br />
-          你认为哪位同学的观点更合理？<br />
-          <a-radio-group name="radioGroup" @change="radioChange" :default-value="-1">
-            <a-radio :value="1"> 学生A </a-radio>
-            <a-radio :value="2"> 学生B </a-radio>
-          </a-radio-group>
-        </div>
-        <div class="w-1/2 flex">
-          <img
-            class="absolute"
-            style="width: 616px"
-            src="../assets/shui5.png"
-            alt=""
-          />
-          <img
-            class="absolute"
-            style="width: 616px"
-            :src="grassImg[1]"
-            alt=""
-          />
-          <img class="absolute" style="width: 616px" :src="fishImg[2]" alt="" />
-        </div>
-      </a-layout-content>
+    <div class="w-1/2">
+      <div class="text-lg text-left mb-8">
+        2.3 根据你上述的实验设计数据结果，你认为哪位同学的观点更合理（ ）<br />
+      </div>
+      <a-radio-group
+        v-model="answer.q33Radio"
+        @change="q33RadioChange"
+        name="radioGroup"
+        :default-value="-1"
+      >
+        <br />
+        <a-radio :value="2"> 同学A.鱼缸放入水草时，鱼缸中含氧量高； </a-radio>
+        <a-radio :value="1">
+          同学B.鱼缸不放入水草时，鱼缸中含氧量高；
+        </a-radio> </a-radio-group
+      ><br /><br />
+      <div class="text-left mb-4">请对你的观点，做出相应的解释。</div>
+      <a-textarea v-model="answer.text" @change="textareaChange" class="mt-4" placeholder="" :rows="4" />
+    </div>
+    <div class="w-1/2">
+    
+      <a-table
+        :scroll="{ y: 480 }"
+        :pagination="false"
+        :columns="columns"
+        :data-source="tableData || []"
+      >
+      </a-table>
+    </div>
+  </a-layout-content>
 </template>
 
 <script>
 const columns = [
   {
+    title: "鱼的数量",
+    dataIndex: "fish",
+    key: "fish",
+  },
+  {
     title: "水面高度",
     dataIndex: "water",
     key: "water",
+  },
+  {
+    title: "水草数量",
+    dataIndex: "grass",
+    key: "grass",
   },
   {
     title: "水的体积",
@@ -48,8 +62,12 @@ const columns = [
 ];
 
 export default {
+  props:['tableData','processData'],
   components: {},
   provide: {},
+  updated(){
+    // this.$forceUpdate()
+  },
   computed: {
     getImg() {
       return this.imgList[this.maojinweizhi + "" + this.shuiweiweizhi];
@@ -90,7 +108,7 @@ export default {
       // });
     },
     getVolumeStraight() {
-       switch (this.water) {
+      switch (this.water) {
         case 1:
           return 5;
         case 2:
@@ -379,25 +397,32 @@ export default {
     };
   },
   name: "app",
-  mounted() {},
-  props:['processData'],
+  mounted() {
+    this.answer.q32TableData=JSON.parse(localStorage.getItem('q32TableData'))
+    
+    this.$forceUpdate()
+  },
   methods: {
-    radioChange(e){
+    textareaChange(){
       // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
       
-      this.processData.answer[9]=[e.target.value]
+      this.processData.answer[15]=this.answer.text
       // localStorage.setItem('processData',JSON.stringify(recordProcessData))
       this.$emit('recordProcessData',this.processData)
     },
+    
     q33RadioChange(e) {
-      if (e.target.value == 1 && this.steps.length == 8) {
-        this.steps.push({
-          index: 8,
-          title: "问题4",
-        });
-      } else if (e.target.value == 2 && this.steps.length == 9) {
-        this.steps.pop();
+      console.log(e)
+      if (e.target.value == 1 ) {
+        this.$emit('nextStep',true);
+      } else if (e.target.value == 2) {
+        this.$emit('nextStep',false);
       }
+      // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
+      
+      this.processData.answer[14]=[e.target.value]
+      // localStorage.setItem('processData',JSON.stringify(recordProcessData))
+      this.$emit('recordProcessData',this.processData)
     },
     updateQ1Table() {
       if (!this.answer.q1TableData) {

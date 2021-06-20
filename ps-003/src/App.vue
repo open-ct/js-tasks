@@ -256,11 +256,9 @@
       </a-layout-content> -->
       
       <step3 v-show="current==3" @recordProcessData="recordProcessData" :processData="processData"/>
-      <step4 v-show="current==4" @recordProcessData="recordProcessData" :processData="processData"/>
-      <step5 v-show="current==5" @recordProcessData="recordProcessData" :processData="processData"/>
-      <step6 v-show="current==6" @recordProcessData="recordProcessData" @updateTableData="handleInfo" :processData="processData"/>
-      <step7 @recordProcessData="recordProcessData" ref="step7" v-show="current==7" @nextStep="nextStep" :tableData="answer.s7TableData" :processData="processData"/>
-      <step8 @recordProcessData="recordProcessData" v-show="current==8" :processData="processData"/>
+      <step4 v-show="current==4" @recordProcessData="recordProcessData" @updateTableData="handleInfo" :processData="processData"/>
+      <step5 @recordProcessData="recordProcessData" ref="step7" v-show="current==5" @nextStep="nextStep" :tableData="answer.s7TableData" :processData="processData"/>
+      <step6 @recordProcessData="recordProcessData" v-show="current==6" :processData="processData"/>
       
       
       
@@ -357,10 +355,8 @@ import step3 from './components/Step3'
 import step4 from './components/Step4'
 import step5 from './components/Step5'
 import step6 from './components/Step6'
-import step7 from './components/Step7'
-import step8 from './components/Step8'
 export default {
-  components: {step0, step1, step2,step3, step4, step5, step6, step7, step8 },
+  components: {step0, step1, step2, step3, step4, step5, step6, },
   provide: {},
   computed: {
     getImg() {
@@ -633,23 +629,15 @@ export default {
         },
         {
           index: 3,
-          title: "问题1.1",
+          title: "问题2.1",
         },
         {
           index: 4,
-          title: "问题2",
+          title: "问题2.2",
         },
         {
           index: 5,
-          title: "问题3.1",
-        },
-        {
-          index: 6,
-          title: "问题3.2",
-        },
-        {
-          index: 7,
-          title: "问题3.3",
+          title: "问题2.3",
         },
       ],
       current: 0,
@@ -726,12 +714,12 @@ export default {
     },
     nextStep(e) {
       console.log(e)
-      if (e&&this.steps.length==8) {
+      if (e&&this.steps.length==6) {
         this.steps.push({
-          index: 8,
-          title: "问题4",
+          index: 6,
+          title: "问题2.4",
         });
-      } else if(this.steps.length==9) {
+      } else if(this.steps.length==7) {
         this.steps.pop();
       }
     },

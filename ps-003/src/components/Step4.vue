@@ -1,21 +1,118 @@
 <template>
-  <a-layout-content class="bg-white h-4/5 p-6 flex">
-    <div class="text-lg text-left mb-8">
-      <div class="mb-4">
-        2.某位同学，在上述两个实验中，使用“实验模拟器”分别收集长方体鱼缸以及球状体鱼缸的数据如右表所示。<br />由图表数据可以发现，在水面盖度在4时，球状鱼缸中溶氧量最高。请根据您观察到的实验过程，解释为什么在位置4时，球状鱼缸中溶氧量最高？
+  <a-layout-content class="bg-white h-4/5 p-6 flex w-full">
+    <div class="w-1/3">
+      <div class="text-lg leading-relaxed text-left mb-8">
+        2.2 请你利用实验模拟器，设计实验并收集至少三组数据，验证你的观点。
       </div>
-      <a-textarea v-model="answer.text" @change="textareaChange" class="mt-4" placeholder="" :rows="4" />
+      <a-textarea v-model="answer.text" @change="textareaChange" class="mt-4" placeholder="" :rows="18" />
     </div>
-    <img class="ml-4" src="../assets/q2table.png" alt="" />
+    <div class="w-2/3">
+      <a-form-model
+        class=""
+        :model="form"
+        :label-col="labelCol"
+        :wrapper-col="wrapperCol"
+      >
+        <a-form-model-item label="鱼的数量">
+          <a-slider
+            v-model="fish"
+            id="test"
+            :default-value="1"
+            :dots="true"
+            :min="1"
+            :max="5"
+            :marks="marks2"
+          />
+        </a-form-model-item>
+        <a-form-model-item label="水面高度">
+          <a-slider
+            v-model="water"
+            id="test"
+            :default-value="1"
+            :dots="true"
+            :min="1"
+            :max="5"
+            :marks="marks2"
+          />
+        </a-form-model-item>
+        <a-form-model-item label="水草数量">
+          <a-slider
+            v-model="grass"
+            id="test"
+            :default-value="0"
+            :dots="true"
+            :max="4"
+            :marks="marks1"
+          />
+        </a-form-model-item>
+      </a-form-model>
+
+      <div class="flex ml-6 mt-4">
+        <a-statistic
+          title="水的体积（mL）"
+          :value="getVolume"
+          style="margin-right: 50px"
+        />
+        <a-statistic
+          title="溶氧量（mg/L）"
+          :value="getDo"
+          style="margin-right: 50px"
+        />
+        <a-button @click="updateQ1Table" type="primary">
+          <a-icon type="edit" />记录
+        </a-button>
+      </div>
+      <div class="flex flex-1 w-full">
+        <img
+          v-if="grass > 0"
+          class="absolute"
+          style="width: 416px"
+          :src="grassImg[grass + '']"
+          alt=""
+        /><img
+          v-if="fish > 0"
+          class="absolute"
+          style="width: 416px"
+          :src="fishImg[fish + '']"
+          alt=""
+        />
+        <div class="w-1/2">
+          <img v-if="water == 1" src="../assets/straight1.png" alt="" />
+          <img v-if="water == 2" src="../assets/straight2.png" alt="" />
+          <img v-if="water == 3" src="../assets/straight3.png" alt="" />
+          <img v-if="water == 4" src="../assets/straight4.png" alt="" />
+          <img v-if="water == 5" src="../assets/straight5.png" alt="" />
+        </div>
+        <div class="w-1/2">
+          <a-table
+            :scroll="{ y: 280 }"
+            :pagination="false"
+            :columns="columns"
+            :data-source="answer.q1TableData || []"
+          >
+          </a-table>
+        </div>
+      </div>
+    </div>
   </a-layout-content>
 </template>
 
 <script>
 const columns = [
   {
+    title: "鱼的数量",
+    dataIndex: "fish",
+    key: "fish",
+  },
+  {
     title: "水面高度",
     dataIndex: "water",
     key: "water",
+  },
+  {
+    title: "水草数量",
+    dataIndex: "grass",
+    key: "grass",
   },
   {
     title: "水的体积",
@@ -100,22 +197,22 @@ export default {
   data() {
     return {
       marks1: {
-        0: "0",
-        1: "1",
-        2: "2",
-        3: "3",
-        4: "4",
+        0: '0',
+        1: '1',
+        2: '2',
+        3: '3',
+        4: '4'
       },
       marks2: {
-        1: "1",
-        2: "2",
-        3: "3",
-        4: "4",
-        5: "5",
+        1: '1',
+        2: '2',
+        3: '3',
+        4: '4',
+        5: '5'
       },
       columns,
       answer: {},
-       q4TableData: [
+      q4TableData: [
         { fish: 3, water: 4, grass: 0, do: 6.6 },
         { fish: 3, water: 4, grass: 1, do: 7.1 },
         { fish: 3, water: 4, grass: 2, do: 7.6 },
@@ -361,13 +458,13 @@ export default {
       },
     };
   },
-  name: "step-4",
+  name: "step-6",
   mounted() {},
   methods: {
     textareaChange(){
       // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
       
-      this.processData.answer[8]=this.answer.text
+      this.processData.answer[10]=this.answer.text
       // localStorage.setItem('processData',JSON.stringify(recordProcessData))
       this.$emit('recordProcessData',this.processData)
     },
@@ -384,14 +481,7 @@ export default {
     updateQ1Table() {
       if (!this.answer.q1TableData) {
         this.answer.q1TableData = [
-          {
-            key: 0,
-            fish: 0,
-            water: 1,
-            grass: 0,
-            volume: this.getVolumeStraight,
-            do: this.getDoStraight,
-          },
+          
         ];
       }
       this.answer.q1TableData.push({
@@ -399,10 +489,19 @@ export default {
         fish: this.fish,
         water: this.water,
         grass: this.grass,
-        volume: this.getVolumeStraight,
-        do: this.getDoStraight,
+        volume: this.getVolume,
+        do: this.getDo,
       });
+      // localStorage.setItem('q32TableData',JSON.stringify(this.answer.q1TableData))
+      this.$emit('updateTableData',this.answer.q1TableData)
       this.$forceUpdate();
+      // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
+      
+      this.processData.answer[11]=[this.fish]
+      this.processData.answer[12]=[this.water]
+      this.processData.answer[13]=[this.grass+1]
+      // localStorage.setItem('processData',JSON.stringify(recordProcessData))
+      this.$emit('recordProcessData',this.processData)
     },
     updateQ32Table() {
       if (this.current == 6) {

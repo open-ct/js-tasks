@@ -1,125 +1,32 @@
 <template>
-<a-layout-content class="bg-white h-4/5 p-6 flex w-full">
-    <div class="text-lg leading-relaxed text-left mb-8 w-1/3">
-      1.1接着，该同学向另外一个球状鱼缸中注水，并测量水中的溶氧量。<br /><br />
-
-      请你使用“实验模拟器”，拖动“水面高度“按钮，观察数据可知，球形鱼缸中溶氧量最大的位置在
-      <a-dropdown>
-            <a-button style="margin-left: 8px;"> {{ answer.q1a1 || "" }} <a-icon type="down" /> </a-button>
-            <a-menu slot="overlay">
-              <a-menu-item
-                @click="
-                  () => {
-                    answer.q1a1 = 1;
-                    recordProcessData(1)
-                    $forceUpdate();
-                  }
-                "
-              >
-                <a>1</a>
-              </a-menu-item>
-              <a-menu-item
-                @click="
-                  () => {
-                    answer.q1a1 = 2;
-                    recordProcessData(1)
-                    $forceUpdate();
-                  }
-                "
-              >
-                <a>2</a>
-              </a-menu-item>
-              <a-menu-item
-                @click="
-                  () => {
-                    answer.q1a1 = 3;
-                    recordProcessData(1)
-                    $forceUpdate();
-                  }
-                "
-              >
-                <a>3</a>
-              </a-menu-item>
-              <a-menu-item
-                @click="
-                  () => {
-                    answer.q1a1 = 4;
-                    recordProcessData(1)
-                    $forceUpdate();
-                  }
-                "
-              >
-                <a>4</a>
-              </a-menu-item>
-              <a-menu-item
-                @click="
-                  () => {
-                    answer.q1a1 = 5;
-                    recordProcessData(1)
-                    $forceUpdate();
-                  }
-                "
-              >
-                <a>5</a>
-              </a-menu-item>
-            </a-menu>
-          </a-dropdown>
-
-    </div>
-    <div class="w-2/3">
-      <a-form-model
-        class=""
-        :model="form"
-        :label-col="labelCol"
-        :wrapper-col="wrapperCol"
-      >
-        <a-form-model-item label="水面高度">
-          <a-slider
-            v-model="water"
-            id="test"
-            :default-value="1"
-            :dots="true"
-            :min="1"
-            :max="5"
-            :marks="marks2"
-            @change="updateQ1Table"
+  <a-layout-content class="bg-white h-4/5 p-6 flex">
+        <div class="text-lg text-left mb-8 w-1/2">
+          2.1 某位同学想在球状鱼缸中养鱼，<br />
+          学生A认为：鱼缸放入水草时，鱼缸中含氧量会更高；<br />
+          学生B认为：鱼缸不放入水草时，鱼缸中含氧量会更高；<br /><br />
+          你认为哪位同学的观点更合理？<br />
+          <a-radio-group name="radioGroup" @change="radioChange" :default-value="-1">
+            <a-radio :value="1"> 学生A </a-radio>
+            <a-radio :value="2"> 学生B </a-radio>
+            <a-radio :value="3"> 学生C </a-radio>
+          </a-radio-group>
+        </div>
+        <div class="w-1/2 flex">
+          <img
+            class="absolute"
+            style="width: 616px"
+            src="../assets/head.png"
+            alt=""
           />
-        </a-form-model-item>
-      </a-form-model>
-
-      <a-statistic
-        class="w-1/5"
-        style="margin-left: 30px"
-        title="水的体积（mL）"
-        :value="getVolumeStraight"
-      />
-      <a-statistic
-        class="w-1/5"
-        style="margin-left: 30px"
-        title="溶氧量（mg/L）"
-        :value="getDoStraight"
-      />
-      <div class="flex flex-1 w-full mt-4">
-        <div class="w-1/2">
-          <img v-if="water == 1" src="../assets/shui1.png" alt="" />
-          <img v-if="water == 2" src="../assets/shui2.png" alt="" />
-          <img v-if="water == 3" src="../assets/shui3.png" alt="" />
-          <img v-if="water == 4" src="../assets/shui4.png" alt="" />
-          <img v-if="water == 5" src="../assets/shui5.png" alt="" />
+          <img
+            class="absolute"
+            style="width: 616px"
+            :src="grassImg[1]"
+            alt=""
+          />
+          <img class="absolute" style="width: 616px" :src="fishImg[2]" alt="" />
         </div>
-        <div class="w-1/2">
-          <a-table
-            :scroll="{ y: 280 }"
-            :pagination="false"
-            :columns="columns"
-            :data-source="answer.q1TableData || []"
-          >
-          </a-table>
-        </div>
-      </div>
-    </div>
-  </a-layout-content>
-  
+      </a-layout-content>
 </template>
 
 <script>
@@ -144,7 +51,6 @@ const columns = [
 export default {
   components: {},
   provide: {},
-  props:['processData'],
   computed: {
     getImg() {
       return this.imgList[this.maojinweizhi + "" + this.shuiweiweizhi];
@@ -152,15 +58,15 @@ export default {
     getVolume() {
       switch (this.water) {
         case 1:
-          return 100;
+          return 5;
         case 2:
-          return 220;
+          return 10;
         case 3:
-          return 350;
+          return 15;
         case 4:
-          return 470;
+          return 20;
         case 5:
-          return 590;
+          return 25;
       }
     },
     getDo() {
@@ -185,21 +91,21 @@ export default {
       // });
     },
     getVolumeStraight() {
-      switch (this.water) {
+       switch (this.water) {
         case 1:
-          return 100;
+          return 5;
         case 2:
-          return 200;
+          return 10;
         case 3:
-          return 300;
+          return 15;
         case 4:
-          return 400;
+          return 20;
         case 5:
-          return 500;
+          return 25;
       }
     },
     getDoStraight() {
-      return this.getVolumeStraight / 10 + 20;
+      return 9;
       // this.doData.forEach(element => {
       // 	debugger
       // 	if(element.fish==fish&&element.water==water&&element.grass==grass){
@@ -228,136 +134,138 @@ export default {
       columns,
       answer: {},
       q4TableData: [
-        { fish: 0, water: 4, grass: 0, do: 60 },
-        { fish: 2, water: 4, grass: 0, do: 50 },
-        { fish: 2, water: 4, grass: 2, do: 48 },
+        { fish: 3, water: 4, grass: 0, do: 6.6 },
+        { fish: 3, water: 4, grass: 1, do: 7.1 },
+        { fish: 3, water: 4, grass: 2, do: 7.6 },
+        { fish: 3, water: 4, grass: 3, do: 8.1 },
+        { fish: 3, water: 4, grass: 4, do: 8.6 },
       ],
       doData: [
-        { fish: 1, water: 1, grass: 0, do: 31 },
-        { fish: 1, water: 1, grass: 1, do: 31.1 },
-        { fish: 1, water: 1, grass: 2, do: 31.2 },
-        { fish: 1, water: 1, grass: 3, do: 31.3 },
-        { fish: 1, water: 1, grass: 4, do: 31.4 },
-        { fish: 1, water: 2, grass: 0, do: 43 },
-        { fish: 1, water: 2, grass: 1, do: 43.1 },
-        { fish: 1, water: 2, grass: 2, do: 43.2 },
-        { fish: 1, water: 2, grass: 3, do: 43.3 },
-        { fish: 1, water: 2, grass: 4, do: 43.4 },
-        { fish: 1, water: 3, grass: 0, do: 58 },
-        { fish: 1, water: 3, grass: 1, do: 58.1 },
-        { fish: 1, water: 3, grass: 2, do: 58.2 },
-        { fish: 1, water: 3, grass: 3, do: 58.3 },
-        { fish: 1, water: 3, grass: 4, do: 58.4 },
-        { fish: 1, water: 4, grass: 0, do: 79 },
-        { fish: 1, water: 4, grass: 1, do: 79.1 },
-        { fish: 1, water: 4, grass: 2, do: 79.2 },
-        { fish: 1, water: 4, grass: 3, do: 79.3 },
-        { fish: 1, water: 4, grass: 4, do: 79.4 },
-        { fish: 1, water: 5, grass: 0, do: 75 },
-        { fish: 1, water: 5, grass: 1, do: 75.1 },
-        { fish: 1, water: 5, grass: 2, do: 75.2 },
-        { fish: 1, water: 5, grass: 3, do: 75.3 },
-        { fish: 1, water: 5, grass: 4, do: 75.4 },
-        { fish: 2, water: 1, grass: 0, do: 30.8 },
-        { fish: 2, water: 1, grass: 1, do: 30.9 },
-        { fish: 2, water: 1, grass: 2, do: 31 },
-        { fish: 2, water: 1, grass: 3, do: 31.1 },
-        { fish: 2, water: 1, grass: 4, do: 31.2 },
-        { fish: 2, water: 2, grass: 0, do: 42.8 },
-        { fish: 2, water: 2, grass: 1, do: 42.9 },
-        { fish: 2, water: 2, grass: 2, do: 43 },
-        { fish: 2, water: 2, grass: 3, do: 43.1 },
-        { fish: 2, water: 2, grass: 4, do: 43.2 },
-        { fish: 2, water: 3, grass: 0, do: 57.8 },
-        { fish: 2, water: 3, grass: 1, do: 57.9 },
-        { fish: 2, water: 3, grass: 2, do: 58 },
-        { fish: 2, water: 3, grass: 3, do: 58.1 },
-        { fish: 2, water: 3, grass: 4, do: 58.2 },
-        { fish: 2, water: 4, grass: 0, do: 78.8 },
-        { fish: 2, water: 4, grass: 1, do: 78.9 },
-        { fish: 2, water: 4, grass: 2, do: 79 },
-        { fish: 2, water: 4, grass: 3, do: 79.1 },
-        { fish: 2, water: 4, grass: 4, do: 79.2 },
-        { fish: 2, water: 5, grass: 0, do: 74.8 },
-        { fish: 2, water: 5, grass: 1, do: 74.9 },
-        { fish: 2, water: 5, grass: 2, do: 75 },
-        { fish: 2, water: 5, grass: 3, do: 75.1 },
-        { fish: 2, water: 5, grass: 4, do: 75.2 },
-        { fish: 3, water: 1, grass: 0, do: 30.6 },
-        { fish: 3, water: 1, grass: 1, do: 30.7 },
-        { fish: 3, water: 1, grass: 2, do: 30.8 },
-        { fish: 3, water: 1, grass: 3, do: 30.9 },
-        { fish: 3, water: 1, grass: 4, do: 31 },
-        { fish: 3, water: 2, grass: 0, do: 42.6 },
-        { fish: 3, water: 2, grass: 1, do: 42.7 },
-        { fish: 3, water: 2, grass: 2, do: 42.8 },
-        { fish: 3, water: 2, grass: 3, do: 42.9 },
-        { fish: 3, water: 2, grass: 4, do: 43 },
-        { fish: 3, water: 3, grass: 0, do: 57.6 },
-        { fish: 3, water: 3, grass: 1, do: 57.7 },
-        { fish: 3, water: 3, grass: 2, do: 57.8 },
-        { fish: 3, water: 3, grass: 3, do: 57.9 },
-        { fish: 3, water: 3, grass: 4, do: 58 },
-        { fish: 3, water: 4, grass: 0, do: 78.6 },
-        { fish: 3, water: 4, grass: 1, do: 78.7 },
-        { fish: 3, water: 4, grass: 2, do: 78.8 },
-        { fish: 3, water: 4, grass: 3, do: 78.9 },
-        { fish: 3, water: 4, grass: 4, do: 79 },
-        { fish: 3, water: 5, grass: 0, do: 74.6 },
-        { fish: 3, water: 5, grass: 1, do: 74.7 },
-        { fish: 3, water: 5, grass: 2, do: 74.8 },
-        { fish: 3, water: 5, grass: 3, do: 74.9 },
-        { fish: 3, water: 5, grass: 4, do: 75 },
-        { fish: 4, water: 1, grass: 0, do: 30.4 },
-        { fish: 4, water: 1, grass: 1, do: 30.5 },
-        { fish: 4, water: 1, grass: 2, do: 30.6 },
-        { fish: 4, water: 1, grass: 3, do: 30.7 },
-        { fish: 4, water: 1, grass: 4, do: 30.8 },
-        { fish: 4, water: 2, grass: 0, do: 42.4 },
-        { fish: 4, water: 2, grass: 1, do: 42.5 },
-        { fish: 4, water: 2, grass: 2, do: 42.6 },
-        { fish: 4, water: 2, grass: 3, do: 42.7 },
-        { fish: 4, water: 2, grass: 4, do: 42.8 },
-        { fish: 4, water: 3, grass: 0, do: 57.4 },
-        { fish: 4, water: 3, grass: 1, do: 57.5 },
-        { fish: 4, water: 3, grass: 2, do: 57.6 },
-        { fish: 4, water: 3, grass: 3, do: 57.7 },
-        { fish: 4, water: 3, grass: 4, do: 57.8 },
-        { fish: 4, water: 4, grass: 0, do: 78.4 },
-        { fish: 4, water: 4, grass: 1, do: 78.5 },
-        { fish: 4, water: 4, grass: 2, do: 78.6 },
-        { fish: 4, water: 4, grass: 3, do: 78.7 },
-        { fish: 4, water: 4, grass: 4, do: 78.8 },
-        { fish: 4, water: 5, grass: 0, do: 74.4 },
-        { fish: 4, water: 5, grass: 1, do: 74.5 },
-        { fish: 4, water: 5, grass: 2, do: 74.6 },
-        { fish: 4, water: 5, grass: 3, do: 74.7 },
-        { fish: 4, water: 5, grass: 4, do: 74.8 },
-        { fish: 5, water: 1, grass: 0, do: 30.2 },
-        { fish: 5, water: 1, grass: 1, do: 30.3 },
-        { fish: 5, water: 1, grass: 2, do: 30.4 },
-        { fish: 5, water: 1, grass: 3, do: 30.5 },
-        { fish: 5, water: 1, grass: 4, do: 30.6 },
-        { fish: 5, water: 2, grass: 0, do: 42.2 },
-        { fish: 5, water: 2, grass: 1, do: 42.3 },
-        { fish: 5, water: 2, grass: 2, do: 42.4 },
-        { fish: 5, water: 2, grass: 3, do: 42.5 },
-        { fish: 5, water: 2, grass: 4, do: 42.6 },
-        { fish: 5, water: 3, grass: 0, do: 57.2 },
-        { fish: 5, water: 3, grass: 1, do: 57.3 },
-        { fish: 5, water: 3, grass: 2, do: 57.4 },
-        { fish: 5, water: 3, grass: 3, do: 57.5 },
-        { fish: 5, water: 3, grass: 4, do: 57.6 },
-        { fish: 5, water: 4, grass: 0, do: 78.2 },
-        { fish: 5, water: 4, grass: 1, do: 78.3 },
-        { fish: 5, water: 4, grass: 2, do: 78.4 },
-        { fish: 5, water: 4, grass: 3, do: 78.5 },
-        { fish: 5, water: 4, grass: 4, do: 78.6 },
-        { fish: 5, water: 5, grass: 0, do: 74.2 },
-        { fish: 5, water: 5, grass: 1, do: 74.3 },
-        { fish: 5, water: 5, grass: 2, do: 74.4 },
-        { fish: 5, water: 5, grass: 3, do: 74.5 },
-        { fish: 5, water: 5, grass: 4, do: 74.6 },
+        { fish: 1, water: 1, grass: 0, do: 7.0 },
+        { fish: 1, water: 1, grass: 1, do: 7.5 },
+        { fish: 1, water: 1, grass: 2, do: 8.0 },
+        { fish: 1, water: 1, grass: 3, do: 8.5 },
+        { fish: 1, water: 1, grass: 4, do: 9.0 },
+        { fish: 1, water: 2, grass: 0, do: 7.0 },
+        { fish: 1, water: 2, grass: 1, do: 7.5 },
+        { fish: 1, water: 2, grass: 2, do: 8.0 },
+        { fish: 1, water: 2, grass: 3, do: 8.5 },
+        { fish: 1, water: 2, grass: 4, do: 9.0 },
+        { fish: 1, water: 3, grass: 0, do: 7.0 },
+        { fish: 1, water: 3, grass: 1, do: 7.5 },
+        { fish: 1, water: 3, grass: 2, do: 8.0 },
+        { fish: 1, water: 3, grass: 3, do: 8.5 },
+        { fish: 1, water: 3, grass: 4, do: 9.0 },
+        { fish: 1, water: 4, grass: 0, do: 7.0 },
+        { fish: 1, water: 4, grass: 1, do: 7.5 },
+        { fish: 1, water: 4, grass: 2, do: 8.0 },
+        { fish: 1, water: 4, grass: 3, do: 8.5 },
+        { fish: 1, water: 4, grass: 4, do: 9.0 },
+        { fish: 1, water: 5, grass: 0, do: 7.0 },
+        { fish: 1, water: 5, grass: 1, do: 7.5 },
+        { fish: 1, water: 5, grass: 2, do: 8.0 },
+        { fish: 1, water: 5, grass: 3, do: 8.5 },
+        { fish: 1, water: 5, grass: 4, do: 9.0 },
+        { fish: 2, water: 1, grass: 0, do: 6.8 },
+        { fish: 2, water: 1, grass: 1, do: 7.3 },
+        { fish: 2, water: 1, grass: 2, do: 7.8 },
+        { fish: 2, water: 1, grass: 3, do: 8.3 },
+        { fish: 2, water: 1, grass: 4, do: 8.8 },
+        { fish: 2, water: 2, grass: 0, do: 6.8 },
+        { fish: 2, water: 2, grass: 1, do: 7.3 },
+        { fish: 2, water: 2, grass: 2, do: 7.8 },
+        { fish: 2, water: 2, grass: 3, do: 8.3 },
+        { fish: 2, water: 2, grass: 4, do: 8.8 },
+        { fish: 2, water: 3, grass: 0, do: 6.8 },
+        { fish: 2, water: 3, grass: 1, do: 7.3 },
+        { fish: 2, water: 3, grass: 2, do: 7.8 },
+        { fish: 2, water: 3, grass: 3, do: 8.3 },
+        { fish: 2, water: 3, grass: 4, do: 8.8 },
+        { fish: 2, water: 4, grass: 0, do: 6.8 },
+        { fish: 2, water: 4, grass: 1, do: 7.3 },
+        { fish: 2, water: 4, grass: 2, do: 7.8 },
+        { fish: 2, water: 4, grass: 3, do: 8.3 },
+        { fish: 2, water: 4, grass: 4, do: 8.8 },
+        { fish: 2, water: 5, grass: 0, do: 6.8 },
+        { fish: 2, water: 5, grass: 1, do: 7.3 },
+        { fish: 2, water: 5, grass: 2, do: 7.8 },
+        { fish: 2, water: 5, grass: 3, do: 8.3 },
+        { fish: 2, water: 5, grass: 4, do: 8.8 },
+        { fish: 3, water: 1, grass: 0, do: 6.6 },
+        { fish: 3, water: 1, grass: 1, do: 7.1 },
+        { fish: 3, water: 1, grass: 2, do: 7.6 },
+        { fish: 3, water: 1, grass: 3, do: 8.1 },
+        { fish: 3, water: 1, grass: 4, do: 8.6 },
+        { fish: 3, water: 2, grass: 0, do: 6.6 },
+        { fish: 3, water: 2, grass: 1, do: 7.1 },
+        { fish: 3, water: 2, grass: 2, do: 7.6 },
+        { fish: 3, water: 2, grass: 3, do: 8.1 },
+        { fish: 3, water: 2, grass: 4, do: 8.6 },
+        { fish: 3, water: 3, grass: 0, do: 6.6 },
+        { fish: 3, water: 3, grass: 1, do: 7.1 },
+        { fish: 3, water: 3, grass: 2, do: 7.6 },
+        { fish: 3, water: 3, grass: 3, do: 8.1 },
+        { fish: 3, water: 3, grass: 4, do: 8.6 },
+        { fish: 3, water: 4, grass: 0, do: 6.6 },
+        { fish: 3, water: 4, grass: 1, do: 7.1 },
+        { fish: 3, water: 4, grass: 2, do: 7.6 },
+        { fish: 3, water: 4, grass: 3, do: 8.1 },
+        { fish: 3, water: 4, grass: 4, do: 8.6 },
+        { fish: 3, water: 5, grass: 0, do: 6.6 },
+        { fish: 3, water: 5, grass: 1, do: 7.1 },
+        { fish: 3, water: 5, grass: 2, do: 7.6 },
+        { fish: 3, water: 5, grass: 3, do: 8.1 },
+        { fish: 3, water: 5, grass: 4, do: 8.6 },
+        { fish: 4, water: 1, grass: 0, do: 6.4 },
+        { fish: 4, water: 1, grass: 1, do: 6.9 },
+        { fish: 4, water: 1, grass: 2, do: 7.4 },
+        { fish: 4, water: 1, grass: 3, do: 7.9 },
+        { fish: 4, water: 1, grass: 4, do: 8.4 },
+        { fish: 4, water: 2, grass: 0, do: 6.4 },
+        { fish: 4, water: 2, grass: 1, do: 6.9 },
+        { fish: 4, water: 2, grass: 2, do: 7.4 },
+        { fish: 4, water: 2, grass: 3, do: 7.9 },
+        { fish: 4, water: 2, grass: 4, do: 8.4 },
+        { fish: 4, water: 3, grass: 0, do: 6.4 },
+        { fish: 4, water: 3, grass: 1, do: 6.9 },
+        { fish: 4, water: 3, grass: 2, do: 7.4 },
+        { fish: 4, water: 3, grass: 3, do: 7.9 },
+        { fish: 4, water: 3, grass: 4, do: 8.4 },
+        { fish: 4, water: 4, grass: 0, do: 6.4 },
+        { fish: 4, water: 4, grass: 1, do: 6.9 },
+        { fish: 4, water: 4, grass: 2, do: 7.4 },
+        { fish: 4, water: 4, grass: 3, do: 7.9 },
+        { fish: 4, water: 4, grass: 4, do: 8.4 },
+        { fish: 4, water: 5, grass: 0, do: 6.4 },
+        { fish: 4, water: 5, grass: 1, do: 6.9 },
+        { fish: 4, water: 5, grass: 2, do: 7.4 },
+        { fish: 4, water: 5, grass: 3, do: 7.9 },
+        { fish: 4, water: 5, grass: 4, do: 8.4 },
+        { fish: 5, water: 1, grass: 0, do: 6.2 },
+        { fish: 5, water: 1, grass: 1, do: 6.7 },
+        { fish: 5, water: 1, grass: 2, do: 7.2 },
+        { fish: 5, water: 1, grass: 3, do: 7.7 },
+        { fish: 5, water: 1, grass: 4, do: 8.2 },
+        { fish: 5, water: 2, grass: 0, do: 6.2 },
+        { fish: 5, water: 2, grass: 1, do: 6.7 },
+        { fish: 5, water: 2, grass: 2, do: 7.2 },
+        { fish: 5, water: 2, grass: 3, do: 7.7 },
+        { fish: 5, water: 2, grass: 4, do: 8.2 },
+        { fish: 5, water: 3, grass: 0, do: 6.2 },
+        { fish: 5, water: 3, grass: 1, do: 6.7 },
+        { fish: 5, water: 3, grass: 2, do: 7.2 },
+        { fish: 5, water: 3, grass: 3, do: 7.7 },
+        { fish: 5, water: 3, grass: 4, do: 8.2 },
+        { fish: 5, water: 4, grass: 0, do: 6.2 },
+        { fish: 5, water: 4, grass: 1, do: 6.7 },
+        { fish: 5, water: 4, grass: 2, do: 7.2 },
+        { fish: 5, water: 4, grass: 3, do: 7.7 },
+        { fish: 5, water: 4, grass: 4, do: 8.2 },
+        { fish: 5, water: 5, grass: 0, do: 6.2 },
+        { fish: 5, water: 5, grass: 1, do: 6.7 },
+        { fish: 5, water: 5, grass: 2, do: 7.2 },
+        { fish: 5, water: 5, grass: 3, do: 7.7 },
+        { fish: 5, water: 5, grass: 4, do: 8.2 },
       ],
       fishImg: {
         1: "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-7d0ddff0-472c-48e1-ad19-ad0d117424d9/64e6cc69-d67a-417d-b81b-04f08f13ead9.png",
@@ -473,11 +381,12 @@ export default {
   },
   name: "app",
   mounted() {},
+  props:['processData'],
   methods: {
-    recordProcessData(water){
+    radioChange(e){
       // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
       
-      this.processData.answer[6]=[water]
+      this.processData.answer[9]=[e.target.value]
       // localStorage.setItem('processData',JSON.stringify(recordProcessData))
       this.$emit('recordProcessData',this.processData)
     },
@@ -499,8 +408,8 @@ export default {
             fish: 0,
             water: 1,
             grass: 0,
-            volume: 100,
-            do: 31,
+            volume: this.getVolumeStraight,
+            do: this.getDoStraight,
           },
         ];
       }
@@ -509,15 +418,10 @@ export default {
         fish: this.fish,
         water: this.water,
         grass: this.grass,
-        volume: this.getVolume,
-        do: this.getDo,
+        volume: this.getVolumeStraight,
+        do: this.getDoStraight,
       });
       this.$forceUpdate();
-      // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
-      
-      this.processData.answer[7]=[this.water]
-      // localStorage.setItem('processData',JSON.stringify(recordProcessData))
-      this.$emit('recordProcessData',this.processData)
     },
     updateQ32Table() {
       if (this.current == 6) {
