@@ -713,13 +713,13 @@ export default {
       this.$refs.step7.$forceUpdate()
     },
     nextStep(e) {
-      console.log(e)
-      if (e&&this.steps.length==6) {
+      console.log(e.target.value)
+      if ((e.target.value==2 || e.target.value==3) && this.steps.length==6) {
         this.steps.push({
           index: 6,
           title: "问题2.4",
         });
-      } else if(this.steps.length==7) {
+      } else if(this.steps.length==7 && e.target.value==1) {
         this.steps.pop();
       }
     },
@@ -767,7 +767,7 @@ export default {
     },
     next() {
       this.current++;
-      if(this.current===3){
+      if(this.current===3 && this.$refs.step2.answer.q1a1 && this.$refs.step2.answer.input){
          this.$refs.step2.a_dropdown_disabled= true;
          this.$refs.step2.a_input_disabled= true;
       }

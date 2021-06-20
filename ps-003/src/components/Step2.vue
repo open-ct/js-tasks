@@ -3,77 +3,89 @@
     <div class="text-lg leading-relaxed text-left mb-8 w-1/3">
       1.某位同学为探究鱼缸中水的溶氧量与哪些因素有关。向如图所示的圆柱体鱼缸中注水，并测量水中的溶氧量。<br /><br />
 
-      请你使用“实验模拟器”，拖动“水面高度“按钮，观察数据可知鱼缸中溶氧量最大的位置在
+      请你使用“实验模拟器”，拖动“水面高度“按钮，观察数据可知：鱼缸中溶氧量在水位
       <a-dropdown :disabled="dropdown_disabled">
             <a-button style="margin-left: 8px;"> {{ answer.q1a1 || "" }} <a-icon type="down" /> </a-button>
             <a-menu slot="overlay">
               <a-menu-item
                 @click="
                   () => {
-                    answer.q1a1 = 1;
+                    answer.q1a1 = '1最高';
                     recordProcessData(1)
                     $forceUpdate();
                     
                   }
                 "
               >
-                <a>1</a>
+                <a>1最高</a>
               </a-menu-item>
               <a-menu-item
                 @click="
                   () => {
-                    answer.q1a1 = 2;
+                    answer.q1a1 = '2最高';
                     recordProcessData(2)
                     $forceUpdate();
                   }
                 "
               >
-                <a>2</a>
+                <a>2最高</a>
               </a-menu-item>
               <a-menu-item
                 @click="
                   () => {
-                    answer.q1a1 = 3;
+                    answer.q1a1 = '3最高';
                     recordProcessData(3)
                     $forceUpdate();
                   }
                 "
               >
-                <a>3</a>
+                <a>3最高</a>
               </a-menu-item>
               <a-menu-item
                 @click="
                   () => {
-                    answer.q1a1 = 4;
+                    answer.q1a1 = '4最高';
                     recordProcessData(4)
                     $forceUpdate();
                   }
                 "
               >
-                <a>4</a>
+                <a>4最高</a>
               </a-menu-item>
               <a-menu-item
                 @click="
                   () => {
-                    answer.q1a1 = 5;
+                    answer.q1a1 = '5最高';
                     recordProcessData(5)
                     $forceUpdate();
                   }
                 "
               >
-                <a>5</a>
+                <a>5最高</a>
+              </a-menu-item>
+              <a-menu-item
+                @click="
+                  () => {
+                    answer.q1a1 = '各处一样高';
+                    recordProcessData(6)
+                    $forceUpdate();
+                  }
+                "
+              >
+                <a>各处一样高</a>
               </a-menu-item>
             </a-menu>
           </a-dropdown>
           
 
-      <br />由此可以看出水中的溶氧量与<a-input
+      <br />由此可以看出水中的溶氧量与水量的关系是
+      <a-input
         style="width: 10rem !important"
         placeholder=""
         v-model="answer.input"
         @change="inputChange"
         :disabled="input_disabled"
-      />有关。
+      />
     </div>
     <div class="w-2/3">
       <a-form-model
@@ -163,7 +175,7 @@ export default {
   provide: {},
   computed: {
     dropdown_disabled(){
-      return this.a_dropdown_disabled && this.answer.q1a1>0 ? true:false;    //监听父组件下一步的按钮，并判断有没有输入答案
+      return this.a_dropdown_disabled && this.answer.q1a1 ? true:false;    //监听父组件下一步的按钮，并判断有没有输入答案
     },
     input_disabled(){
       return this.a_input_disabled && this.answer.input ? true:false;    //监听父组件下一步的按钮，并判断有没有输入答案,还有bug，按了下一页之后回来输入答案，失去焦点会马上不能修改答案

@@ -104,7 +104,7 @@
                   </div>
                 </div>
                 <a-button class="mt-4" @click="updateExpertData" type="primary">
-                  <a-icon type="experiment" />试一试
+                  <a-icon type="experiment" />记录
                 </a-button>
                 <!-- <div class="flex">
 <a-form-model
@@ -225,7 +225,7 @@
 
             <div class="max-h-96">
               <div class="text-2xl">实验数据</div>
-
+                
               <a-table
                 :scroll="{ y: 240 }"
                 :pagination="false"
@@ -560,7 +560,9 @@
 
             <div class="max-h-96">
               <div class="text-2xl">实验数据</div>
-
+              <a-button class="mt-4" @click="updateExpertData" type="primary">
+                  <a-icon type="experiment" />记录
+                </a-button>
               <a-table
                 :scroll="{ y: 240 }"
                 :pagination="false"
@@ -579,10 +581,10 @@
           </div> -->
         </div>
       </a-layout-content>
-      <a-layout-content v-if="current == 3" class="bg-white h-4/5 p-6">
+      <a-layout-content v-if="current == 4" class="bg-white h-4/5 p-6">
         <div class="flex">
           <div class="text-xl text-left mb-4 w-1/2">
-            （3）请结合小红探索的数据，分析毛巾在冷藏食物中的作用。作答完毕请点击“下一步”。
+            （4）请结合小红探索的数据，分析毛巾在冷藏食物中的作用。作答完毕请点击“下一步”。
             <a-textarea
               v-model="answer.q2Text"
               class="mt-4"
@@ -808,10 +810,10 @@
           </div> -->
         </div>
       </a-layout-content>
-      <a-layout-content v-if="current == 4" class="bg-white h-4/5 p-6">
+      <a-layout-content v-if="current == 3" class="bg-white h-4/5 p-6">
         <div class="flex">
           <div class="text-xl text-left mb-4 w-1/2">
-            （4）请结合小明探索的数据，分析水位在冷藏食物中的作用。作答完毕请点击“下一步”。
+            （3）请结合小明探索的数据，分析水位在冷藏食物中的作用。作答完毕请点击“下一步”。
             <a-textarea
               v-model="answer.q3Text"
               @change="q3Change"
@@ -1398,7 +1400,7 @@
       <a-layout-content v-if="current == 5" class="bg-white h-4/5 p-6">
         <div class="flex">
           <div class="text-xl text-left mb-4 w-1/2">
-            现在你认为：冷藏效果最好的毛巾位置
+            （4）现在你认为：冷藏效果最好的毛巾位置
             <a-dropdown>
               <a-button class="ant-dropdown-link">
                 {{ answer.q4a1 || "请选择" }} <a-icon type="down" />
@@ -1711,7 +1713,8 @@
       <a-layout-content v-if="current == 6" class="bg-white h-4/5 p-6 flex">
         <div class="w-1/2">
           <div class="text-xl text-left mb-4">
-            （6）请根据第（5）题的作答，解释此种情况下冷藏效果最好的原因。
+            （5）请根据第（4）题的作答，用你所学的科学原理解释此时冷藏效果最好1原因。
+            将答案填写于方框中，作答完毕请点击“提交答案”并“进入下一题”。
           </div>
           <a-textarea v-model="answer.q6Text" @change="q6Change" class="mt-4" placeholder="" :rows="4" />
         </div>
@@ -2045,31 +2048,31 @@ export default {
           key: 0,
           maojinweizhi: "毛巾进入水中",
           shuiweiweizhi: "水位0",
-          temperature: 30,
+          temperature: 30.0,
         },
         {
           key: 1,
           maojinweizhi: "毛巾进入水中",
           shuiweiweizhi: "水位1",
-          temperature: 24.8,
+          temperature: 30.0,
         },
         {
           key: 2,
           maojinweizhi: "毛巾进入水中",
           shuiweiweizhi: "水位2",
-          temperature: 20.2,
+          temperature: 30.0,
         },
         {
           key: 3,
           maojinweizhi: "毛巾进入水中",
           shuiweiweizhi: "水位3",
-          temperature: 28.4,
+          temperature: 29.5,
         },
         {
           key: 4,
           maojinweizhi: "毛巾进入水中",
           shuiweiweizhi: "水位4",
-          temperature: 27.9,
+          temperature: 29.1,
         },
       ],
       list2: [
@@ -2206,11 +2209,11 @@ export default {
       steps: [
         {
           index: 0,
-          title: "前言",
+          title: "前言1",
         },
         {
           index: 1,
-          title: "探究",
+          title: "前言2",
         },
         {
           index: 2,

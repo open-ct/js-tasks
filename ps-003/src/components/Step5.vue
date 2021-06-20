@@ -11,10 +11,9 @@
         :default-value="-1"
       >
         <br />
-        <a-radio :value="2"> 同学A.鱼缸放入水草时，鱼缸中含氧量高； </a-radio>
-        <a-radio :value="1">
-          同学B.鱼缸不放入水草时，鱼缸中含氧量高；
-        </a-radio> </a-radio-group
+        <a-radio :value="1"> 同学A.鱼缸放入水草时，鱼缸中含氧量高； </a-radio>
+        <a-radio :value="2">同学B.鱼缸不放入水草时，鱼缸中含氧量高；</a-radio> <br/>
+        <a-radio :value="3">学生C：水草对鱼缸中溶氧量没有影响;</a-radio> <br/></a-radio-group
       ><br /><br />
       <div class="text-left mb-4">请对你的观点，做出相应的解释。</div>
       <a-textarea v-model="answer.text" @change="textareaChange" class="mt-4" placeholder="" :rows="4" />
@@ -413,13 +412,8 @@ export default {
     
     q33RadioChange(e) {
       console.log(e)
-      if (e.target.value == 1 ) {
-        this.$emit('nextStep',true);
-      } else if (e.target.value == 2) {
-        this.$emit('nextStep',false);
-      }
+      this.$emit('nextStep',e);
       // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
-      
       this.processData.answer[14]=[e.target.value]
       // localStorage.setItem('processData',JSON.stringify(recordProcessData))
       this.$emit('recordProcessData',this.processData)
