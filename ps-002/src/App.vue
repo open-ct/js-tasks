@@ -15,14 +15,23 @@
       </a-layout-content>
       <a-layout-content v-if="current == 0" class="bg-white h-4/5 p-6">
         <div class="text-xl text-left align-middle ml-4 leading-loose">
-          我国南方地区夏季普遍高温多雨。以南方某市为例，夏季室外平均气温可达36℃，平均湿度为80%。某地居民会在停电时为了避免高温引起食物腐烂变质，用以下材料制作了一个“土冰箱”，装置所需材料如右图所示。实验发现毛巾的位置和盆内自来水的高度影响食物冷藏效果。
+          我国南方地区夏季普遍高温多雨。
+          以南方某市为例，夏季室外平均气温可达36C，平均湿度为80％。
+          某地居民会在停电时为了避免高温引起食物腐烂变质，用以下材料制作了一个“土冰箱”，装置所需材料如右图所示。
+          有的居民会在碗上面铺上一块儿毛巾，盆内加一部分自来水。
+          请你探究毛巾的位置和盆内水的高度是否会影响食物冷藏效果。
         </div>
         <img class="float-right" src="./assets/0.jpg" alt="" />
       </a-layout-content>
       <a-layout-content v-if="current == 1" class="bg-white h-4/5 p-6">
         <div class="flex flex-1">
           <div class="text-xl text-left mb-4 w-1/2">
-            （1）现有一碗红烧肉，它的温度为30℃，需要冷藏保鲜，碗内温度越低冷藏效果越好。请同学们选择毛巾位置和水位高度，点击“试一试”，探究何种情况下冷藏效果最好。若已探究完成，请点击“下一步”。
+              右图是一个实验模拟器，可以用来探究食物冷藏效果。<br/>
+              如果你想了解实验模拟器如何使用，可以尝试下列操作:<br/>
+              1.拖动“毛巾位置”按钮；<br/>
+              2.拖动“水位高度”按钮；<br/>
+              3.点击“记录”按钮，表格中会呈现实验数据。<br/>
+              若模拟练习完成，请点击“下一步<br/>
           </div>
           <div class="w-1/2">
             <div class="">
@@ -102,9 +111,10 @@
                       :tooltipVisible="false"
                     />
                   </div>
+                  若完成作答，请点击“下一步”
                 </div>
                 <a-button class="mt-4" @click="updateExpertData" type="primary">
-                  <a-icon type="experiment" />记录
+                  <a-icon type="experiment" />试一试
                 </a-button>
                 <!-- <div class="flex">
 <a-form-model
@@ -225,7 +235,7 @@
 
             <div class="max-h-96">
               <div class="text-2xl">实验数据</div>
-                
+
               <a-table
                 :scroll="{ y: 240 }"
                 :pagination="false"
@@ -247,7 +257,8 @@
       <a-layout-content v-if="current == 2" class="bg-white h-4/5 p-6">
         <div class="flex flex-1">
           <div class="text-xl text-left mb-4">
-            （2）经过探究，你认为：冷藏效果最好的毛巾位置
+            （1）室温为30，碗内食物的初始温度为45°℃，需要冷藏保鲜，碗内温度越低冷藏效果越好，请探究冷藏效果最好的毛巾位置、水位高度。请点击“记录”按钮，记录下实验数据<br/>
+              经过探究，你认为:冷藏效果最好的毛巾位置
             <a-dropdown>
               <a-button class="ant-dropdown-link">
                 {{ answer.q1a1 || "请选择" }} <a-icon type="down" />
@@ -357,7 +368,8 @@
                   <a>水位5</a>
                 </a-menu-item>
               </a-menu>
-            </a-dropdown>
+            </a-dropdown><br/>
+            若完成作答，请点击“下一步”
           </div>
           <div class="w-1/2">
             <div class="">
@@ -560,9 +572,7 @@
 
             <div class="max-h-96">
               <div class="text-2xl">实验数据</div>
-              <a-button class="mt-4" @click="updateExpertData" type="primary">
-                  <a-icon type="experiment" />记录
-                </a-button>
+
               <a-table
                 :scroll="{ y: 240 }"
                 :pagination="false"
@@ -581,10 +591,17 @@
           </div> -->
         </div>
       </a-layout-content>
-      <a-layout-content v-if="current == 4" class="bg-white h-4/5 p-6">
+      <a-layout-content v-if="current == 3" class="bg-white h-4/5 p-6">
         <div class="flex">
           <div class="text-xl text-left mb-4 w-1/2">
-            （4）请结合小红探索的数据，分析毛巾在冷藏食物中的作用。作答完毕请点击“下一步”。
+            小红对这个冷藏装置也很感兴趣，她做了一组实验，得出如右图所示的数据。根据数据，你认为水位在哪里时冷藏效果最好？（）<br/>
+            A.水位0<br/>
+            B.水位1<br/>
+            C.水位2<br/>
+            D.水位3<br/>
+            E.水位4<br/>
+            根据你所学的科学原理，说明此水位冷藏效果最好的原因。<br/>
+            将答案填写于方框中，作答完毕请点击“下一步”。
             <a-textarea
               v-model="answer.q2Text"
               class="mt-4"
@@ -810,10 +827,14 @@
           </div> -->
         </div>
       </a-layout-content>
-      <a-layout-content v-if="current == 3" class="bg-white h-4/5 p-6">
+      <a-layout-content v-if="current == 4" class="bg-white h-4/5 p-6">
         <div class="flex">
           <div class="text-xl text-left mb-4 w-1/2">
-            （3）请结合小明探索的数据，分析水位在冷藏食物中的作用。作答完毕请点击“下一步”。
+            （3）小红继续探究，得出如右图所示的数据。根据数据，你认为毛巾位置在哪里时冷藏效果最好？（）
+A. 无毛巾<br/>
+B. 毛巾未进入水中<br/>
+C. C毛巾进入水中<br/>
+根据你所学的科学原理，说明此该毛巾位置冷藏效果最好的原因。将答案填写于方框中，作答完毕请点击“下一步”。
             <a-textarea
               v-model="answer.q3Text"
               @change="q3Change"
@@ -1019,7 +1040,7 @@
             </div>
 
             <div class="max-h-96">
-              <div class="text-2xl">小明的实验数据</div>
+              <div class="text-2xl">小红的实验数据</div>
 
               <a-table
                 :scroll="{ y: 240 }"
@@ -1713,7 +1734,7 @@
       <a-layout-content v-if="current == 6" class="bg-white h-4/5 p-6 flex">
         <div class="w-1/2">
           <div class="text-xl text-left mb-4">
-            （5）请根据第（4）题的作答，用你所学的科学原理解释此时冷藏效果最好1原因。
+            （5）请根据第（4）题的作答，用你所学的科学原理解释此时冷藏效果最好的原因。<br/>
             将答案填写于方框中，作答完毕请点击“提交答案”并“进入下一题”。
           </div>
           <a-textarea v-model="answer.q6Text" @change="q6Change" class="mt-4" placeholder="" :rows="4" />
@@ -2048,31 +2069,31 @@ export default {
           key: 0,
           maojinweizhi: "毛巾进入水中",
           shuiweiweizhi: "水位0",
-          temperature: 30.0,
+          temperature: 30,
         },
         {
           key: 1,
           maojinweizhi: "毛巾进入水中",
           shuiweiweizhi: "水位1",
-          temperature: 30.0,
+          temperature: 24.8,
         },
         {
           key: 2,
           maojinweizhi: "毛巾进入水中",
           shuiweiweizhi: "水位2",
-          temperature: 30.0,
+          temperature: 20.2,
         },
         {
           key: 3,
           maojinweizhi: "毛巾进入水中",
           shuiweiweizhi: "水位3",
-          temperature: 29.5,
+          temperature: 28.4,
         },
         {
           key: 4,
           maojinweizhi: "毛巾进入水中",
           shuiweiweizhi: "水位4",
-          temperature: 29.1,
+          temperature: 27.9,
         },
       ],
       list2: [
