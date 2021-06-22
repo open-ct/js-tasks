@@ -2,20 +2,21 @@
   <a-layout-content class="bg-white h-4/5 p-6 flex">
     <div class="w-1/2">
       <div class="text-lg text-left mb-8">
-        2.4.某位同学的实验记录如下表所示，请根据他的实验数据，猜测他选择的结论（
-        ）
+        2.4 某位同学的实验记录如下表所示，请根据他的实验数据，猜测他选择的结论（     ）
+
       </div>
       <a-radio-group
         v-model="answer.q4Radio"
         name="radioGroup2"
         :default-value="-1"
         @change="q33RadioChange"
+        class="text-left"
       >
         <br />
-        <a-radio :value="1"> A.鱼缸放入水草时，鱼缸中含氧量高； </a-radio>
-        <a-radio :value="2">
-          B.鱼缸不放入水草时，鱼缸中含氧量高；
-        </a-radio> </a-radio-group
+        <a-radio :value="1">学生A：鱼缸放入多量水草时，鱼缸中溶氧量高； </a-radio>
+        <a-radio :value="2">学生B：鱼缸放入少量水草时，鱼缸中溶氧量高；</a-radio> 
+        <a-radio :value="3">学生C：水草对鱼缸中溶氧量没有影响;</a-radio> 
+        </a-radio-group
       ><br /><br />
       <div class="text-left mb-4">并对他的结论，做出相应的解释。</div>
       <a-textarea v-model="answer.text" @change="textareaChange" class="mt-4" placeholder="" :rows="4" />
@@ -51,7 +52,7 @@ const q4Columns = [
     key: "grass",
   },
   {
-    title: "溶氧量",
+    title: "溶氧量（mg/L）",
     dataIndex: "do",
     key: "do",
   },

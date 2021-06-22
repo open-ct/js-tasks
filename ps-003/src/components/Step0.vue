@@ -1,12 +1,12 @@
 <template>
   <a-layout-content class="bg-white h-4/5 p-6 flex">
        
-        <div class="text-xl text-left align-middle mt-32 ml-4">
-          在某些家庭中，常会使用生态鱼缸来饲养观赏鱼。
-          根据经验知道，在饲养某类观赏鱼时，当鱼缸中的溶氧量(水中氧气的溶解量，单位mg/L)过低时观赏鱼会因缺氧而死亡；
+        <div class="text-xl text-left align-middle mt-32 ml-4 text">
+          在某些家庭中，常会使用生态鱼缸来饲养观赏鱼。<br/>
+          根据经验知道，在饲养某类观赏鱼时，<br/>当鱼缸中的溶氧量(水中氧气的溶解量，单位mg/L)过低时观赏鱼会因缺氧而死亡；<br/>
           有人认为，鱼缸中的水量、鱼的数量以及水草数量等因素会影响鱼缸中的溶氧量。
            <div>
-          <img src="../assets/head.png" width=640px height=280px>
+          <img src="../assets/head1.png" width=640px height=280px>
         </div>
         </div>
       </a-layout-content>
@@ -447,5 +447,10 @@ export default {
 };
 </script>
 
-<style>
+<style  scoped>
+  .text{
+    margin-top: -30px;
+
+    line-height: 3rem;
+  }
 </style>

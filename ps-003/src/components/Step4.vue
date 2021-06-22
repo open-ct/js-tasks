@@ -2,7 +2,8 @@
   <a-layout-content class="bg-white h-4/5 p-6 flex w-full">
     <div class="w-1/3">
       <div class="text-lg leading-relaxed text-left mb-8">
-        2.2 请你利用实验模拟器，设计实验并收集至少三组数据，验证你的观点。
+        2.2 请你利用实验模拟器，设计实验并收集至少三组数据，验证你的观点。<br/><br/>
+        实验设计：
       </div>
       <a-textarea v-model="answer.text" @change="textareaChange" class="mt-4" placeholder="" :rows="18" />
     </div>

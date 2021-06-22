@@ -11,7 +11,9 @@
             <a-radio :value="1"> 学生A </a-radio>
             <a-radio :value="2"> 学生B </a-radio>
             <a-radio :value="3"> 学生C </a-radio>
-          </a-radio-group>
+          </a-radio-group><br/><br/>
+          请说明你的选择的理由:
+          <a-textarea  class="mt-4" placeholder="" :rows="8" v-model="answer.textarea" @change="textareaChange"/>
         </div>
         <div class="w-1/2 flex">
           <img
@@ -385,6 +387,13 @@ export default {
   mounted() {},
   props:['processData'],
   methods: {
+    textareaChange(e){
+      // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
+      
+      this.processData.answer[4]=[this.answer.textarea]
+      // localStorage.setItem('processData',JSON.stringify(recordProcessData))
+      this.$emit('recordProcessData',this.processData)
+    },
     radioChange(e){
       // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
       
