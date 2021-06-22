@@ -271,7 +271,7 @@
                   @click="
                     () => {
                       answer.q1a1 = '无毛巾';
-                      processData.answer[2]=[1]
+                      processData.answer[0]=0
                       recordProcessData()
                       $forceUpdate();
                     }
@@ -283,7 +283,7 @@
                   @click="
                     () => {
                       answer.q1a1 = '未进入水中';
-                      processData.answer[2]=[2]
+                      processData.answer[0]=1
                       recordProcessData()
                       $forceUpdate();
                     }
@@ -295,7 +295,7 @@
                   @click="
                     () => {
                       answer.q1a1 = '进入水中';
-                      processData.answer[2]=[3]
+                      processData.answer[0]=2
                       recordProcessData()
                       $forceUpdate();
                     }
@@ -313,8 +313,20 @@
                 <a-menu-item
                   @click="
                     () => {
+                      answer.q1a2 = '水位0';
+                      processData.answer[1]=0
+                      recordProcessData()
+                      $forceUpdate();
+                    }
+                  "
+                >
+                  <a>水位0</a>
+                </a-menu-item>
+                <a-menu-item
+                  @click="
+                    () => {
                       answer.q1a2 = '水位1';
-                      processData.answer[3]=[1]
+                      processData.answer[1]=1
                       recordProcessData()
                       $forceUpdate();
                     }
@@ -326,7 +338,7 @@
                   @click="
                     () => {
                       answer.q1a2 = '水位2';
-                      processData.answer[3]=[2]
+                      processData.answer[1]=2
                       recordProcessData()
                       $forceUpdate();
                     }
@@ -338,7 +350,7 @@
                   @click="
                     () => {
                       answer.q1a2 = '水位3';
-                      processData.answer[3]=[3]
+                      processData.answer[1]=3
                       recordProcessData()
                       $forceUpdate();
                     }
@@ -350,25 +362,13 @@
                   @click="
                     () => {
                       answer.q1a2 = '水位4';
-                      processData.answer[3]=[4]
+                      processData.answer[1]=4
                       recordProcessData()
                       $forceUpdate();
                     }
                   "
                 >
                   <a>水位4</a>
-                </a-menu-item>
-                <a-menu-item
-                  @click="
-                    () => {
-                      answer.q1a2 = '水位5';
-                      processData.answer[3]=[5]
-                      recordProcessData()
-                      $forceUpdate();
-                    }
-                  "
-                >
-                  <a>水位5</a>
                 </a-menu-item>
               </a-menu>
             </a-dropdown><br/><br/><br/>
@@ -1453,7 +1453,7 @@
                   @click="
                     () => {
                       answer.q4a1 = '无毛巾';
-                      processData.answer[12]=[1]
+                      processData.answer[8]=0
                       recordProcessData()
                       $forceUpdate();
                     }
@@ -1465,7 +1465,7 @@
                   @click="
                     () => {
                       answer.q4a1 = '未进入水中';
-                      processData.answer[12]=[2]
+                      processData.answer[8]=1
                       recordProcessData()
                       $forceUpdate();
                     }
@@ -1477,7 +1477,7 @@
                   @click="
                     () => {
                       answer.q4a1 = '进入水中';
-                      processData.answer[12]=[3]
+                      processData.answer[8]=2
                       recordProcessData()
                       $forceUpdate();
                     }
@@ -1495,8 +1495,20 @@
                 <a-menu-item
                   @click="
                     () => {
+                      answer.q4a2 = '水位0';
+                      processData.answer[9]=0
+                      recordProcessData()
+                      $forceUpdate();
+                    }
+                  "
+                >
+                  <a>水位0</a>
+                </a-menu-item>
+                <a-menu-item
+                  @click="
+                    () => {
                       answer.q4a2 = '水位1';
-                      processData.answer[13]=[1]
+                      processData.answer[9]=1
                       recordProcessData()
                       $forceUpdate();
                     }
@@ -1508,7 +1520,7 @@
                   @click="
                     () => {
                       answer.q4a2 = '水位2';
-                      processData.answer[13]=[2]
+                      processData.answer[9]=2
                       recordProcessData()
                       $forceUpdate();
                     }
@@ -1520,7 +1532,7 @@
                   @click="
                     () => {
                       answer.q4a2 = '水位3';
-                      processData.answer[13]=[3]
+                      processData.answer[9]=3
                       recordProcessData()
                       $forceUpdate();
                     }
@@ -1532,25 +1544,13 @@
                   @click="
                     () => {
                       answer.q4a2 = '水位4';
-                      processData.answer[13]=[4]
+                      processData.answer[9]=4
                       recordProcessData()
                       $forceUpdate();
                     }
                   "
                 >
                   <a>水位4</a>
-                </a-menu-item>
-                <a-menu-item
-                  @click="
-                    () => {
-                      answer.q4a2 = '水位5';
-                      processData.answer[13]=[5]
-                      recordProcessData()
-                      $forceUpdate();
-                    }
-                  "
-                >
-                  <a>水位5</a>
                 </a-menu-item>
               </a-menu>
             </a-dropdown>
@@ -2003,25 +2003,11 @@ export default {
       processData: {
         page: 1,
         answer: [
-          [1],
-          [1],
-          [-1],
-          [-1],
-          [1],
-          [1],
-          "text",
-          [1],
-          [1],
-          "text",
-          [1],
-          [1],
-          [-1],
-          [-1],
-          [1],
-          [1],
-          "text",
-          [1],
-          [1],
+          -1,-1,-1,-1,
+          -1,'text',
+          -1,'text',
+          -1,-1,
+          'text',
         ],
       },
       labelCol: { span: 4 },
@@ -2334,23 +2320,23 @@ export default {
   mounted() {},
   methods: {
     q2radioGroupChange(){
-      this.processData.answer[19]=this.answer.q2radioGroup
+      this.processData.answer[4]=this.answer.q2radioGroup
       this.recordProcessData()
     },
     q2Change(){
-      this.processData.answer[6]=this.answer.q2Text
+      this.processData.answer[5]=this.answer.q2Text
       this.recordProcessData()
     },
     q3radioGroupChange(){
-      this.processData.answer[22]=this.answer.q3radioGroup
+      this.processData.answer[6]=this.answer.q3radioGroup
       this.recordProcessData()
     },
     q3Change(){
-      this.processData.answer[9]=this.answer.q3Text
+      this.processData.answer[7]=this.answer.q3Text
       this.recordProcessData()
     },
     q6Change(){
-      this.processData.answer[16]=this.answer.q6Text
+      this.processData.answer[10]=this.answer.q6Text
       this.recordProcessData()
     },
     recordProcessData(){
@@ -2411,19 +2397,6 @@ export default {
         temperature: item.temperature,
       });
       this.$forceUpdate();
-      this.processData.answer[0]=this.maojinweizhi+1
-      this.processData.answer[1]=this.shuiweiweizhi+1
-      this.processData.answer[4]=this.maojinweizhi+1
-      this.processData.answer[5]=this.shuiweiweizhi+1
-      this.processData.answer[7]=this.maojinweizhi+1
-      this.processData.answer[8]=this.shuiweiweizhi+1
-      this.processData.answer[10]=this.maojinweizhi+1
-      this.processData.answer[11]=this.shuiweiweizhi+1
-      this.processData.answer[14]=this.maojinweizhi+1
-      this.processData.answer[15]=this.shuiweiweizhi+1
-      this.processData.answer[17]=this.maojinweizhi+1
-      this.processData.answer[18]=this.shuiweiweizhi+1
-      this.recordProcessData()
     },
     updateExpertData1() {
       if (this.maojinweizhi == undefined) {
@@ -2467,19 +2440,10 @@ export default {
         temperature: item.temperature,
       });
       this.$forceUpdate();
-      this.processData.answer[20]=this.maojinweizhi+1
-      this.processData.answer[21]=this.shuiweiweizhi+1
-      this.processData.answer[24]=this.maojinweizhi+1
-      this.processData.answer[25]=this.shuiweiweizhi+1
-      this.processData.answer[27]=this.maojinweizhi+1
-      this.processData.answer[28]=this.shuiweiweizhi+1
-      this.processData.answer[30]=this.maojinweizhi+1
-      this.processData.answer[31]=this.shuiweiweizhi+1
-      this.processData.answer[34]=this.maojinweizhi+1
-      this.processData.answer[35]=this.shuiweiweizhi+1
-      this.processData.answer[37]=this.maojinweizhi+1
-      this.processData.answer[38]=this.shuiweiweizhi+1
+      this.processData.answer[2]=this.maojinweizhi
+      this.processData.answer[3]=this.shuiweiweizhi
       this.recordProcessData()
+      console.log(this.processData.answer)
     },
     next() {
       this.current++;
