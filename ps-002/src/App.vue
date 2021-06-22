@@ -2333,8 +2333,8 @@ export default {
   name: "app",
   mounted() {},
   methods: {
-    q2radiooGroupChange(){
-      this.processData.answer[7]=this.answer.q2radioGroup
+    q2radioGroupChange(){
+      this.processData.answer[19]=this.answer.q2radioGroup
       this.recordProcessData()
     },
     q2Change(){
@@ -2342,7 +2342,7 @@ export default {
       this.recordProcessData()
     },
     q3radioGroupChange(){
-      this.processData.answer[8]=this.answer.q3radioGroup
+      this.processData.answer[22]=this.answer.q3radioGroup
       this.recordProcessData()
     },
     q3Change(){
@@ -2467,18 +2467,18 @@ export default {
         temperature: item.temperature,
       });
       this.$forceUpdate();
-      this.processData.answer[0]=this.maojinweizhi+1
-      this.processData.answer[1]=this.shuiweiweizhi+1
-      this.processData.answer[4]=this.maojinweizhi+1
-      this.processData.answer[5]=this.shuiweiweizhi+1
-      this.processData.answer[7]=this.maojinweizhi+1
-      this.processData.answer[8]=this.shuiweiweizhi+1
-      this.processData.answer[10]=this.maojinweizhi+1
-      this.processData.answer[11]=this.shuiweiweizhi+1
-      this.processData.answer[14]=this.maojinweizhi+1
-      this.processData.answer[15]=this.shuiweiweizhi+1
-      this.processData.answer[17]=this.maojinweizhi+1
-      this.processData.answer[18]=this.shuiweiweizhi+1
+      this.processData.answer[20]=this.maojinweizhi+1
+      this.processData.answer[21]=this.shuiweiweizhi+1
+      this.processData.answer[24]=this.maojinweizhi+1
+      this.processData.answer[25]=this.shuiweiweizhi+1
+      this.processData.answer[27]=this.maojinweizhi+1
+      this.processData.answer[28]=this.shuiweiweizhi+1
+      this.processData.answer[30]=this.maojinweizhi+1
+      this.processData.answer[31]=this.shuiweiweizhi+1
+      this.processData.answer[34]=this.maojinweizhi+1
+      this.processData.answer[35]=this.shuiweiweizhi+1
+      this.processData.answer[37]=this.maojinweizhi+1
+      this.processData.answer[38]=this.shuiweiweizhi+1
       this.recordProcessData()
     },
     next() {
