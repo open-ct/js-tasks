@@ -704,7 +704,6 @@ export default {
       this.processData=processData
       this.processData.page=this.current+1
       this.processData=JSON.parse(JSON.stringify(this.processData))
-      console.log(this.processData);
       parent.postMessage(this.processData, "*")
     },
     handleInfo(e){
@@ -772,7 +771,6 @@ export default {
       }
       if(this.current===3 && this.$refs.step2.answer.textarea){
          this.$refs.step2.a_textarea_disabled= true;
-         console.log(this.$refs.step2.a_textarea_disabled )
          
       }
     },
