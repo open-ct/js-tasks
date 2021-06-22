@@ -2,7 +2,7 @@
   <a-layout-content class="bg-white h-4/5 p-6 flex">
     <div class="w-1/2">
       <div class="text-lg text-left mb-8">
-        2.3 根据你上述的实验设计数据结果，你认为哪位同学的观点更合理（ ）<br />
+        2.3 根据你上述的实验设计数据结果，你认为哪位同学的观点更合理<br />
       </div>
       <a-radio-group
         v-model="answer.q33Radio"

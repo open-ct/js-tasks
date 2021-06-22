@@ -2,7 +2,7 @@
   <a-layout-content class="bg-white h-4/5 p-6 flex">
     <div class="w-1/2">
       <div class="text-lg text-left mb-8">
-        2.4 某位同学的实验记录如下表所示，请根据他的实验数据，猜测他选择的结论（     ）
+        2.4 某位同学的实验记录如下表所示，请根据他的实验数据，猜测他选择的结论
 
       </div>
       <a-radio-group

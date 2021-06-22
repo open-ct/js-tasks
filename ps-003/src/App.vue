@@ -767,9 +767,13 @@ export default {
     },
     next() {
       this.current++;
-      if(this.current===3 && this.$refs.step2.answer.q1a1 && this.$refs.step2.answer.input){
+      if(this.current===3 && this.$refs.step2.answer.q1a1){
          this.$refs.step2.a_dropdown_disabled= true;
-         this.$refs.step2.a_input_disabled= true;
+      }
+      if(this.current===3 && this.$refs.step2.answer.textarea){
+         this.$refs.step2.a_textarea_disabled= true;
+         console.log(this.$refs.step2.a_textarea_disabled )
+         
       }
     },
     back() {

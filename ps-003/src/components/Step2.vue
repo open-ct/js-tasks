@@ -5,7 +5,7 @@
 <br /><br />
 
       请你使用“实验模拟器”，拖动“水面高度“按钮，观察数据可知：鱼缸中溶氧量在水位
-      <a-dropdown :disabled="dropdown_disabled">
+      <a-dropdown :disabled="a_dropdown_disabled">
             <a-button style="margin-left: 8px;"> {{ answer.q1a1 || "" }} <a-icon type="down" /> </a-button>
             <a-menu slot="overlay">
               <a-menu-item
@@ -80,7 +80,7 @@
           
 
       <br />由此可以看出水中的溶氧量与水量的关系是
-      <a-textarea v-model="answer.textarea" @change="textareaChange" class="mt-4" placeholder="" :rows="12" :disabled="input_disabled"/>
+      <a-textarea v-model="answer.textarea" @change="textareaChange" class="mt-4" placeholder="" :rows="12" :read-only="a_textarea_disabled"/>
     </div>
     <div class="w-2/3">
       <a-form-model
@@ -169,12 +169,6 @@ export default {
   components: {},
   provide: {},
   computed: {
-    dropdown_disabled(){
-      return this.a_dropdown_disabled && this.answer.q1a1 ? true:false;    //监听父组件下一步的按钮，并判断有没有输入答案
-    },
-    input_disabled(){
-      return this.a_input_disabled && this.answer.input ? true:false;    //监听父组件下一步的按钮，并判断有没有输入答案,还有bug，按了下一页之后回来输入答案，失去焦点会马上不能修改答案
-    },
     getImg() {
       return this.imgList[this.maojinweizhi + "" + this.shuiweiweizhi];
     },
@@ -241,7 +235,7 @@ export default {
   data() {
     return {
       a_dropdown_disabled:false,
-      a_input_disabled:false,
+      a_textarea_disabled:false,
       marks1: {
         0: '0',
         1: '1',
@@ -529,7 +523,7 @@ export default {
       if (e.target.value == 1 && this.steps.length == 8) {
         this.steps.push({
           index: 8,
-          title: "问题4",
+          title: "问题 4",
         });
       } else if (e.target.value == 2 && this.steps.length == 9) {
         this.steps.pop();
