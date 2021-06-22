@@ -16,7 +16,7 @@
       <a-layout-content v-if="current == 0" class="bg-white h-4/5 p-6">
         <div class="text-xl text-left align-middle ml-4 leading-loose">
           我国南方地区夏季普遍高温多雨。
-          以南方某市为例，夏季室外平均气温可达36C，平均湿度为80％。
+          以南方某市为例，夏季室外平均气温可达36℃，平均湿度为80％。
           某地居民会在停电时为了避免高温引起食物腐烂变质，用以下材料制作了一个“土冰箱”，装置所需材料如右图所示。
           有的居民会在碗上面铺上一块儿毛巾，盆内加一部分自来水。
           请你探究毛巾的位置和盆内水的高度是否会影响食物冷藏效果。
@@ -2053,37 +2053,37 @@ export default {
           key: 0,
           maojinweizhi: "无毛巾",
           shuiweiweizhi: "水位2",
-          temperature: 30.0,
+          temperature: '30.0℃',
         },
         {
           key: 1,
           maojinweizhi: "毛巾未进入水中",
           shuiweiweizhi: "水位2",
-          temperature: 30.0,
+          temperature:'30.0℃',
         },
         {
           key: 2,
           maojinweizhi: "毛巾进入水中",
           shuiweiweizhi: "水位2",
-          temperature: 22.2,
+          temperature: '22.2℃',
         },
         {
           key: 3,
           maojinweizhi: "无毛巾",
           shuiweiweizhi: "水位4",
-          temperature: 29.1,
+          temperature: '29.1℃',
         },
         {
           key: 4,
           maojinweizhi: "毛巾未进入水中",
           shuiweiweizhi: "水位4",
-          temperature: 29.2,
+          temperature: '29.2℃',
         },
         {
           key: 5,
           maojinweizhi: "毛巾进入水中",
           shuiweiweizhi: "水位4",
-          temperature: 26.3,
+          temperature: '26.3℃',
         },
       ],
       q3TableData: [
@@ -2091,31 +2091,31 @@ export default {
           key: 0,
           maojinweizhi: "毛巾进入水中",
           shuiweiweizhi: "水位0",
-          temperature: 30.0,
+          temperature: '30.0℃',
         },
         {
           key: 1,
           maojinweizhi: "毛巾进入水中",
           shuiweiweizhi: "水位1",
-          temperature: 23.8,
+          temperature: '23.8℃',
         },
         {
           key: 2,
           maojinweizhi: "毛巾进入水中",
           shuiweiweizhi: "水位2",
-          temperature: 22.2,
+          temperature: '22.2℃',
         },
         {
           key: 3,
           maojinweizhi: "毛巾进入水中",
           shuiweiweizhi: "水位3",
-          temperature: 26.0,
+          temperature: '26.0℃',
         },
         {
           key: 4,
           maojinweizhi: "毛巾进入水中",
           shuiweiweizhi: "水位4",
-          temperature: 26.3,
+          temperature: '26.3℃',
         },
       ],
       list2: [
