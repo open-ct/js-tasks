@@ -3,7 +3,7 @@ import App from './App.vue'
 import './index.css'
 import 'ant-design-vue/dist/antd.css';
 import Icon from 'ant-design-vue/lib/icon';
-import { Button, Layout,Divider,Steps,Table,Dropdown,Menu,Input,Checkbox,Slider,FormModel } from 'ant-design-vue';
+import { Button, Layout,Divider,Steps,Table,Dropdown,Menu,Input,Checkbox,Slider,FormModel,Radio } from 'ant-design-vue';
 Vue.use(Button);
 Vue.use(Layout);
 Vue.use(Divider);
@@ -15,6 +15,7 @@ Vue.use(Input);
 Vue.use(Checkbox);
 Vue.use(Slider);
 Vue.use(FormModel);
+Vue.use(Radio);
 Vue.config.productionTip = false
 
 Vue.component(Icon.name, Icon);
