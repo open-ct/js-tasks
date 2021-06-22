@@ -1,7 +1,8 @@
 <template>
   <a-layout-content class="bg-white h-4/5 p-6 flex w-full">
     <div class="text-lg leading-relaxed text-left mb-8 w-1/3">
-      1.某位同学为探究鱼缸中水的溶氧量与哪些因素有关。向如图所示的圆柱体鱼缸中注水，并测量水中的溶氧量。<br /><br />
+      1.为了探究鱼缸中溶氧量与哪些因素有关。<br/>某位同学向鱼缸中不同水位分别加入一定量的水，并测量水中的溶氧量。
+<br /><br />
 
       请你使用“实验模拟器”，拖动“水面高度“按钮，观察数据可知：鱼缸中溶氧量在水位
       <a-dropdown :disabled="dropdown_disabled">
@@ -79,13 +80,7 @@
           
 
       <br />由此可以看出水中的溶氧量与水量的关系是
-      <a-input
-        style="width: 10rem !important"
-        placeholder=""
-        v-model="answer.input"
-        @change="inputChange"
-        :disabled="input_disabled"
-      />
+      <a-textarea v-model="answer.textarea" @change="textareaChange" class="mt-4" placeholder="" :rows="12" :disabled="input_disabled"/>
     </div>
     <div class="w-2/3">
       <a-form-model
@@ -523,10 +518,10 @@ export default {
       // localStorage.setItem('processData',JSON.stringify(recordProcessData))
       this.$emit('recordProcessData',this.processData)
     },
-    inputChange(e){
+    textareaChange(e){
       // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
       
-      this.processData.answer[4]=[this.answer.input]
+      this.processData.answer[4]=[this.answer.textarea]
       // localStorage.setItem('processData',JSON.stringify(recordProcessData))
       this.$emit('recordProcessData',this.processData)
     },

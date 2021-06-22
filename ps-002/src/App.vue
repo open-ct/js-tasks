@@ -16,7 +16,7 @@
       <a-layout-content v-if="current == 0" class="bg-white h-4/5 p-6">
         <div class="text-xl text-left align-middle ml-4 leading-loose">
           我国南方地区夏季普遍高温多雨。
-          以南方某市为例，夏季室外平均气温可达36C，平均湿度为80％。
+          以南方某市为例，夏季室外平均气温可达36℃，平均湿度为80％。
           某地居民会在停电时为了避免高温引起食物腐烂变质，用以下材料制作了一个“土冰箱”，装置所需材料如右图所示。
           有的居民会在碗上面铺上一块儿毛巾，盆内加一部分自来水。
           请你探究毛巾的位置和盆内水的高度是否会影响食物冷藏效果。
@@ -111,10 +111,10 @@
                       :tooltipVisible="false"
                     />
                   </div>
-                  若完成作答，请点击“下一步”
+                  
                 </div>
                 <a-button class="mt-4" @click="updateExpertData" type="primary">
-                  <a-icon type="experiment" />试一试
+                  <a-icon type="experiment" />记录
                 </a-button>
                 <!-- <div class="flex">
 <a-form-model
@@ -257,7 +257,10 @@
       <a-layout-content v-if="current == 2" class="bg-white h-4/5 p-6">
         <div class="flex flex-1">
           <div class="text-xl text-left mb-4">
-            （1）室温为30，碗内食物的初始温度为45°℃，需要冷藏保鲜，碗内温度越低冷藏效果越好，请探究冷藏效果最好的毛巾位置、水位高度。请点击“记录”按钮，记录下实验数据<br/>
+            （1）室温为30℃，碗内食物的初始温度为45℃，
+            需要冷藏保鲜，<br/>碗内温度越低冷藏效果越好，
+            请探究冷藏效果最好的毛巾位置、水位高度。<br/><br/>
+            请点击“记录”按钮，记录下实验数据。<br/><br/>
               经过探究，你认为:冷藏效果最好的毛巾位置
             <a-dropdown>
               <a-button class="ant-dropdown-link">
@@ -368,7 +371,7 @@
                   <a>水位5</a>
                 </a-menu-item>
               </a-menu>
-            </a-dropdown><br/>
+            </a-dropdown><br/><br/><br/>
             若完成作答，请点击“下一步”
           </div>
           <div class="w-1/2">
@@ -569,15 +572,16 @@
                 </div>
               </div> -->
             </div>
-
+            <a-button class="mt-4"  @click="updateExpertData1" type="primary" >
+                  <a-icon type="experiment" />记录
+                </a-button>
             <div class="max-h-96">
               <div class="text-2xl">实验数据</div>
-
               <a-table
                 :scroll="{ y: 240 }"
                 :pagination="false"
                 :columns="columns"
-                :data-source="answer.expertData || []"
+                :data-source="answer.expertData1 || []"
               />
             </div>
           </div>
@@ -594,12 +598,21 @@
       <a-layout-content v-if="current == 3" class="bg-white h-4/5 p-6">
         <div class="flex">
           <div class="text-xl text-left mb-4 w-1/2">
-            小红对这个冷藏装置也很感兴趣，她做了一组实验，得出如右图所示的数据。根据数据，你认为水位在哪里时冷藏效果最好？（）<br/>
-            A.水位0<br/>
-            B.水位1<br/>
-            C.水位2<br/>
-            D.水位3<br/>
-            E.水位4<br/>
+            （2）小红对这个冷藏装置也很感兴趣，她做了一组实验，得出如右图所示的数据。根据数据，你认为水位在哪里时冷藏效果最好？<br/>
+            <a-radio-group
+            v-model="answer.q2radioGroup"
+            @change="q2radioGroupChange"
+            name="radioGroup2"
+            :default-value="-1"
+            class="text-left"
+          >
+        <br />
+        <a-radio :value="1">A. 水位0</a-radio>
+        <a-radio :value="2">B. 水位1</a-radio> 
+        <a-radio :value="3">C. 水位2</a-radio>
+        <a-radio :value="4">D. 水位3</a-radio> 
+        <a-radio :value="5">E. 水位4</a-radio>  
+        </a-radio-group><br/><br/>
             根据你所学的科学原理，说明此水位冷藏效果最好的原因。<br/>
             将答案填写于方框中，作答完毕请点击“下一步”。
             <a-textarea
@@ -830,11 +843,20 @@
       <a-layout-content v-if="current == 4" class="bg-white h-4/5 p-6">
         <div class="flex">
           <div class="text-xl text-left mb-4 w-1/2">
-            （3）小红继续探究，得出如右图所示的数据。根据数据，你认为毛巾位置在哪里时冷藏效果最好？（）
-A. 无毛巾<br/>
-B. 毛巾未进入水中<br/>
-C. C毛巾进入水中<br/>
-根据你所学的科学原理，说明此该毛巾位置冷藏效果最好的原因。将答案填写于方框中，作答完毕请点击“下一步”。
+            （3）小红继续探究，得出如右图所示的数据。根据数据，你认为毛巾位置在哪里时冷藏效果最好？<br/>
+             <a-radio-group
+              v-model="answer.q3radioGroup"
+               @change="q3radioGroupChange"
+        name="radioGroup2"
+        :default-value="-1"
+        class="text-left"
+      >
+        <br />
+        <a-radio :value="1">A. 无毛巾</a-radio>
+        <a-radio :value="2">B. 毛巾未进入水中</a-radio> 
+        <a-radio :value="3">C. 毛巾进入水中</a-radio>
+        </a-radio-group><br/><br/>
+根据你所学的科学原理，说明此毛巾位置冷藏效果最好的原因。将答案填写于方框中，作答完毕请点击“下一步”。
             <a-textarea
               v-model="answer.q3Text"
               @change="q3Change"
@@ -2031,37 +2053,37 @@ export default {
           key: 0,
           maojinweizhi: "无毛巾",
           shuiweiweizhi: "水位2",
-          temperature: 30,
+          temperature: '30.0℃',
         },
         {
           key: 1,
           maojinweizhi: "毛巾未进入水中",
           shuiweiweizhi: "水位2",
-          temperature: 30,
+          temperature:'30.0℃',
         },
         {
           key: 2,
           maojinweizhi: "毛巾进入水中",
           shuiweiweizhi: "水位2",
-          temperature: 20.2,
+          temperature: '22.2℃',
         },
         {
           key: 3,
           maojinweizhi: "无毛巾",
           shuiweiweizhi: "水位4",
-          temperature: 29.1,
+          temperature: '29.1℃',
         },
         {
           key: 4,
           maojinweizhi: "毛巾未进入水中",
           shuiweiweizhi: "水位4",
-          temperature: 29.2,
+          temperature: '29.2℃',
         },
         {
           key: 5,
           maojinweizhi: "毛巾进入水中",
           shuiweiweizhi: "水位4",
-          temperature: 27.9,
+          temperature: '26.3℃',
         },
       ],
       q3TableData: [
@@ -2069,31 +2091,31 @@ export default {
           key: 0,
           maojinweizhi: "毛巾进入水中",
           shuiweiweizhi: "水位0",
-          temperature: 30,
+          temperature: '30.0℃',
         },
         {
           key: 1,
           maojinweizhi: "毛巾进入水中",
           shuiweiweizhi: "水位1",
-          temperature: 24.8,
+          temperature: '23.8℃',
         },
         {
           key: 2,
           maojinweizhi: "毛巾进入水中",
           shuiweiweizhi: "水位2",
-          temperature: 20.2,
+          temperature: '22.2℃',
         },
         {
           key: 3,
           maojinweizhi: "毛巾进入水中",
           shuiweiweizhi: "水位3",
-          temperature: 28.4,
+          temperature: '26.0℃',
         },
         {
           key: 4,
           maojinweizhi: "毛巾进入水中",
           shuiweiweizhi: "水位4",
-          temperature: 27.9,
+          temperature: '26.3℃',
         },
       ],
       list2: [
@@ -2276,13 +2298,13 @@ export default {
         10: "30.0℃",
         11: "30.0℃",
         12: "30.0℃",
-        13: "29.4℃",
-        14: "29.0℃",
+        13: "29.6℃",
+        14: "29.2℃",
         20: "30.0℃",
-        21: "24.8℃",
-        22: "20.2℃",
-        23: "28.4℃",
-        24: "27.9℃",
+        21: "23.8℃",
+        22: "22.2℃",
+        23: "26.0℃",
+        24: "26.3℃",
       },
       imgList: {
         "00":
@@ -2311,8 +2333,16 @@ export default {
   name: "app",
   mounted() {},
   methods: {
+    q2radiooGroupChange(){
+      this.processData.answer[7]=this.answer.q2radioGroup
+      this.recordProcessData()
+    },
     q2Change(){
       this.processData.answer[6]=this.answer.q2Text
+      this.recordProcessData()
+    },
+    q3radioGroupChange(){
+      this.processData.answer[8]=this.answer.q3radioGroup
       this.recordProcessData()
     },
     q3Change(){
@@ -2376,6 +2406,62 @@ export default {
       }
       this.answer.expertData.push({
         key: this.answer.expertData.length,
+        maojinweizhi: item.maojin,
+        shuiweiweizhi: item.shuiwei,
+        temperature: item.temperature,
+      });
+      this.$forceUpdate();
+      this.processData.answer[0]=this.maojinweizhi+1
+      this.processData.answer[1]=this.shuiweiweizhi+1
+      this.processData.answer[4]=this.maojinweizhi+1
+      this.processData.answer[5]=this.shuiweiweizhi+1
+      this.processData.answer[7]=this.maojinweizhi+1
+      this.processData.answer[8]=this.shuiweiweizhi+1
+      this.processData.answer[10]=this.maojinweizhi+1
+      this.processData.answer[11]=this.shuiweiweizhi+1
+      this.processData.answer[14]=this.maojinweizhi+1
+      this.processData.answer[15]=this.shuiweiweizhi+1
+      this.processData.answer[17]=this.maojinweizhi+1
+      this.processData.answer[18]=this.shuiweiweizhi+1
+      this.recordProcessData()
+    },
+    updateExpertData1() {
+      if (this.maojinweizhi == undefined) {
+        alert("请选择毛巾位置");
+        return;
+      }
+      if (this.shuiweiweizhi == undefined) {
+        alert("请选择水位位置");
+        return;
+      }
+      let item = {};
+
+      if (this.maojinweizhi == 0) {
+        item.maojin = "无毛巾";
+      } else if (this.maojinweizhi == 1) {
+        item.maojin = "毛巾未进入水中";
+      } else if (this.maojinweizhi == 2) {
+        item.maojin = "毛巾进入水中";
+      }
+      if (this.shuiweiweizhi == 0) {
+        item.shuiwei = "水位0";
+      } else if (this.shuiweiweizhi == 1) {
+        item.shuiwei = "水位1";
+      } else if (this.shuiweiweizhi == 2) {
+        item.shuiwei = "水位2";
+      } else if (this.shuiweiweizhi == 3) {
+        item.shuiwei = "水位3";
+      } else if (this.shuiweiweizhi == 4) {
+        item.shuiwei = "水位4";
+      }
+      item.temperature = this.tempData[
+        this.maojinweizhi + "" + this.shuiweiweizhi
+      ];
+      if (!this.answer.expertData1) {
+        this.answer.expertData1 = [];
+      }
+      this.answer.expertData1.push({
+        key: this.answer.expertData1.length,
         maojinweizhi: item.maojin,
         shuiweiweizhi: item.shuiwei,
         temperature: item.temperature,

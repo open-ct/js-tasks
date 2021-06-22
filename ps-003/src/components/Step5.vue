@@ -9,13 +9,16 @@
         @change="q33RadioChange"
         name="radioGroup"
         :default-value="-1"
+        class="text-left"
       >
         <br />
-        <a-radio :value="1"> 同学A.鱼缸放入水草时，鱼缸中含氧量高； </a-radio>
+        <a-radio :value="1" style="">同学A.鱼缸放入水草时，鱼缸中含氧量高；</a-radio>
         <a-radio :value="2">同学B.鱼缸不放入水草时，鱼缸中含氧量高；</a-radio> <br/>
-        <a-radio :value="3">学生C：水草对鱼缸中溶氧量没有影响;</a-radio> <br/></a-radio-group
+        <a-radio :value="3">学生C.水草对鱼缸中溶氧量没有影响;</a-radio> <br/></a-radio-group
       ><br /><br />
-      <div class="text-left mb-4">请对你的观点，做出相应的解释。</div>
+      <div class="text-left mb-4">通过你的实验结果，能得出什么结论。<br/>
+      并根据你所学的科学原理，说明你选择观点更合理的原因。
+</div>
       <a-textarea v-model="answer.text" @change="textareaChange" class="mt-4" placeholder="" :rows="4" />
     </div>
     <div class="w-1/2">
