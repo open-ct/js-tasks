@@ -12,9 +12,9 @@
         class="text-left"
       >
         <br />
-        <a-radio :value="1" style="">同学A.鱼缸放入水草时，鱼缸中含氧量高；</a-radio>
-        <a-radio :value="2">同学B.鱼缸不放入水草时，鱼缸中含氧量高；</a-radio> <br/>
-        <a-radio :value="3">学生C.水草对鱼缸中溶氧量没有影响;</a-radio> <br/></a-radio-group
+        <a-radio :value="1" style="">学生A:鱼缸放入较多水草时，鱼缸中溶氧量高；</a-radio>
+        <a-radio :value="2">学生B:鱼缸放入少量水草时，鱼缸中溶氧量高；</a-radio> <br/>
+        <a-radio :value="3">学生C：水草对鱼缸中溶氧量没有影响;</a-radio> <br/></a-radio-group
       ><br /><br />
       <div class="text-left mb-4">通过你的实验结果，能得出什么结论。<br/>
       并根据你所学的科学原理，说明你选择观点更合理的原因。
