@@ -50,7 +50,7 @@
 
       <div class="flex ml-6 mt-4">
         <a-statistic
-          title="水的体积（mL）"
+          title="水的体积（L）"
           :value="getVolume"
           style="margin-right: 50px"
         />
