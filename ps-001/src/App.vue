@@ -668,6 +668,14 @@ export default {
           title: "问题1",
         },
         {
+          index: 3,
+          title: "问题2",
+        },
+        {
+          index: 4,
+          title: "实验2",
+        },
+        {
           index: 5,
           title: "问题3",
         },
