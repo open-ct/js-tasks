@@ -2,9 +2,9 @@
   <a-layout-content class="bg-white h-4/5 p-6 flex">
         <div class="text-lg text-left mb-8 w-1/2">
           2.1 某位同学想在球状鱼缸中养鱼，<br />
-          学生A认为：鱼缸放入水草时，鱼缸中含氧量会更高；<br />
-          学生B认为：鱼缸不放入水草时，鱼缸中含氧量会更高；<br />
-          学生C认为：水草对鱼缸中溶氧量没有影响;<br/>
+          学生A：鱼缸放入较多水草时，鱼缸中溶氧量会更高；<br />
+          学生B：鱼缸放入少量水草时，鱼缸中溶氧量会更高；<br />
+          学生C：水草对鱼缸中溶氧量没有影响;<br/>
           <br />
           你认为哪位同学的观点更合理？<br />
           <a-radio-group name="radioGroup" @change="radioChange" :default-value="-1">
