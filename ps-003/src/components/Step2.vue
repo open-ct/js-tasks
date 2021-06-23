@@ -106,7 +106,7 @@
       <a-statistic
         class="w-1/5"
         style="margin-left: 30px"
-        title="水的体积（mL）"
+        title="水的体积（L）"
         :value="getVolumeStraight"
       />
       <a-statistic
