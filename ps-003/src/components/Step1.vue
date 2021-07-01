@@ -4,10 +4,10 @@
       右图是一个实验模拟器，可以用来测量鱼缸中的溶氧量。<br/><br/>
       如果你想了解实验模拟器如何使用，可以尝试下列操作：<br/>
       1.拖动“鱼的数量”按钮；<br/>
-      2.拖动“水面高度”按钮；<br/>
+      2.拖动“水面位置”按钮；<br/>
       3.拖动“水草数量”按钮；<br/>
       4.点击“记录”按钮，表格中会呈现实验数据；<br/><br/><br/>
-      注：任意拖动按钮，“水的体积”与“溶氧量”都会发生变化。
+      注：任意拖动按钮，“溶氧量”都会发生变化。
 
     </div>
     <div class="w-2/3">
@@ -28,7 +28,7 @@
             :marks="marks2"
           />
         </a-form-model-item>
-        <a-form-model-item label="水面高度">
+        <a-form-model-item label="水面位置">
           <a-slider
             v-model="water"
             id="test"
@@ -52,11 +52,6 @@
       </a-form-model>
 
       <div class="flex ml-6 mt-4">
-        <a-statistic
-          title="水的体积（L）"
-          :value="getVolume"
-          style="margin-right: 50px"
-        />
         <a-statistic
           title="溶氧量（mg/L）"
           :value="getDo"
@@ -108,17 +103,22 @@
 <script>
 const columns = [
   {
-    title: "水面高度",
+    title: "鱼的数量",
+    dataIndex: "fish",
+    key: "fish",
+  },
+  {
+    title: "水面位置",
     dataIndex: "water",
     key: "water",
   },
   {
-    title: "水的体积",
-    dataIndex: "volume",
-    key: "volume",
+    title: "水草数量",
+    dataIndex: "grass",
+    key: "grass",
   },
   {
-    title: "溶氧量",
+    title: "溶氧量(mg/L)",
     dataIndex: "do",
     key: "do",
   },

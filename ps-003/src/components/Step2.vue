@@ -1,86 +1,104 @@
 <template>
   <a-layout-content class="bg-white h-4/5 p-6 flex w-full">
     <div class="text-lg leading-relaxed text-left mb-8 w-1/3">
-      1.为了探究鱼缸中溶氧量与哪些因素有关。<br/>某位同学向鱼缸中不同水位分别加入一定量的水，并测量水中的溶氧量。
+      1.1为了探究水的溶氧量是否与水量和水温有关。
+      小明同学向鱼缸中，依次将不同温度的水加入至鱼缸内不同水位，
+      恒温状态下，不断搅拌鱼缸中水，一段时间后，分别测量出水中的溶氧量。<br/>
+      请你使用“实验模拟器”，拖动“水温”与“水面位置”按钮，记录实验数据；
 <br /><br />
-
-      请你使用“实验模拟器”，拖动“水面高度“按钮，观察数据可知：鱼缸中溶氧量在水位
-      <a-dropdown :disabled="a_dropdown_disabled">
+      根据你的实验数据，鱼缸中水温与水的溶氧量之间的关系是：
+          <a-radio-group  name="radioGroup" @change="radioChange1" :default-value="-1" :disabled="answer_dispaly[0]">
+            <a-radio :value="1"> A.水温越高，水的溶氧量越高</a-radio>
+            <a-radio :value="2"> B.水温越高，水的溶氧量越低</a-radio>
+            <a-radio :value="3"> C.水温对水的溶氧量没有影响</a-radio>
+          </a-radio-group><br/><br/>
+      <!-- <a-dropdown :disabled="answer_dispaly[0]">
             <a-button style="margin-left: 8px;"> {{ answer.q1a1 || "" }} <a-icon type="down" /> </a-button>
             <a-menu slot="overlay">
               <a-menu-item
                 @click="
                   () => {
-                    answer.q1a1 = '1最高';
+                    answer.q1a1 = 'A.水温越高，水的溶氧量越高';
                     recordProcessData(1)
                     $forceUpdate();
                     
                   }
                 "
               >
-                <a>1最高</a>
+                <a>A.水温越高，水的溶氧量越高</a>
               </a-menu-item>
               <a-menu-item
                 @click="
                   () => {
-                    answer.q1a1 = '2最高';
+                    answer.q1a1 = 'B.水温越高，水的溶氧量越低';
                     recordProcessData(2)
                     $forceUpdate();
                   }
                 "
               >
-                <a>2最高</a>
+                <a>B.水温越高，水的溶氧量越低</a>
               </a-menu-item>
               <a-menu-item
                 @click="
                   () => {
-                    answer.q1a1 = '3最高';
+                    answer.q1a1 = 'C.水温对水的溶氧量没有影响';
                     recordProcessData(3)
                     $forceUpdate();
                   }
                 "
               >
-                <a>3最高</a>
-              </a-menu-item>
-              <a-menu-item
-                @click="
-                  () => {
-                    answer.q1a1 = '4最高';
-                    recordProcessData(4)
-                    $forceUpdate();
-                  }
-                "
-              >
-                <a>4最高</a>
-              </a-menu-item>
-              <a-menu-item
-                @click="
-                  () => {
-                    answer.q1a1 = '5最高';
-                    recordProcessData(5)
-                    $forceUpdate();
-                  }
-                "
-              >
-                <a>5最高</a>
-              </a-menu-item>
-              <a-menu-item
-                @click="
-                  () => {
-                    answer.q1a1 = '各处一样高';
-                    recordProcessData(6)
-                    $forceUpdate();
-                  }
-                "
-              >
-                <a>各处一样高</a>
+                <a>C.水温对水的溶氧量没有影响</a>
               </a-menu-item>
             </a-menu>
-          </a-dropdown>
+          </a-dropdown> -->
           
 
-      <br />由此可以看出水中的溶氧量与水量的关系是
-      <a-textarea v-model="answer.textarea" @change="textareaChange" class="mt-4" placeholder="" :rows="12" :read-only="a_textarea_disabled"/>
+      <br />鱼缸中水量与水的溶氧量之间关系是:
+          <a-radio-group name="radioGroup" @change="radioChange2" :default-value="-1" :disabled="answer_dispaly[1]">
+            <a-radio :value="1"> A.水量越多，水的溶氧量越高</a-radio>
+            <a-radio :value="2"> B.水量越多，水的溶氧量越低 </a-radio>
+            <a-radio :value="3"> C.水量对水的溶氧量没有影响</a-radio>
+          </a-radio-group><br/><br/>
+            <!-- <a-dropdown :disabled="answer_dispaly[1]">
+            <a-button style="margin-left: 8px;"> {{ processData.answer[4]=='text'?'': processData.answer[4]}} <a-icon type="down" /> </a-button>
+            <a-menu slot="overlay">
+              <a-menu-item
+                @click="
+                  () => {
+                    this.processData.answer[4]= 'A.水量越多，水的溶氧量越高 ';
+                    this.$emit('recordProcessData',this.processData)
+                    $forceUpdate();
+                    
+                  }
+                "
+              >
+                <a>A.水量越多，水的溶氧量越高</a>
+              </a-menu-item>
+              <a-menu-item
+                @click="
+                  () => {
+                    this.processData.answer[4]='B.水量越多，水的溶氧量越低';
+                    this.$emit('recordProcessData',this.processData)
+                    $forceUpdate();
+                  }
+                "
+              >
+                <a>B.水量越多，水的溶氧量越低</a>
+              </a-menu-item>
+              <a-menu-item
+                @click="
+                  () => {
+                    this.processData.answer[4]='C.水量对水的溶氧量没有影响'
+                    this.$emit('recordProcessData',this.processData)
+                    $forceUpdate();
+                  }
+                "
+              >
+                <a>C.水量对水的溶氧量没有影响</a>
+              </a-menu-item>
+            </a-menu>
+          </a-dropdown> -->
+      <!-- <a-textarea v-model="answer.textarea" @change="textareaChange" class="mt-4" placeholder="" :rows="12" :disabled="answer_dispaly[1]"/> -->
     </div>
     <div class="w-2/3">
       <a-form-model
@@ -89,7 +107,7 @@
         :label-col="labelCol"
         :wrapper-col="wrapperCol"
       >
-        <a-form-model-item label="水面高度">
+        <a-form-model-item label="水面位置">
           <a-slider
             v-model="water"
             id="test"
@@ -97,24 +115,38 @@
             :dots="true"
             :min="1"
             :max="5"
+            :marks="marks1"
+          />
+        </a-form-model-item>
+        <a-form-model-item label="水温">
+          <a-slider
+            v-model="temperature"
+            id="test"
+            :default-value="1"
+            :dots="true"
+            :step="7"
+            :min="7"
+            :max="35"
             :marks="marks2"
-            @change="updateQ1Table"
           />
         </a-form-model-item>
       </a-form-model>
 
-      <a-statistic
+      <!-- <a-statistic
         class="w-1/5"
         style="margin-left: 30px"
         title="水的体积（L）"
         :value="getVolumeStraight"
-      />
+      /> -->
       <a-statistic
         class="w-1/5"
         style="margin-left: 30px"
         title="溶氧量（mg/L）"
         :value="getDoStraight"
       />
+        <a-button @click="updateQ1Table" type="primary">
+          <a-icon type="edit" />记录
+        </a-button>
       <div class="flex flex-1 w-full mt-4">
         <div class="w-1/2">
           <img v-if="water == 1" src="../assets/straight1.png" alt="" />
@@ -143,17 +175,17 @@
 <script>
 const columns = [
   {
-    title: "水面高度",
+    title: "水面位置",
     dataIndex: "water",
     key: "water",
   },
   {
-    title: "水的体积",
-    dataIndex: "volume",
-    key: "volume",
+    title: "水温（℃）",
+    dataIndex: "temperature",
+    key: "temperature",
   },
   {
-    title: "溶氧量",
+    title: "溶氧量（mg/L）",
     dataIndex: "do",
     key: "do",
   },
@@ -222,7 +254,14 @@ export default {
       }
     },
     getDoStraight() {
-      return 9;
+      let tempData= {
+        '17':"12.11",'114':"10.30",'121':"8.90",'128':"7.82",'135':"6.95",
+        '27':"12.11",'214':"10.30",'221':"8.90",'228':"7.82",'235':"6.95",
+        '37':"12.11",'314':"10.30",'321':"8.90",'328':"7.82",'335':"6.95",
+        '47':"12.11",'414':"10.30",'421':"8.90",'428':"7.82",'435':"6.95",
+        '57':"12.11",'514':"10.30",'521':"8.90",'528':"7.82",'535':"6.95",
+      }
+      return tempData[this.water + "" + this.temperature];
       // this.doData.forEach(element => {
       // 	debugger
       // 	if(element.fish==fish&&element.water==water&&element.grass==grass){
@@ -234,21 +273,19 @@ export default {
   },
   data() {
     return {
-      a_dropdown_disabled:false,
-      a_textarea_disabled:false,
       marks1: {
-        0: '0',
-        1: '1',
-        2: '2',
-        3: '3',
-        4: '4'
-      },
-      marks2: {
         1: '1',
         2: '2',
         3: '3',
         4: '4',
         5: '5'
+      },
+      marks2: {
+        7: '7',
+        14: '14',
+        21: '21',
+        28: '28',
+        35: '35'
       },
       columns,
       answer: {},
@@ -403,6 +440,7 @@ export default {
       fish: 1,
       grass: 0,
       water: 1,
+      temperature:7,
       labelCol: { span: 4 },
       wrapperCol: { span: 14 },
       form: {
@@ -499,26 +537,41 @@ export default {
     };
   },
   name: "app",
+  props:['processData','answer_dispaly'],
   mounted() {},
-  props:['processData'],
   methods: {
+    radioChange1(e){
+      // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
+      
+      this.processData.answer[3]=[e.target.value]
+      // localStorage.setItem('processData',JSON.stringify(recordProcessData))
+      this.$emit('recordProcessData',this.processData)
+    },
+    radioChange2(e){
+      // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
+      
+      this.processData.answer[4]=[e.target.value]
+      // localStorage.setItem('processData',JSON.stringify(recordProcessData))
+      this.$emit('recordProcessData',this.processData)
+    },
     deleteQ1Tabledata(index){
       this.answer.q1TableData.splice(index, 1);
       this.$forceUpdate();
     },
-    recordProcessData(water){
+    recordProcessData(){
       // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
-      this.processData.answer[3]=[water]
+      this.processData.answer[5]=[this.water]
+      this.processData.answer[6]=[this.temperatur]
       // localStorage.setItem('processData',JSON.stringify(recordProcessData))
       this.$emit('recordProcessData',this.processData)
     },
-    textareaChange(e){
-      // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
+    // textareaChange(e){
+    //   // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
       
-      this.processData.answer[4]=[this.answer.textarea]
-      // localStorage.setItem('processData',JSON.stringify(recordProcessData))
-      this.$emit('recordProcessData',this.processData)
-    },
+    //   this.processData.answer[4]=[this.answer.textarea]
+    //   // localStorage.setItem('processData',JSON.stringify(recordProcessData))
+    //   this.$emit('recordProcessData',this.processData)
+    // },
     q33RadioChange(e) {
       if (e.target.value == 1 && this.steps.length == 8) {
         this.steps.push({
@@ -538,7 +591,8 @@ export default {
             water: 1,
             grass: 0,
             volume: 5,
-            do: 9,
+            do: 12.11,
+            temperature:7,
           },
         ];
       }
@@ -549,11 +603,13 @@ export default {
         grass: this.grass,
         volume: this.getVolumeStraight,
         do: this.getDoStraight,
+        temperature:this.temperature
       });
       this.$forceUpdate();
       // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
 
       this.processData.answer[5]=[this.water]
+      this.processData.answer[6]=[this.temperature]
       // localStorage.setItem('processData',JSON.stringify(recordProcessData))
       this.$emit('recordProcessData',this.processData)
     },
