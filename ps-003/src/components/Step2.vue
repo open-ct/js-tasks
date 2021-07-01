@@ -7,7 +7,7 @@
       请你使用“实验模拟器”，拖动“水温”与“水面位置”按钮，记录实验数据；
 <br /><br />
       根据你的实验数据，鱼缸中水温与水的溶氧量之间的关系是：
-          <a-radio-group  name="radioGroup" @change="radioChange1" :default-value="-1" :disabled="answer_dispaly[0]">
+          <a-radio-group  name="radioGroup" v-model="$store.state.answer.radio1" @change="radioChange1" :default-value="-1" :disabled="answer_dispaly[0]">
             <a-radio :value="1"> A.水温越高，水的溶氧量越高</a-radio>
             <a-radio :value="2"> B.水温越高，水的溶氧量越低</a-radio>
             <a-radio :value="3"> C.水温对水的溶氧量没有影响</a-radio>
@@ -54,7 +54,7 @@
           
 
       <br />鱼缸中水量与水的溶氧量之间关系是:
-          <a-radio-group name="radioGroup" @change="radioChange2" :default-value="-1" :disabled="answer_dispaly[1]">
+          <a-radio-group name="radioGroup" v-model="$store.state.answer.radio2" @change="radioChange2" :default-value="-1" :disabled="answer_dispaly[1]">
             <a-radio :value="1"> A.水量越多，水的溶氧量越高</a-radio>
             <a-radio :value="2"> B.水量越多，水的溶氧量越低 </a-radio>
             <a-radio :value="3"> C.水量对水的溶氧量没有影响</a-radio>
@@ -542,14 +542,14 @@ export default {
   methods: {
     radioChange1(e){
       // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
-      
+      this.$store.state.answer.radio1=e.target.value
       this.processData.answer[3]=[e.target.value]
       // localStorage.setItem('processData',JSON.stringify(recordProcessData))
       this.$emit('recordProcessData',this.processData)
     },
     radioChange2(e){
       // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
-      
+      this.$store.state.answer.radio2=e.target.value
       this.processData.answer[4]=[e.target.value]
       // localStorage.setItem('processData',JSON.stringify(recordProcessData))
       this.$emit('recordProcessData',this.processData)

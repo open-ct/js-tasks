@@ -5,7 +5,7 @@
         2.3 根据你上述的实验设计数据结果，你认为哪位同学的观点更合理<br />
       </div>
       <a-radio-group
-        v-model="answer.q33Radio"
+        v-model="$store.state.answer.radio4"
         @change="q33RadioChange"
         name="radioGroup"
         :default-value="-1"
@@ -20,7 +20,7 @@
       <div class="text-left mb-4">通过你的实验结果，能得出什么结论。<br/>
       并根据你所学的科学原理，说明你选择观点更合理的原因。
 </div>
-      <a-textarea v-model="answer.text" @change="textareaChange" class="mt-4" placeholder="" :rows="4" :disabled="answer_dispaly[7]"/>
+      <a-textarea v-model="$store.state.answer.text4" @change="textareaChange" class="mt-4" placeholder="" :rows="4" :disabled="answer_dispaly[7]"/>
     </div>
     <div class="w-1/2">
     
@@ -401,16 +401,17 @@ export default {
     this.$forceUpdate()
   },
   methods: {
-    textareaChange(){
+    textareaChange(e){
       // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
-      
-      this.processData.answer[15]=this.answer.text
+      this.$store.state.answer.text4=e.target.value
+      this.processData.answer[15]=[e.target.value]
       // localStorage.setItem('processData',JSON.stringify(recordProcessData))
       this.$emit('recordProcessData',this.processData)
     },
     
     q33RadioChange(e) {
       console.log(e)
+      this.$store.state.answer.radio4=e.target.value
       this.$emit('nextStep',e);
       // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
       this.processData.answer[14]=[e.target.value]
