@@ -5,7 +5,7 @@
         2.2 请你利用实验模拟器，设计实验并收集至少三组数据，验证你的观点。<br/><br/>
         实验设计：
       </div>
-      <a-textarea v-model="answer.text" @change="textareaChange" class="mt-4" placeholder="" :rows="18" :disabled="answer_dispaly[5]"/>
+      <a-textarea v-model="$store.state.answer.text3" @change="textareaChange" class="mt-4" placeholder="" :rows="18" :disabled="answer_dispaly[5]"/>
     </div>
     
     <div class="w-2/3">
@@ -466,10 +466,10 @@ export default {
       this.answer.q1TableData.splice(index, 1);
       this.$forceUpdate();
     },
-    textareaChange(){
+    textareaChange(e){
       // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
-      
-      this.processData.answer[10]=this.answer.text
+      this.$store.state.answer.text3=e.target.value
+      this.processData.answer[10]=[e]
       // localStorage.setItem('processData',JSON.stringify(recordProcessData))
       this.$emit('recordProcessData',this.processData)
     },

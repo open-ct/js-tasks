@@ -5,7 +5,7 @@
           1.2右表为小明同学通过“实验模拟器”记录的数据。<br/>
           请你运用所学的科学原理，解释水温在7℃比在35℃时，水中溶氧量高的原因。
            <div>
-        <a-textarea  class="mt-4" placeholder="" :rows="8"  v-model="answer.text" @change="textareaChange" :disabled="answer_dispaly[2]"/>
+        <a-textarea  class="mt-4" placeholder="" :rows="8"  v-model="$store.state.answer.text1" @change="textareaChange" :disabled="answer_dispaly[2]"/>
         
         </div>
         </div>
@@ -147,8 +147,9 @@ export default {
   name: "app",
   mounted() {},
   methods: {
-    textareaChange(){
-      this.processData.answer[7]=[this.answer.text]
+    textareaChange(e){
+      this.$store.state.text1=e.target.value
+      this.processData.answer[7]=[e.target.value]
       this.$emit('recordProcessData',this.processData)
     },
 

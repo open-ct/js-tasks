@@ -1,7 +1,7 @@
 <template>
   <a-layout-content class="bg-white h-4/5 p-6 flex">
         <div class="text-lg text-left mb-8 w-1/2">
-          2.1 为进一步探究鱼缸中鱼的数量和水草数量对水中溶氧量的关系。
+          2.1 为进一步探究鱼缸中鱼的数量和水草数量与水中溶氧量的关系。
           小明同学向鱼缸中，分别加入不同量的鱼和水草。
           <br />
           学生A认为：鱼缸放入较多水草时，鱼缸中溶氧量会更高；<br />
@@ -9,13 +9,13 @@
           学生C认为：水草数量对鱼缸中溶氧量没有影响;<br/>
           <br />
           你认为哪位同学的观点更合理？<br />
-          <a-radio-group name="radioGroup" @change="radioChange" :default-value="-1" :disabled="answer_dispaly[3]">
+          <a-radio-group name="radioGroup" v-model="$store.state.answer.radio3" @change="radioChange" :default-value="-1" :disabled="answer_dispaly[3]">
             <a-radio :value="1"> 学生A </a-radio>
             <a-radio :value="2"> 学生B </a-radio>
             <a-radio :value="3"> 学生C </a-radio>
           </a-radio-group><br/><br/>
-          请说明你的选择的理由:
-          <a-textarea  class="mt-4" placeholder="" :rows="8" :v-model="answer.textarea" @change="textareaChange" :disabled="answer_dispaly[4]"/>
+          请说明你选择该观点的理由：
+          <a-textarea  class="mt-4" placeholder="" :rows="8" :v-model="$store.state.answer.text2" @change="textareaChange" :disabled="answer_dispaly[4]"/>
         </div>
         <div class="w-1/2 flex">
           <img
@@ -391,14 +391,14 @@ export default {
   methods: {
     textareaChange(e){
       // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
-      
-      this.processData.answer[9]=[this.answer.textarea]
+      this.$store.state.answer.radio3=e.target.value
+      this.processData.answer[9]=[e.target.value]
       // localStorage.setItem('processData',JSON.stringify(recordProcessData))
       this.$emit('recordProcessData',this.processData)
     },
     radioChange(e){
       // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
-      
+      this.$store.state.answer.text2=e.target.value
       this.processData.answer[8]=[e.target.value]
       // localStorage.setItem('processData',JSON.stringify(recordProcessData))
       this.$emit('recordProcessData',this.processData)

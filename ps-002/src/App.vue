@@ -853,7 +853,7 @@
         name="radioGroup2"
         :default-value="-1"
         class="text-left"
-        :disabled="answer_dispaly[5]"
+        :disabled="answer_dispaly[4]"
       >
         <br />
         <a-radio :value="1">A. 无毛巾</a-radio>
@@ -867,7 +867,7 @@
               class="mt-4"
               placeholder=""
               :rows="4"
-              :disabled="answer_dispaly[6]"
+              :disabled="answer_dispaly[5]"
             />
           </div>
           <div class="w-1/2">
@@ -1449,7 +1449,7 @@
         <div class="flex">
           <div class="text-xl text-left mb-4 w-1/2">
             （4）现在你认为：冷藏效果最好的毛巾位置
-            <a-dropdown :disabled="answer_dispaly[7]">
+            <a-dropdown :disabled="answer_dispaly[6]">
               <a-button class="ant-dropdown-link">
                 {{ answer.q4a1 || "请选择" }} <a-icon type="down" />
               </a-button>
@@ -1492,7 +1492,7 @@
                 </a-menu-item>
               </a-menu> </a-dropdown
             ><br />水位高度
-            <a-dropdown :disabled="answer_dispaly[8]">
+            <a-dropdown :disabled="answer_dispaly[7]">
               <a-button class="ant-dropdown-link">
                 {{ answer.q4a2 || "请选择" }} <a-icon type="down" />
               </a-button>
@@ -1764,7 +1764,7 @@
             （5）请根据第（4）题的作答，用你所学的科学原理解释此时冷藏效果最好的原因。<br/>
             将答案填写于方框中，作答完毕请点击“提交答案”并“进入下一题”。
           </div>
-          <a-textarea v-model="answer.q6Text" @change="q6Change" class="mt-4" placeholder="" :rows="4" :disabled="answer_dispaly[9]"/>
+          <a-textarea v-model="answer.q6Text" @change="q6Change" class="mt-4" placeholder="" :rows="4" :disabled="answer_dispaly[8]"/>
         </div>
 
         <div class="w-1/2 ml-24">
@@ -2479,6 +2479,7 @@ export default {
     },
     next() {
       this.current++;
+      console.log(this.current)
       if (this.current == 2) {
         this.maojinweizhi = -1;
         this.shuiweiweizhi = -1;

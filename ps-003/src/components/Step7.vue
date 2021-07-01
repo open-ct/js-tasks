@@ -6,7 +6,7 @@
 
       </div>
       <a-radio-group
-        v-model="answer.q4Radio"
+        v-model="$store.state.answer.radio5"
         name="radioGroup2"
         :default-value="-1"
         @change="q33RadioChange"
@@ -20,7 +20,7 @@
         </a-radio-group
       ><br /><br />
       <div class="text-left mb-4">并对他的结论，做出相应的解释。</div>
-      <a-textarea v-model="answer.text" @change="textareaChange" class="mt-4" placeholder="" :rows="4" :disabled="answer_dispaly[9]"/>
+      <a-textarea v-model="$store.state.answer.text5" @change="textareaChange" class="mt-4" placeholder="" :rows="4" :disabled="answer_dispaly[9]"/>
     </div>
     <div class="w-1/2">
 
@@ -407,10 +407,10 @@ export default {
   mounted() {},
   props:['processData','answer_dispaly'],
   methods: {
-    textareaChange(){
+    textareaChange(e){
       // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
-      
-      this.processData.answer[17]=this.answer.text
+      this.$store.state.answer.text5=e.target.value
+      this.processData.answer[17]=[e.target.value]
       // localStorage.setItem('processData',JSON.stringify(recordProcessData))
       this.$emit('recordProcessData',this.processData)
     },
@@ -424,7 +424,7 @@ export default {
         this.steps.pop();
       }
       // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
-      
+      this.$store.state.answer.radio5=e.target.value
       this.processData.answer[16]=[e.target.value]
       // localStorage.setItem('processData',JSON.stringify(recordProcessData))
       this.$emit('recordProcessData',this.processData)
