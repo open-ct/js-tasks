@@ -210,7 +210,7 @@
           在上述实验1中，矿泉水瓶A的作用是什么？
         </div>
         <div class="float-left">
-          <a-radio-group @change="q2Change" name="radioGroup" :default-value="0" :disabled="answer_dispaly[3]">
+          <a-radio-group v-model="answer.q2" @change="q2Change" name="radioGroup" :default-value="0" :disabled="answer_dispaly[3]">
             <a-radio :value="1"> 对照组 </a-radio>
             <a-radio :value="2"> 实验组 </a-radio>
           </a-radio-group>
@@ -393,7 +393,7 @@
           <div class="text-lg text-left mb-8">
             请比较图1和图2中A、B、C曲线各有什么变化？
           </div>
-          <a-checkbox-group @change="onChange" class="w-96 text-left" :disabled="answer_dispaly[7]">
+          <a-checkbox-group v-model="answer.q4" @change="onChange" class="w-96 text-left" :disabled="answer_dispaly[7]">
             <a-checkbox value="1"> A曲线几乎不变 </a-checkbox><br />
             <a-checkbox value="2"> B曲线有明显变化 </a-checkbox><br />
             <a-checkbox value="3"> C曲线几乎不变 </a-checkbox><br />
@@ -938,14 +938,11 @@ export default {
       parent.postMessage(this.processData, "*")
     },
     onChange(e) {
-      for (let index = 0; index < e.length; index++) {
-        e[index]=parseInt(e[index]);
-        
-      }
-      this.answer.q4=e.sort()
+      this.answer.q4=e
       this.recordProcessData()
     },
     next(i) {
+      console.log(this.answer)
       this.beforeLeave();
       this.current++
       if(this.current==3){
