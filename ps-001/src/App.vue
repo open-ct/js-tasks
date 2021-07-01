@@ -66,7 +66,7 @@
           <div class="w-1/12">
             <div class="flex">
               <div style="color: #fac858" class="mr-1">——</div>
-              <a-dropdown>
+              <a-dropdown :disabled="answer_dispaly[0]">
                 <a class="ant-dropdown-link text-lg" style="color: #fac858">
                   {{ answer.q1Yellow || "请选择" }} <a-icon type="down" />
                 </a>
@@ -112,7 +112,7 @@
             </div>
             <div class="flex">
               <div style="color: #91cc75" class="mr-1">——</div>
-              <a-dropdown>
+              <a-dropdown :disabled="answer_dispaly[1]">
                 <a class="ant-dropdown-link text-lg" style="color: #91cc75">
                   {{ answer.q1Green || "请选择" }} <a-icon type="down" />
                 </a>
@@ -158,7 +158,7 @@
             </div>
             <div class="flex">
               <div style="color: #5470c6" class="mr-1">——</div>
-              <a-dropdown>
+              <a-dropdown :disabled="answer_dispaly[2]">
                 <a class="ant-dropdown-link text-lg" style="color: #5470c6">
                   {{ answer.q1Blue || "请选择" }} <a-icon type="down" />
                 </a>
@@ -210,7 +210,7 @@
           在上述实验1中，矿泉水瓶A的作用是什么？
         </div>
         <div class="float-left">
-          <a-radio-group @change="q2Change" name="radioGroup" :default-value="0">
+          <a-radio-group @change="q2Change" name="radioGroup" :default-value="0" :disabled="answer_dispaly[3]">
             <a-radio :value="1"> 对照组 </a-radio>
             <a-radio :value="2"> 实验组 </a-radio>
           </a-radio-group>
@@ -242,7 +242,7 @@
           <div class="w-1/12">
             <div class="flex">
               <div style="color: #fac858" class="mr-1">——</div>
-              <a-dropdown>
+              <a-dropdown :disabled="answer_dispaly[4]">
                 <a class="ant-dropdown-link text-lg" style="color: #fac858">
                   {{ answer.q3Yellow || "请选择" }} <a-icon type="down" />
                 </a>
@@ -288,7 +288,7 @@
             </div>
             <div class="flex">
               <div style="color: #91cc75" class="mr-1">——</div>
-              <a-dropdown>
+              <a-dropdown :disabled="answer_dispaly[5]">
                 <a class="ant-dropdown-link text-lg" style="color: #91cc75">
                   {{ answer.q3Green || "请选择" }} <a-icon type="down" />
                 </a>
@@ -334,7 +334,7 @@
             </div>
             <div class="flex">
               <div style="color: #5470c6" class="mr-1">——</div>
-              <a-dropdown>
+              <a-dropdown :disabled="answer_dispaly[6]">
                 <a class="ant-dropdown-link text-lg" style="color: #5470c6">
                   {{ answer.q3Blue || "请选择" }} <a-icon type="down" />
                 </a>
@@ -393,12 +393,12 @@
           <div class="text-lg text-left mb-8">
             请比较图1和图2中A、B、C曲线各有什么变化？
           </div>
-          <a-checkbox-group @change="onChange" class="w-96">
+          <a-checkbox-group @change="onChange" class="w-96 text-left" :disabled="answer_dispaly[7]">
             <a-checkbox value="1"> A曲线几乎不变 </a-checkbox><br />
             <a-checkbox value="2"> B曲线有明显变化 </a-checkbox><br />
             <a-checkbox value="3"> C曲线几乎不变 </a-checkbox><br />
             <a-checkbox value="4"> C曲线变得更贴近B曲线 </a-checkbox><br />
-            <a-checkbox value="5"> C曲线和B曲线叠合 </a-checkbox>
+            <a-checkbox value="5"> C曲线和B曲线重合 </a-checkbox>
             <!-- <a-row class="justify-start">
             </a-row>
             <a-row class="justify-start">
@@ -424,11 +424,11 @@
           <div class="text-lg text-left mb-8 mt-4">
             倘若小明刚刚记录的数据正确，图2中，曲线A、B几乎没有改变，但曲线C变得更加贴近曲线B，解释其原因。
           </div>
-          <a-textarea v-model="answer.q5" @change="q5Change" class="mt-4" placeholder="" :rows="4" />
+          <a-textarea v-model="answer.q5" @change="q5Change" class="mt-4" placeholder="" :rows="4" :disabled="answer_dispaly[8]"/>
           <div class="text-lg text-left mb-8 mt-4">
             对于实验目的而言，仅需进行实验2即可？还是两组实验都要做？并请简要说明原因。
           </div>
-          <a-textarea v-model="answer.q6" @change="q6Change" class="mt-4" placeholder="" :rows="4" />
+          <a-textarea v-model="answer.q6" @change="q6Change" class="mt-4" placeholder="" :rows="4" :disabled="answer_dispaly[9]"/>
         </div>
       </a-layout-content>
       <a-layout-content class="justify-between flex bg-white">
@@ -437,9 +437,9 @@
         </a-button>
         <a-button
           @click="next"
-          :disabled="current == steps.length - 1"
+          :disabled="answer_dispaly[10]"
           type="primary"
-          >下一步 <a-icon type="right" />
+          >{{nexttext}} <a-icon type="right" />
         </a-button>
       </a-layout-content>
     </a-layout>
@@ -518,6 +518,9 @@ export default {
   },
   data() {
     return {
+      fulfill:false,//判断是否做完测试
+      nexttext:'下一步',//下一步or提交答案,下一位兄弟改需求的时候可以封装一下“下一步”的操作
+      answer_dispaly:[false,false,false,false,false,false,false,false,false,false,false],//对应的每一个答案，最后一个是最后一步的下一步按钮
       processData: {
         page: 1,
         answer: [[-1], [-1], [-1], [1], [-1], [-1], [-1], [], "null", "null"],
@@ -822,6 +825,9 @@ export default {
           data: [20.0, 29.0, 30.5, 31.0, 31.2, 31.3, 31.4, 31.5, 31.5],
         },
       ],
+      axisPointer:{
+          show:false
+        },
       grid: {
         y2: 50,
       },
@@ -906,6 +912,9 @@ export default {
           data: [20.0, 27.4, 29.6, 30.2, 30.4, 30.7, 30.8, 30.9, 30.9],
         },
       ],
+      axisPointer:{
+          show:false
+        },
       grid: {
         y2: 50,
       },
@@ -936,15 +945,44 @@ export default {
       this.answer.q4=e.sort()
       this.recordProcessData()
     },
-    next() {
+    next(i) {
       this.beforeLeave();
-      this.current++;
+      this.current++
+      if(this.current==3){
+        this.answer_dispaly[0]=true;
+        this.answer_dispaly[1]=true;
+        this.answer_dispaly[2]=true;
+      }else if(this.current==4){
+        this.answer_dispaly[3]=true;
+      }else if(this.current==6){
+        this.answer_dispaly[4]=true;
+        this.answer_dispaly[5]=true;
+        this.answer_dispaly[6]=true;
+      }else if(this.current==7){
+        this.answer_dispaly[7]=true;
+        this.nexttext='提交答案';
+      }else if(this.current==8){
+        this.answer_dispaly[8]=true;
+        this.answer_dispaly[9]=true;
+        this.answer_dispaly[10]=true;
+        this.fulfill=true
+        this.current--;
+      };
+      if(this.nexttext=='提交答案' && this.fulfill){
+        this.answer_dispaly[10]=true;
+      }
+      
       // this.mLog();
       // parent.postMessage({ code: this.current }, "*");
     },
     back() {
       this.beforeLeave();
       this.current--;
+      //给学生回去看答案的时候
+      if(this.current==6){
+        this.nexttext='下一步';
+        this.answer_dispaly[10]=false;
+      }
       // this.mLog();
     },
     beforeLeave() {
