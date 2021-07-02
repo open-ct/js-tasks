@@ -417,6 +417,7 @@ export default {
       this.processData.answer[14]=[e.target.value]
       // localStorage.setItem('processData',JSON.stringify(recordProcessData))
       this.$emit('recordProcessData',this.processData)
+      this.$forceUpdate()
     },
     updateQ1Table() {
       if (!this.answer.q1TableData) {

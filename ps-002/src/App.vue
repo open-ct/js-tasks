@@ -829,7 +829,7 @@
                 :scroll="{ y: 240 }"
                 :pagination="false"
                 :columns="columns"
-                :data-source="q2TableData || []"
+                :data-source="q3TableData || []"
               />
             </div>
           </div>
@@ -1073,7 +1073,7 @@
                 :scroll="{ y: 240 }"
                 :pagination="false"
                 :columns="columns"
-                :data-source="q3TableData || []"
+                :data-source="q2TableData || []"
               />
             </div>
           </div>
