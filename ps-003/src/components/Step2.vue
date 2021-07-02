@@ -545,6 +545,7 @@ export default {
       this.processData.answer[3]=[e.target.value]
       // localStorage.setItem('processData',JSON.stringify(recordProcessData))
       this.$emit('recordProcessData',this.processData)
+      this.$forceUpdate()
     },
     radioChange2(e){
       // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
@@ -552,6 +553,7 @@ export default {
       this.processData.answer[4]=[e.target.value]
       // localStorage.setItem('processData',JSON.stringify(recordProcessData))
       this.$emit('recordProcessData',this.processData)
+      this.$forceUpdate()
     },
     deleteQ1Tabledata(index){
       this.answer.q1TableData.splice(index, 1);

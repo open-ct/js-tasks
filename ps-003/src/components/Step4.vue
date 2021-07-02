@@ -402,6 +402,7 @@ export default {
       this.processData.answer[8]=[e.target.value]
       // localStorage.setItem('processData',JSON.stringify(recordProcessData))
       this.$emit('recordProcessData',this.processData)
+      this.$forceUpdate()
     },
     q33RadioChange(e) {
       if (e.target.value == 1 && this.steps.length == 8) {
