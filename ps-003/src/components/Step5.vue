@@ -469,7 +469,7 @@ export default {
     textareaChange(e){
       // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
       this.$store.state.answer.text3=e.target.value
-      this.processData.answer[10]=[e]
+      this.processData.answer[10]=[e.target.value]
       // localStorage.setItem('processData',JSON.stringify(recordProcessData))
       this.$emit('recordProcessData',this.processData)
     },
