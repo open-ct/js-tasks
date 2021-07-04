@@ -1,15 +1,15 @@
 <template>
   <a-layout-content class="bg-white h-4/5 p-6 flex w-full">
-    <div class="text-lg leading-relaxed text-left mb-8 w-1/3">
+    <div class="text-lg leading-relaxed text-left mb-8 w-1/2 byellow">
       1.1为了探究水的溶氧量是否与水量和水温有关。
       小明同学依次将水加入至鱼缸内不同水位，分别测量出不同温度下鱼缸中水的溶氧量。<br/>
       请你使用“实验模拟器”，拖动“水温”与“水面位置”按钮，记录实验数据；
 <br /><br />
       根据你的实验数据，鱼缸中水温与水的溶氧量之间的关系是：
           <a-radio-group  name="radioGroup" v-model="$store.state.answer.radio1" @change="radioChange1" :default-value="-1" :disabled="answer_dispaly[0]">
-            <a-radio :value="1"> A.水温越高，水的溶氧量越高</a-radio>
-            <a-radio :value="2"> B.水温越高，水的溶氧量越低</a-radio>
-            <a-radio :value="3"> C.水温对水的溶氧量没有影响</a-radio>
+            <a-radio :value="1" style="display: block"> A.水温越高，水的溶氧量越高</a-radio>
+            <a-radio :value="2" style="display: block"> B.水温越高，水的溶氧量越低</a-radio>
+            <a-radio :value="3" style="display: block"> C.水温对水的溶氧量没有影响</a-radio>
           </a-radio-group><br/><br/>
       <!-- <a-dropdown :disabled="answer_dispaly[0]">
             <a-button style="margin-left: 8px;"> {{ answer.q1a1 || "" }} <a-icon type="down" /> </a-button>
@@ -54,9 +54,9 @@
 
       <br />鱼缸中水量与水的溶氧量之间关系是:
           <a-radio-group name="radioGroup" v-model="$store.state.answer.radio2" @change="radioChange2" :default-value="-1" :disabled="answer_dispaly[1]">
-            <a-radio :value="1"> A.水量越多，水的溶氧量越高</a-radio>
-            <a-radio :value="2"> B.水量越多，水的溶氧量越低 </a-radio>
-            <a-radio :value="3"> C.水量对水的溶氧量没有影响</a-radio>
+            <a-radio :value="1" style="display: block"> A.水量越多，水的溶氧量越高</a-radio>
+            <a-radio :value="2" style="display: block"> B.水量越多，水的溶氧量越低 </a-radio>
+            <a-radio :value="3" style="display: block"> C.水量对水的溶氧量没有影响</a-radio>
           </a-radio-group><br/><br/>
             <!-- <a-dropdown :disabled="answer_dispaly[1]">
             <a-button style="margin-left: 8px;"> {{ processData.answer[4]=='text'?'': processData.answer[4]}} <a-icon type="down" /> </a-button>
@@ -99,9 +99,9 @@
           </a-dropdown> -->
       <!-- <a-textarea v-model="answer.textarea" @change="textareaChange" class="mt-4" placeholder="" :rows="12" :disabled="answer_dispaly[1]"/> -->
     </div>
-    <div class="w-2/3">
+    <div class="w-1/2 bgreen">
       <a-form-model
-        class=""
+        class="w-2/3"
         :model="form"
         :label-col="labelCol"
         :wrapper-col="wrapperCol"
@@ -130,7 +130,13 @@
           />
         </a-form-model-item>
       </a-form-model>
-
+        <div class="w-1/3 relative" style="float:right;right:5rem;bottom:10rem;">
+          <img v-if="water == 1" src="../assets/straight1.png" alt="" />
+          <img v-if="water == 2" src="../assets/straight2.png" alt="" />
+          <img v-if="water == 3" src="../assets/straight3.png" alt="" />
+          <img v-if="water == 4" src="../assets/straight4.png" alt="" />
+          <img v-if="water == 5" src="../assets/straight5.png" alt="" />
+        </div>
       <!-- <a-statistic
         class="w-1/5"
         style="margin-left: 30px"
@@ -138,28 +144,22 @@
         :value="getVolumeStraight"
       /> -->
       <a-statistic
-        class="w-1/5"
+        class="w-1/3"
         style="margin-left: 30px"
         title="溶氧量（mg/L）"
         :value="getDoStraight"
       />
-        <a-button @click="updateQ1Table" type="primary">
+        <a-button @click="updateQ1Table" type="primary" style="position: relative;bottom:3rem;left:5rem">
           <a-icon type="edit" />记录
         </a-button>
       <div class="flex flex-1 w-full mt-4">
-        <div class="w-1/2">
-          <img v-if="water == 1" src="../assets/straight1.png" alt="" />
-          <img v-if="water == 2" src="../assets/straight2.png" alt="" />
-          <img v-if="water == 3" src="../assets/straight3.png" alt="" />
-          <img v-if="water == 4" src="../assets/straight4.png" alt="" />
-          <img v-if="water == 5" src="../assets/straight5.png" alt="" />
-        </div>
-        <div class="w-1/2">
+
+        <div class="w-1/2 relative" style="bottom:5rem;">
           <a-table
             :scroll="{ y: 280 }"
             :pagination="false"
             :columns="columns"
-            :data-source="answer.q1TableData || []"
+            :data-source="$store.state.answer.q2TableData || []"
           >
           <p slot="tags" slot-scope="text,tags,i">
               <a-button @click="deleteQ1Tabledata(i)">删除</a-button>
@@ -556,7 +556,7 @@ export default {
       this.$forceUpdate()
     },
     deleteQ1Tabledata(index){
-      this.answer.q1TableData.splice(index, 1);
+      this.$store.state.answer.q2TableData.splice(index, 1);
       this.$forceUpdate();
     },
     recordProcessData(){
@@ -584,8 +584,8 @@ export default {
       }
     },
     updateQ1Table() {
-      if (!this.answer.q1TableData) {
-        this.answer.q1TableData = [
+      if (!this.$store.state.answer.q2TableData) {
+        this.$store.state.answer.q2TableData = [
           {
             key: 0,
             fish: 0,
@@ -597,8 +597,8 @@ export default {
           },
         ];
       }
-      this.answer.q1TableData.push({
-        key: this.answer.q1TableData.length,
+      this.$store.state.answer.q2TableData.push({
+        key: this.$store.state.answer.q2TableData.length,
         fish: this.fish,
         water: this.water,
         grass: this.grass,
@@ -678,5 +678,6 @@ export default {
 
 </script>
 
-<style>
+<style scope>
+
 </style>

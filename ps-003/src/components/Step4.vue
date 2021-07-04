@@ -1,6 +1,6 @@
 <template>
   <a-layout-content class="bg-white h-4/5 p-6 flex">
-        <div class="text-lg text-left mb-8 w-1/2">
+        <div class="text-lg text-left mb-8 w-1/2 byellow">
           2.1 为进一步探究鱼缸中鱼的数量和水草数量与水中溶氧量的关系。
           小明同学向鱼缸中，分别加入不同量的鱼和水草。
           <br />
@@ -14,23 +14,23 @@
             <a-radio :value="2"> 学生B </a-radio>
             <a-radio :value="3"> 学生C </a-radio>
           </a-radio-group><br/><br/>
-          请说明你选择该观点的理由：
+          请说明你选择该观点的理由：<br/><br/>
           <a-textarea  class="mt-4" placeholder="" :rows="8" :v-model="$store.state.answer.text2" @change="textareaChange" :disabled="answer_dispaly[4]"/>
         </div>
-        <div class="w-1/2 flex">
+        <div class="w-1/2 flex bgreen">
           <img
-            class="absolute"
-            style="width: 616px"
+            class="relative"
+            style="width: 506px;height:331px;top:10rem;"
             src="../assets/head.png"
             alt=""
           />
-          <img
+          <!-- <img
             class="absolute"
             style="width: 616px"
             :src="grassImg[1]"
             alt=""
           />
-          <img class="absolute" style="width: 616px" :src="fishImg[2]" alt="" />
+          <img class="absolute" style="width: 616px" :src="fishImg[2]" alt="" /> -->
         </div>
       </a-layout-content>
 </template>

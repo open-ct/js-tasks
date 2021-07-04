@@ -1,16 +1,17 @@
 <template>
   <a-layout-content class="bg-white h-4/5 p-6 flex">
        
-        <div class="text-lg leading-relaxed text-left mb-8 w-2/3">
+        <div class="text-lg leading-relaxed text-left mb-8 w-1/2 byellow">
           1.2右表为小明同学通过“实验模拟器”记录的数据。<br/>
           请你运用所学的科学原理，解释水温在7℃比在35℃时，水中溶氧量高的原因。
-           <div>
+           <div><br/>
         <a-textarea  class="mt-4" placeholder="" :rows="8"  v-model="$store.state.answer.text1" @change="textareaChange" :disabled="answer_dispaly[2]"/>
         
         </div>
         </div>
-        <div class="w-2/3 align-middle table">
+        <div class="w-1/2 bgreen" >
           <a-table
+              style="margin-top:2rem"
               :scroll="{ y:550 }"
               :pagination="false"
               :columns="columns"
@@ -168,8 +169,5 @@ export default {
     margin-top: -30px;
 
     line-height: 3rem;
-  }
-  .table{
-    margin-left: 5rem;
   }
 </style>
