@@ -1,6 +1,6 @@
 <template>
   <a-layout-content class="bg-white h-4/5 p-6 flex w-full">
-    <div class="text-lg leading-relaxed text-left mb-8 w-1/3">
+    <div class="text-lg leading-relaxed text-left mb-8 w-1/2 byellow answer">
       右图是一个实验模拟器，可以用来测量鱼缸中的溶氧量。<br/><br/>
       如果你想了解实验模拟器如何使用，可以尝试下列操作：<br/>
       1.拖动“鱼的数量”按钮；<br/>
@@ -10,9 +10,10 @@
       注：任意拖动按钮，“溶氧量”都会发生变化。
 
     </div>
-    <div class="w-2/3">
+    <div class="w-1/2 bgreen">
       <a-form-model
-        class=""
+        class="w-2/3"
+        style="float:left;padding-left:1rem;"
         :model="form"
         :label-col="labelCol"
         :wrapper-col="wrapperCol"
@@ -50,18 +51,7 @@
           />
         </a-form-model-item>
       </a-form-model>
-
-      <div class="flex ml-6 mt-4">
-        <a-statistic
-          title="溶氧量（mg/L）"
-          :value="getDo"
-          style="margin-right: 50px"
-        />
-        <a-button @click="updateQ1Table" type="primary">
-          <a-icon type="edit" />记录
-        </a-button>
-      </div>
-      <div class="flex flex-1 w-full mt-4">
+        <div class="w-1/3 relative" style="float:right;right:5rem;top:3rem;">
         <img
           v-if="grass > 0"
           class="absolute"
@@ -75,27 +65,35 @@
           :src="fishImg[fish + '']"
           alt=""
         />
-        <div class="w-1/2">
           <img v-if="water == 1" src="../assets/straight1.png" alt="" />
           <img v-if="water == 2" src="../assets/straight2.png" alt="" />
           <img v-if="water == 3" src="../assets/straight3.png" alt="" />
           <img v-if="water == 4" src="../assets/straight4.png" alt="" />
           <img v-if="water == 5" src="../assets/straight5.png" alt="" />
         </div>
-        <div class="w-1/2">
+      <div class="flex ml-6 mt-4 w-1/2">
+        <a-statistic
+          title="溶氧量（mg/L）"
+          :value="getDo"
+          style="margin-right: 50px"
+        />
+        <a-button @click="updateQ1Table" type="primary" >
+          <a-icon type="edit" />记录
+        </a-button>
+      </div>
+      <div class="w-1/2">
           <a-table
             :scroll="{ y: 280 }"
             :pagination="false"
             :columns="columns"
-            :data-source="answer.q1TableData || []"
-            size=middle
+            :data-source="$store.state.answer.q1TableData || []"
+            size="middle"
           >
             <p slot="tags" slot-scope="text,tags,i">
               <a-button @click="deleteQ1Tabledata(i)">删除</a-button>
             </p>
           </a-table>
         </div>
-      </div>
     </div>
   </a-layout-content>
 </template>
@@ -466,7 +464,7 @@ export default {
   mounted() {},
   methods: {
     deleteQ1Tabledata(index){
-      this.answer.q1TableData.splice(index, 1);
+      this.$store.state.answer.q1TableData.splice(index, 1);
       this.$forceUpdate();
     },
     q33RadioChange(e) {
@@ -480,11 +478,11 @@ export default {
       }
     },
     updateQ1Table() {
-      if (!this.answer.q1TableData) {
-        this.answer.q1TableData = [];
+      if (!this.$store.state.answer.q1TableData) {
+        this.$store.state.answer.q1TableData = [];
       }
-      this.answer.q1TableData.push({
-        key: this.answer.q1TableData.length,
+      this.$store.state.answer.q1TableData.push({
+        key: this.$store.state.answer.q1TableData.length,
         fish: this.fish,
         water: this.water,
         grass: this.grass,
@@ -563,5 +561,5 @@ export default {
 };
 </script>
 
-<style>
+<style scope>
 </style>

@@ -1,16 +1,16 @@
 <template>
   <a-layout-content class="bg-white h-4/5 p-6 flex w-full">
-    <div class="w-1/3">
+    <div class="w-1/2 byellow">
       <div class="text-lg leading-relaxed text-left mb-8">
         2.2 请你利用实验模拟器，设计实验并收集至少三组数据，验证你的观点。<br/><br/>
         实验设计：
       </div>
-      <a-textarea v-model="$store.state.answer.text3" @change="textareaChange" class="mt-4" placeholder="" :rows="18" :disabled="answer_dispaly[5]"/>
+      <a-textarea v-model="$store.state.answer.text3" @change="textareaChange" class="mt-4" placeholder="" :rows="8" :disabled="answer_dispaly[5]"/>
     </div>
     
-    <div class="w-2/3">
+    <div class="w-1/2 bgreen">
       <a-form-model
-        class=""
+        class="w-2/3"
         :model="form"
         :label-col="labelCol"
         :wrapper-col="wrapperCol"
@@ -48,19 +48,8 @@
           />
         </a-form-model-item>
       </a-form-model>
-
-      <div class="flex ml-6 mt-4">
-        <a-statistic
-          title="溶氧量（mg/L）"
-          :value="getDo"
-          style="margin-right: 50px"
-        />
-        <a-button @click="updateQ1Table" type="primary">
-          <a-icon type="edit" />记录
-        </a-button>
-      </div>
-      <div class="flex flex-1 w-full">
-        <img
+        <div class="w-1/3 relative" style="float:right;right:5rem;bottom:10rem;">
+          <img
           v-if="grass > 0"
           class="absolute"
           style="width: 416px"
@@ -73,19 +62,31 @@
           :src="fishImg[fish + '']"
           alt=""
         />
-        <div class="w-1/2">
           <img v-if="water == 1" src="../assets/straight1.png" alt="" />
           <img v-if="water == 2" src="../assets/straight2.png" alt="" />
           <img v-if="water == 3" src="../assets/straight3.png" alt="" />
           <img v-if="water == 4" src="../assets/straight4.png" alt="" />
           <img v-if="water == 5" src="../assets/straight5.png" alt="" />
         </div>
-        <div class="w-1/2">
+      <div class="flex ml-6 mt-4">
+        <a-statistic
+          title="溶氧量（mg/L）"
+          :value="getDo"
+          style="margin-right: 50px"
+        />
+        <a-button @click="updateQ1Table" type="primary">
+          <a-icon type="edit" />记录
+        </a-button>
+      </div>
+      <div class="flex flex-1 w-full">
+        
+
+        <div class="w-1/2" style="margin-top:-5rem;">
           <a-table
             :scroll="{ y: 280 }"
             :pagination="false"
             :columns="columns"
-            :data-source="answer.q1TableData || []"
+            :data-source="$store.state.answer.q3TableData || []"
           >
             <p slot="tags" slot-scope="text,tags,i">
               <a-button @click="deleteQ1Tabledata(i)">删除</a-button>
@@ -463,7 +464,7 @@ export default {
   mounted() {},
   methods: {
     deleteQ1Tabledata(index){
-      this.answer.q1TableData.splice(index, 1);
+      this.$store.state.answer.q3TableData.splice(index, 1);
       this.$forceUpdate();
     },
     textareaChange(e){
@@ -484,8 +485,8 @@ export default {
       }
     },
     updateQ1Table() {
-      if (!this.answer.q1TableData) {
-        this.answer.q1TableData = [
+      if (!this.$store.state.answer.q3TableData) {
+        this.$store.state.answer.q3TableData = [
           {key: 0,
           fish: 1,
           water: 1,
@@ -494,8 +495,8 @@ export default {
           do: this.getDo,}
         ]
       }
-      this.answer.q1TableData.push({
-        key: this.answer.q1TableData.length,
+      this.$store.state.answer.q3TableData.push({
+        key: this.$store.state.answer.q3TableData.length,
         fish: this.fish,
         water: this.water,
         grass: this.grass,
@@ -503,7 +504,7 @@ export default {
         do: this.getDo,
       })
       // localStorage.setItem('q32TableData',JSON.stringify(this.answer.q1TableData))
-      this.$emit('updateTableData',this.answer.q1TableData)
+      this.$emit('updateTableData',this.$store.state.answer.q3TableData)
       this.$forceUpdate(); 
       // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
       

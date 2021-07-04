@@ -888,11 +888,27 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  height: 800px;
+  height: 900px;
   width: 1280px;
 }
 
 .anticon {
   vertical-align: 0.125em !important;
 }
+  .byellow{
+    border: 0.1rem solid #353b48;
+    border-radius: 5%;
+    padding: 2rem;
+    margin: 0.5rem;
+    background-color:#f6e58d;
+    height: 43rem;
+  }
+  .bgreen{
+    border: 0.1rem solid #353b48;
+    border-radius: 5%;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    background-color:#55E6C1;
+    height: 43rem;
+  }
 </style>

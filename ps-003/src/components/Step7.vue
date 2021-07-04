@@ -1,6 +1,6 @@
 <template>
   <a-layout-content class="bg-white h-4/5 p-6 flex">
-    <div class="w-1/2">
+    <div class="w-1/2 text-lg byellow">
       <div class="text-lg text-left mb-8">
         2.4 某位同学的实验记录如下表所示，请根据他的实验数据，猜测他选择的结论
 
@@ -13,22 +13,22 @@
         class="text-left"
         :disabled="answer_dispaly[8]"
       >
-        <br />
         <a-radio :value="1">学生A：鱼缸放入多量水草时，鱼缸中溶氧量高； </a-radio>
         <a-radio :value="2">学生B：鱼缸放入少量水草时，鱼缸中溶氧量高；</a-radio> 
         <a-radio :value="3">学生C：水草对鱼缸中溶氧量没有影响;</a-radio> 
         </a-radio-group
-      ><br /><br />
+      ><br /><br /><br />
       <div class="text-left mb-4">并对他的结论，做出相应的解释。</div>
-      <a-textarea v-model="$store.state.answer.text5" @change="textareaChange" class="mt-4" placeholder="" :rows="4" :disabled="answer_dispaly[9]"/>
+      <a-textarea v-model="$store.state.answer.text5" @change="textareaChange" class="mt-4" placeholder="" :rows="8" :disabled="answer_dispaly[9]"/>
     </div>
-    <div class="w-1/2">
+    <div class="w-1/2 bgreen">
 
       <a-table
         :scroll="{ y: 480 }"
         :pagination="false"
         :columns="q4Columns"
         :data-source="q4TableData"
+        style="margin-top:5rem;"
       >
       </a-table>
     </div>
