@@ -13,8 +13,8 @@
           />
         </a-steps>
       </a-layout-content>
-      <step0 v-show="current==0"/>
-      <step1 v-show="current==1" @recordProcessData="recordProcessData" :processData="processData"/>
+      <step0 v-if="current==0"/>
+      <step1 v-if="current==1" @recordProcessData="recordProcessData" :processData="processData" ref="step1"/>
       
       <!-- <a-layout-content v-if="current == 2" class="bg-white h-4/5 p-6">
         <div class="text-lg text-left mb-8">
@@ -163,7 +163,7 @@
           </a-form-model>
         </div>
       </a-layout-content> -->
-      <step2 v-show="current==2" @recordProcessData="recordProcessData" :processData="processData" ref="step2"/>
+      <step2 v-if="current==2" @recordProcessData="recordProcessData" :processData="processData" ref="step2" :answer_dispaly="answer_dispaly"/>
       <!-- <a-layout-content
         v-if="current == 2"
         class="bg-white h-4/5 p-6 flex w-full"
@@ -254,25 +254,20 @@
           </div>
         </div>
       </a-layout-content> -->
-      
-      <step3 v-show="current==3" @recordProcessData="recordProcessData" :processData="processData"/>
-      <step4 v-show="current==4" @recordProcessData="recordProcessData" @updateTableData="handleInfo" :processData="processData"/>
-      <step5 @recordProcessData="recordProcessData" ref="step7" v-show="current==5" @nextStep="nextStep" :tableData="answer.s7TableData" :processData="processData"/>
-      <step6 @recordProcessData="recordProcessData" v-show="current==6" :processData="processData"/>
-      
-      
-      
-      
-      
+      <step3 v-if="current==3" ref="step3" @recordProcessData="recordProcessData" :processData="processData" :answer_dispaly="answer_dispaly"/>
+      <step4 v-if="current==4" ref="step4" @recordProcessData="recordProcessData" :processData="processData" :answer_dispaly="answer_dispaly"/>
+      <step5 v-if="current==5" ref="step5" @recordProcessData="recordProcessData" @updateTableData="handleInfo" :processData="processData" :answer_dispaly="answer_dispaly"/>
+      <step6 @recordProcessData="recordProcessData" ref="step6" v-if="current==6" @nextStep="nextStep" :tableData="answer.s7TableData" :processData="processData" :answer_dispaly="answer_dispaly"/>
+      <step7 @recordProcessData="recordProcessData" ref="step7" v-if="current==7" :processData="processData" :answer_dispaly="answer_dispaly"/>
       <a-layout-content class="justify-between flex bg-white">
         <a-button @click="back" :disabled="current == 0" type="primary">
           <a-icon type="left" />上一步
         </a-button>
         <a-button
           @click="next"
-          :disabled="current == steps.length - 1"
+          :disabled="answer_dispaly[10]"
           type="primary"
-          >下一步 <a-icon type="right" />
+          >{{nexttext}} <a-icon type="right" />
         </a-button>
       </a-layout-content>
     </a-layout>
@@ -355,10 +350,25 @@ import step3 from './components/Step3'
 import step4 from './components/Step4'
 import step5 from './components/Step5'
 import step6 from './components/Step6'
+import step7 from './components/Step7'
 export default {
-  components: {step0, step1, step2, step3, step4, step5, step6, },
+  components: {step0, step1, step2, step3, step4, step5, step6, step7},
   provide: {},
   computed: {
+    nexttext(){
+      if(this.current==6){
+        if(this.answer23==1 || !this.answer23){
+          return '提交答案'
+        }
+        if(this.answer23==2||this.answer23==3){
+          return '下一步'
+        }
+      }
+      if(this.current==7){
+        return '提交答案'
+      }
+      return '下一步'
+    },
     getImg() {
       return this.imgList[this.maojinweizhi + "" + this.shuiweiweizhi];
     },
@@ -424,27 +434,27 @@ export default {
   },
   data() {
     return {
+      fulfill:false,//判断是否做完测试
+      answer23:0,//2.3的答案，用来判断
+      answer_dispaly:[
+        false,false,
+        false,
+        false,false,
+        false,
+        false,false,
+        false,false,
+        false
+        ],
       processData: {
         page: 1,
         answer: [
-          [1],
-          [1],
-          [1],
-          [-1],
+          [1],[1],[1],
+          [-1],[-1],[1],[1],
           "text",
-          [1],
-          [-1],
-          [1],
-          "text",
-          [1],
-          "text",
-          [1],
-          [1],
-          [1],
-          [-1],
-          "text",
-          [-1],
-          "text"
+          [-1],"text",
+          "text",[1],[1],[1],
+          [-1],"text",
+          [-1],"text"
         ],
       },
 
@@ -625,18 +635,22 @@ export default {
         },
         {
           index: 2,
-          title: "问题1",
+          title: "问题1.1",
         },
         {
           index: 3,
-          title: "问题2.1",
+          title: "问题1.2",
         },
         {
           index: 4,
-          title: "问题2.2",
+          title: "问题2.1",
         },
         {
           index: 5,
+          title: "问题2.2",
+        },
+        {
+          index: 6,
           title: "问题2.3",
         },
       ],
@@ -692,7 +706,7 @@ export default {
   },
   name: "app",
   mounted() {
-    localStorage.setItem('processData',JSON.stringify(this.processData))
+    // localStorage.setItem('processData',JSON.stringify(this.processData))
   },
   methods: {
     q6Change(){
@@ -703,22 +717,24 @@ export default {
       // this.processData=JSON.parse(localStorage.getItem('processData'))
       this.processData=processData
       this.processData.page=this.current+1
+      console.log(this.processData)
       this.processData=JSON.parse(JSON.stringify(this.processData))
       parent.postMessage(this.processData, "*")
     },
     handleInfo(e){
       this.answer.s7TableData=e
       
-      this.$refs.step7.$forceUpdate()
+      // this.$refs.step7.$forceUpdate(),这里会引发2.2点击记录的错误，但是我也不知道为什么
     },
     nextStep(e) {
       console.log(e.target.value)
-      if ((e.target.value==2 || e.target.value==3) && this.steps.length==6) {
+      this.answer23=e.target.value
+      if ((e.target.value==2 || e.target.value==3) && this.steps.length==7) {
         this.steps.push({
           index: 6,
           title: "问题2.4",
         });
-      } else if(this.steps.length==7 && e.target.value==1) {
+      } else if(this.steps.length==8 && e.target.value==1) {
         this.steps.pop();
       }
     },
@@ -766,16 +782,66 @@ export default {
     },
     next() {
       this.current++;
-      if(this.current===3 && this.$refs.step2.answer.q1a1){
-         this.$refs.step2.a_dropdown_disabled= true;
+      //处理下一步锁定答案的逻辑
+      if(this.current==3){
+        this.answer_dispaly[0]=true;
+        this.answer_dispaly[1]=true;
       }
-      if(this.current===3 && this.$refs.step2.answer.textarea){
-         this.$refs.step2.a_textarea_disabled= true;
-         
+      if(this.current==4){
+        this.answer_dispaly[2]=true;
       }
+      if(this.current==5){
+        this.answer_dispaly[3]=true;
+        this.answer_dispaly[4]=true;
+      }
+      if(this.current==6){
+        this.answer_dispaly[5]=true;
+      }
+      if(this.current==7){
+        this.answer_dispaly[6]=true;
+        this.answer_dispaly[7]=true;
+      }
+      if(this.current==8){
+        this.answer_dispaly[8]=true;
+        this.answer_dispaly[9]=true;
+      }
+      // switch(this.current){
+      //   case 3:
+      //     this.answer_dispaly[0]=true;
+      //     this.answer_dispaly[1]=true;
+      //   case 4:
+      //     this.answer_dispaly[2]=true;
+      //   case 5:
+      //     this.answer_dispaly[3]=true;
+      //     this.answer_dispaly[4]=true;
+      //   case 6:
+      //     this.answer_dispaly[5]=true;
+      //   case 7:
+      //     this.answer_dispaly[6]=true;
+      //     this.answer_dispaly[7]=true;
+      //   case 8:
+      //     this.answer_dispaly[8]=true;
+      //     this.answer_dispaly[9]=true;
+      // }
+      //处理提交的逻辑
+      if(this.current==7 && (!this.answer23 || this.answer23==1)){
+        this.current--;
+        this.fulfill=true
+        this.answer_dispaly[10]=true;
+      }
+      if(this.current==8){
+        this.current--;
+        this.fulfill=true
+        this.answer_dispaly[10]=true;
+      }
+      if((this.current==6&&this.fulfill&&this.answer23==1)||(this.current==7&&this.fulfill)){
+        this.answer_dispaly[10]=true;
+      }
+      // console.log(this.processData.answer)
     },
     back() {
       this.current--;
+      this.answer_dispaly[10]=false;
     },
     expert() {
       if (this.maojinweizhi == undefined) {
@@ -822,11 +888,27 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  height: 800px;
+  height: 900px;
   width: 1280px;
 }
 
 .anticon {
   vertical-align: 0.125em !important;
 }
+  .byellow{
+    border: 0.1rem solid #353b48;
+    border-radius: 5%;
+    padding: 2rem;
+    margin: 0.5rem;
+    background-color:#f6e58d;
+    height: 43rem;
+  }
+  .bgreen{
+    border: 0.1rem solid #353b48;
+    border-radius: 5%;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    background-color:#55E6C1;
+    height: 43rem;
+  }
 </style>

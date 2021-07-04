@@ -28,10 +28,10 @@
           <div class="text-xl text-left mb-4 w-1/2">
               右图是一个实验模拟器，可以用来探究食物冷藏效果。<br/>
               如果你想了解实验模拟器如何使用，可以尝试下列操作:<br/>
-              1.拖动“毛巾位置”按钮；<br/>
-              2.拖动“水位高度”按钮；<br/>
-              3.点击“记录”按钮，表格中会呈现实验数据。<br/>
-              若模拟练习完成，请点击“下一步<br/>
+              1. 拖动“毛巾位置”按钮；<br/>
+              2. 拖动“水位高度”按钮；<br/>
+              3. 点击“记录”按钮，表格中会呈现实验数据。<br/>
+              若模拟练习完成，请点击“下一步”。<br/>
           </div>
           <div class="w-1/2">
             <div class="">
@@ -262,7 +262,7 @@
             请探究冷藏效果最好的毛巾位置、水位高度。<br/><br/>
             请点击“记录”按钮，记录下实验数据。<br/><br/>
               经过探究，你认为:冷藏效果最好的毛巾位置
-            <a-dropdown>
+            <a-dropdown :disabled="answer_dispaly[0]">
               <a-button class="ant-dropdown-link">
                 {{ answer.q1a1 || "请选择" }} <a-icon type="down" />
               </a-button>
@@ -305,7 +305,7 @@
                 </a-menu-item>
               </a-menu> </a-dropdown
             ><br />水位高度
-            <a-dropdown>
+            <a-dropdown :disabled="answer_dispaly[1]">
               <a-button class="ant-dropdown-link">
                 {{ answer.q1a2 || "请选择" }} <a-icon type="down" />
               </a-button>
@@ -372,7 +372,7 @@
                 </a-menu-item>
               </a-menu>
             </a-dropdown><br/><br/><br/>
-            若完成作答，请点击“下一步”
+            若完成作答，请点击“下一步”。
           </div>
           <div class="w-1/2">
             <div class="">
@@ -444,7 +444,7 @@
                   <div class="w-full">
                     <a-slider
                       v-model="shuiweiweizhi"
-                      :default-value="0"
+                      :default-value=-1
                       :dots="true"
                       :min="0"
                       :max="4"
@@ -598,13 +598,15 @@
       <a-layout-content v-if="current == 3" class="bg-white h-4/5 p-6">
         <div class="flex">
           <div class="text-xl text-left mb-4 w-1/2">
-            （2）小红对这个冷藏装置也很感兴趣，她做了一组实验，得出如右图所示的数据。根据数据，你认为水位在哪里时冷藏效果最好？<br/>
+            （2）小红对这个冷藏装置也很感兴趣，她做了一组实验，
+            得出如右图所示的数据。根据数据，你认为水位在哪里时冷藏效果最好？<br/>
             <a-radio-group
             v-model="answer.q2radioGroup"
             @change="q2radioGroupChange"
             name="radioGroup2"
             :default-value="-1"
             class="text-left"
+            :disabled="answer_dispaly[3]"
           >
         <br />
         <a-radio :value="1">A. 水位0</a-radio>
@@ -621,248 +623,7 @@
               placeholder=""
               @change="q2Change"
               :rows="4"
-            />
-          </div>
-          <div class="w-1/2">
-            <div class="">
-              <div class="">
-                <!-- <div class="text-2xl">毛巾位置</div> -->
-                <!-- <button
-                  class=""
-                  :class="maojinweizhi == 0 ? 'border-4 border-blue-500' : ''"
-                  @click="() => (maojinweizhi = 0)"
-                >
-                  <img class="h-12" src="./assets/00.png" />
-                </button>
-                <br>
-                <button
-                  :class="maojinweizhi == 1 ? 'border-4 border-blue-500' : ''"
-                  @click="() => (maojinweizhi = 1)"
-                >
-                  <img class="h-12" src="./assets/10.png" />
-                </button>
-                <br>
-                <button
-                  :class="maojinweizhi == 2 ? 'border-4 border-blue-500' : ''"
-                  @click="() => (maojinweizhi = 2)"
-                >
-                  <img class="h-12" src="./assets/20.png" />
-                </button> -->
-                <div class="flex justify-center">
-                  <img
-                    class="h-36"
-                    :src="getImg"
-                    v-if="
-                      maojinweizhi != undefined && shuiweiweizhi != undefined
-                    "
-                  />
-                  <!-- <img
-                    class="h-40"
-                    v-if="!maojinweizhi || maojinweizhi == 0"
-                    src="./assets/00.png"
-                  />
-                  <img
-                    class="h-40"
-                    v-if="maojinweizhi == 1"
-                    src="./assets/10.png"
-                  />
-                  <img
-                    class="h-40"
-                    v-if="maojinweizhi == 2"
-                    src="./assets/20.png"
-                  /> -->
-                </div>
-
-                <div class="flex">
-                  <div class="w-1/6 text-xl">毛巾位置</div>
-                  <div class="w-full">
-                    <a-slider
-                      v-model="maojinweizhi"
-                      id="test"
-                      :default-value="0"
-                      :dots="true"
-                      :min="0"
-                      :max="2"
-                      :marks="marks1"
-                      :tooltipVisible="false"
-                    />
-                  </div>
-                </div>
-                <div class="flex">
-                  <div class="w-1/6 text-xl">水位高度</div>
-                  <div class="w-full">
-                    <a-slider
-                      v-model="shuiweiweizhi"
-                      :default-value="0"
-                      :dots="true"
-                      :min="0"
-                      :max="4"
-                      :marks="marks2"
-                      :tooltipVisible="false"
-                    />
-                  </div>
-                </div>
-                <!-- <div class="flex">
-<a-form-model
-                  class="w-full"
-                  :model="form"
-                  :label-col="labelCol"
-                  :wrapper-col="wrapperCol"
-                >
-                  <a-form-model-item label="毛巾位置">
-                    <a-slider
-                      v-model="maojinweizhi"
-                      id="test"
-                      :default-value="0"
-                      :dots="true"
-                      :min="0"
-                      :max="2"
-                      :marks="marks1"
-                      :tooltipVisible="false"
-                    />
-                  </a-form-model-item>
-                  <a-form-model-item label="水位高度">
-                    <a-slider
-                      v-model="shuiweiweizhi"
-                      :default-value="0"
-                      :dots="true"
-                      :min="0"
-                      :max="4"
-                      :marks="marks2"
-                      :tooltipVisible="false"
-                    />
-                  </a-form-model-item>
-                </a-form-model>
-                
-                </div> -->
-
-                <!-- <span>毛巾位置</span><a-slider :min="0" :max="2" :marks="marks1" :tooltipVisible="false" v-model="maojinweizhi"/>
-                <a-slider :min="0" :max="4" :marks="marks2" :tooltipVisible="false" v-model="maojinweizhi"/> -->
-              </div>
-              <!-- <div class="w-1/2">
-                <div class="ml-4">
-                  <div class="text-2xl">水位高度</div>
-                  <div class="flex justify-center">
-                    <img
-                    class="h-40"
-                    v-if="!shuiweiweizhi || shuiweiweizhi == 0"
-                    src="./assets/00.png"
-                  />
-                  <img
-                    class="h-40"
-                    v-if="shuiweiweizhi == 1"
-                    src="./assets/01.png"
-                  />
-                  <img
-                    class="h-40"
-                    v-if="shuiweiweizhi == 2"
-                    src="./assets/02.png"
-                  />
-                  <img
-                    class="h-40"
-                    v-if="shuiweiweizhi == 3"
-                    src="./assets/03.png"
-                  />
-                  <img
-                    class="h-40"
-                    v-if="shuiweiweizhi == 4"
-                    src="./assets/04.png"
-                  />
-                  </div>
-                  
-                  <button
-                    class="w-full h-6 mt-2 bg-gray-200 rounded"
-                    :class="
-                      shuiweiweizhi == 0 ? 'border-4 border-blue-500' : ''
-                    "
-                    @click="() => (shuiweiweizhi = 0)"
-                  >
-                    0
-                  </button>
-                  <button
-                    class="w-full h-6 mt-2 bg-gray-200 rounded"
-                    :class="
-                      shuiweiweizhi == 1 ? 'border-4 border-blue-500' : ''
-                    "
-                    @click="() => (shuiweiweizhi = 1)"
-                  >
-                    1
-                  </button>
-                  <button
-                    class="w-full h-6 mt-2 bg-gray-200 rounded"
-                    :class="
-                      shuiweiweizhi == 2 ? 'border-4 border-blue-500' : ''
-                    "
-                    @click="() => (shuiweiweizhi = 2)"
-                  >
-                    2
-                  </button>
-                  <button
-                    class="w-full h-6 mt-2 bg-gray-200 rounded"
-                    :class="
-                      shuiweiweizhi == 3 ? 'border-4 border-blue-500' : ''
-                    "
-                    @click="() => (shuiweiweizhi = 3)"
-                  >
-                    3
-                  </button>
-                  <button
-                    class="w-full h-6 mt-2 bg-gray-200 rounded"
-                    :class="
-                      shuiweiweizhi == 4 ? 'border-4 border-blue-500' : ''
-                    "
-                    @click="() => (shuiweiweizhi = 4)"
-                  >
-                    4
-                  </button>
-                </div>
-              </div> -->
-            </div>
-
-            <div class="max-h-96">
-              <div class="text-2xl">小红的实验数据</div>
-
-              <a-table
-                :scroll="{ y: 240 }"
-                :pagination="false"
-                :columns="columns"
-                :data-source="q2TableData || []"
-              />
-            </div>
-          </div>
-
-          <!-- <div class="w-1/3 ml-24 max-h-96">
-            <img
-              class="h-36"
-              :src="getImg"
-              v-if="maojinweizhi != undefined && shuiweiweizhi != undefined"
-            />
-          </div> -->
-        </div>
-      </a-layout-content>
-      <a-layout-content v-if="current == 4" class="bg-white h-4/5 p-6">
-        <div class="flex">
-          <div class="text-xl text-left mb-4 w-1/2">
-            （3）小红继续探究，得出如右图所示的数据。根据数据，你认为毛巾位置在哪里时冷藏效果最好？<br/>
-             <a-radio-group
-              v-model="answer.q3radioGroup"
-               @change="q3radioGroupChange"
-        name="radioGroup2"
-        :default-value="-1"
-        class="text-left"
-      >
-        <br />
-        <a-radio :value="1">A. 无毛巾</a-radio>
-        <a-radio :value="2">B. 毛巾未进入水中</a-radio> 
-        <a-radio :value="3">C. 毛巾进入水中</a-radio>
-        </a-radio-group><br/><br/>
-根据你所学的科学原理，说明此毛巾位置冷藏效果最好的原因。将答案填写于方框中，作答完毕请点击“下一步”。
-            <a-textarea
-              v-model="answer.q3Text"
-              @change="q3Change"
-              class="mt-4"
-              placeholder=""
-              :rows="4"
+              :disabled="answer_dispaly[4]"
             />
           </div>
           <div class="w-1/2">
@@ -1069,6 +830,250 @@
                 :pagination="false"
                 :columns="columns"
                 :data-source="q3TableData || []"
+              />
+            </div>
+          </div>
+
+          <!-- <div class="w-1/3 ml-24 max-h-96">
+            <img
+              class="h-36"
+              :src="getImg"
+              v-if="maojinweizhi != undefined && shuiweiweizhi != undefined"
+            />
+          </div> -->
+        </div>
+      </a-layout-content>
+      <a-layout-content v-if="current == 4" class="bg-white h-4/5 p-6">
+        <div class="flex">
+          <div class="text-xl text-left mb-4 w-1/2">
+            （3）小红继续探究，得出如右图所示的数据。根据数据，你认为毛巾位置在哪里时冷藏效果最好？<br/>
+             <a-radio-group
+              v-model="answer.q3radioGroup"
+               @change="q3radioGroupChange"
+        name="radioGroup2"
+        :default-value="-1"
+        class="text-left"
+        :disabled="answer_dispaly[4]"
+      >
+        <br />
+        <a-radio :value="1">A. 无毛巾</a-radio>
+        <a-radio :value="2">B. 毛巾未进入水中</a-radio> 
+        <a-radio :value="3">C. 毛巾进入水中</a-radio>
+        </a-radio-group><br/><br/>
+根据你所学的科学原理，说明此毛巾位置冷藏效果最好的原因。将答案填写于方框中，作答完毕请点击“下一步”。
+            <a-textarea
+              v-model="answer.q3Text"
+              @change="q3Change"
+              class="mt-4"
+              placeholder=""
+              :rows="4"
+              :disabled="answer_dispaly[5]"
+            />
+          </div>
+          <div class="w-1/2">
+            <div class="">
+              <div class="">
+                <!-- <div class="text-2xl">毛巾位置</div> -->
+                <!-- <button
+                  class=""
+                  :class="maojinweizhi == 0 ? 'border-4 border-blue-500' : ''"
+                  @click="() => (maojinweizhi = 0)"
+                >
+                  <img class="h-12" src="./assets/00.png" />
+                </button>
+                <br>
+                <button
+                  :class="maojinweizhi == 1 ? 'border-4 border-blue-500' : ''"
+                  @click="() => (maojinweizhi = 1)"
+                >
+                  <img class="h-12" src="./assets/10.png" />
+                </button>
+                <br>
+                <button
+                  :class="maojinweizhi == 2 ? 'border-4 border-blue-500' : ''"
+                  @click="() => (maojinweizhi = 2)"
+                >
+                  <img class="h-12" src="./assets/20.png" />
+                </button> -->
+                <div class="flex justify-center">
+                  <img
+                    class="h-36"
+                    :src="getImg"
+                    v-if="
+                      maojinweizhi != undefined && shuiweiweizhi != undefined
+                    "
+                  />
+                  <!-- <img
+                    class="h-40"
+                    v-if="!maojinweizhi || maojinweizhi == 0"
+                    src="./assets/00.png"
+                  />
+                  <img
+                    class="h-40"
+                    v-if="maojinweizhi == 1"
+                    src="./assets/10.png"
+                  />
+                  <img
+                    class="h-40"
+                    v-if="maojinweizhi == 2"
+                    src="./assets/20.png"
+                  /> -->
+                </div>
+
+                <div class="flex">
+                  <div class="w-1/6 text-xl">毛巾位置</div>
+                  <div class="w-full">
+                    <a-slider
+                      v-model="maojinweizhi"
+                      id="test"
+                      :default-value="0"
+                      :dots="true"
+                      :min="0"
+                      :max="2"
+                      :marks="marks1"
+                      :tooltipVisible="false"
+                    />
+                  </div>
+                </div>
+                <div class="flex">
+                  <div class="w-1/6 text-xl">水位高度</div>
+                  <div class="w-full">
+                    <a-slider
+                      v-model="shuiweiweizhi"
+                      :default-value="0"
+                      :dots="true"
+                      :min="0"
+                      :max="4"
+                      :marks="marks2"
+                      :tooltipVisible="false"
+                    />
+                  </div>
+                </div>
+                <!-- <div class="flex">
+<a-form-model
+                  class="w-full"
+                  :model="form"
+                  :label-col="labelCol"
+                  :wrapper-col="wrapperCol"
+                >
+                  <a-form-model-item label="毛巾位置">
+                    <a-slider
+                      v-model="maojinweizhi"
+                      id="test"
+                      :default-value="0"
+                      :dots="true"
+                      :min="0"
+                      :max="2"
+                      :marks="marks1"
+                      :tooltipVisible="false"
+                    />
+                  </a-form-model-item>
+                  <a-form-model-item label="水位高度">
+                    <a-slider
+                      v-model="shuiweiweizhi"
+                      :default-value="0"
+                      :dots="true"
+                      :min="0"
+                      :max="4"
+                      :marks="marks2"
+                      :tooltipVisible="false"
+                    />
+                  </a-form-model-item>
+                </a-form-model>
+                
+                </div> -->
+
+                <!-- <span>毛巾位置</span><a-slider :min="0" :max="2" :marks="marks1" :tooltipVisible="false" v-model="maojinweizhi"/>
+                <a-slider :min="0" :max="4" :marks="marks2" :tooltipVisible="false" v-model="maojinweizhi"/> -->
+              </div>
+              <!-- <div class="w-1/2">
+                <div class="ml-4">
+                  <div class="text-2xl">水位高度</div>
+                  <div class="flex justify-center">
+                    <img
+                    class="h-40"
+                    v-if="!shuiweiweizhi || shuiweiweizhi == 0"
+                    src="./assets/00.png"
+                  />
+                  <img
+                    class="h-40"
+                    v-if="shuiweiweizhi == 1"
+                    src="./assets/01.png"
+                  />
+                  <img
+                    class="h-40"
+                    v-if="shuiweiweizhi == 2"
+                    src="./assets/02.png"
+                  />
+                  <img
+                    class="h-40"
+                    v-if="shuiweiweizhi == 3"
+                    src="./assets/03.png"
+                  />
+                  <img
+                    class="h-40"
+                    v-if="shuiweiweizhi == 4"
+                    src="./assets/04.png"
+                  />
+                  </div>
+                  
+                  <button
+                    class="w-full h-6 mt-2 bg-gray-200 rounded"
+                    :class="
+                      shuiweiweizhi == 0 ? 'border-4 border-blue-500' : ''
+                    "
+                    @click="() => (shuiweiweizhi = 0)"
+                  >
+                    0
+                  </button>
+                  <button
+                    class="w-full h-6 mt-2 bg-gray-200 rounded"
+                    :class="
+                      shuiweiweizhi == 1 ? 'border-4 border-blue-500' : ''
+                    "
+                    @click="() => (shuiweiweizhi = 1)"
+                  >
+                    1
+                  </button>
+                  <button
+                    class="w-full h-6 mt-2 bg-gray-200 rounded"
+                    :class="
+                      shuiweiweizhi == 2 ? 'border-4 border-blue-500' : ''
+                    "
+                    @click="() => (shuiweiweizhi = 2)"
+                  >
+                    2
+                  </button>
+                  <button
+                    class="w-full h-6 mt-2 bg-gray-200 rounded"
+                    :class="
+                      shuiweiweizhi == 3 ? 'border-4 border-blue-500' : ''
+                    "
+                    @click="() => (shuiweiweizhi = 3)"
+                  >
+                    3
+                  </button>
+                  <button
+                    class="w-full h-6 mt-2 bg-gray-200 rounded"
+                    :class="
+                      shuiweiweizhi == 4 ? 'border-4 border-blue-500' : ''
+                    "
+                    @click="() => (shuiweiweizhi = 4)"
+                  >
+                    4
+                  </button>
+                </div>
+              </div> -->
+            </div>
+
+            <div class="max-h-96">
+              <div class="text-2xl">小红的实验数据</div>
+
+              <a-table
+                :scroll="{ y: 240 }"
+                :pagination="false"
+                :columns="columns"
+                :data-source="q2TableData || []"
               />
             </div>
           </div>
@@ -1444,7 +1449,7 @@
         <div class="flex">
           <div class="text-xl text-left mb-4 w-1/2">
             （4）现在你认为：冷藏效果最好的毛巾位置
-            <a-dropdown>
+            <a-dropdown :disabled="answer_dispaly[6]">
               <a-button class="ant-dropdown-link">
                 {{ answer.q4a1 || "请选择" }} <a-icon type="down" />
               </a-button>
@@ -1487,7 +1492,7 @@
                 </a-menu-item>
               </a-menu> </a-dropdown
             ><br />水位高度
-            <a-dropdown>
+            <a-dropdown :disabled="answer_dispaly[7]">
               <a-button class="ant-dropdown-link">
                 {{ answer.q4a2 || "请选择" }} <a-icon type="down" />
               </a-button>
@@ -1759,7 +1764,7 @@
             （5）请根据第（4）题的作答，用你所学的科学原理解释此时冷藏效果最好的原因。<br/>
             将答案填写于方框中，作答完毕请点击“提交答案”并“进入下一题”。
           </div>
-          <a-textarea v-model="answer.q6Text" @change="q6Change" class="mt-4" placeholder="" :rows="4" />
+          <a-textarea v-model="answer.q6Text" @change="q6Change" class="mt-4" placeholder="" :rows="4" :disabled="answer_dispaly[8]"/>
         </div>
 
         <div class="w-1/2 ml-24">
@@ -1963,9 +1968,9 @@
         </a-button>
         <a-button
           @click="next"
-          :disabled="current == steps.length - 1"
+          :disabled="answer_dispaly[9]"
           type="primary"
-          >下一步 <a-icon type="right" />
+          >{{nexttext}} <a-icon type="right" />
         </a-button>
       </a-layout-content>
     </a-layout>
@@ -1995,11 +2000,19 @@ export default {
   provide: {},
   computed: {
     getImg() {
-      return this.imgList[this.maojinweizhi + "" + this.shuiweiweizhi];
+      if(this.maojinweizhi==-1){
+        return this.imgList[0+ "" +0];
+      }else{
+        return this.imgList[this.maojinweizhi + "" + this.shuiweiweizhi];
+      }
+      
     },
   },
   data() {
     return {
+      fulfill:false,//判断是否做完测试
+      nexttext:'下一步',//下一步or提交答案,下一位兄弟改需求的时候可以封装一下“下一步”的操作
+      answer_dispaly:[false,false,false,false,false,false,false,false,false,false],//对应的每一个答案，最后一个是最后一步的下一步按钮
       processData: {
         page: 1,
         answer: [
@@ -2275,7 +2288,26 @@ export default {
       maojinweizhi: 0,
       shuiweiweizhi: 0,
       temperature: undefined,
+      //前言2的数据表
       tempData: {
+        "00": "数据1",
+        "01": "数据2",
+        "02": "数据3",
+        "03": "数据4",
+        "04": "数据5",
+        10: "数据6",
+        11: "数据7",
+        12: "数据8",
+        13: "数据9",
+        14: "数据10",
+        20: "数据11",
+        21: "数据12",
+        22: "数据13",
+        23: "数据14",
+        24: "数据15",
+      },
+      //问题1的数据表
+      tempData1: {
         "00": "30.0℃",
         "01": "30.0℃",
         "02": "30.0℃",
@@ -2427,7 +2459,7 @@ export default {
       } else if (this.shuiweiweizhi == 4) {
         item.shuiwei = "水位4";
       }
-      item.temperature = this.tempData[
+      item.temperature = this.tempData1[
         this.maojinweizhi + "" + this.shuiweiweizhi
       ];
       if (!this.answer.expertData1) {
@@ -2447,25 +2479,51 @@ export default {
     },
     next() {
       this.current++;
+      console.log(this.current)
       if (this.current == 2) {
-        this.maojinweizhi = 0;
-        this.shuiweiweizhi = 0;
+        this.maojinweizhi = -1;
+        this.shuiweiweizhi = -1;
       }
-
       if (this.current == 3) {
-        this.maojinweizhi = 0;
-        this.shuiweiweizhi = 0;
+        this.maojinweizhi = -1;
+        this.shuiweiweizhi = -1;
+        this.answer_dispaly[0]=true;
+        this.answer_dispaly[1]=true;
       }
       if (this.current == 4) {
-        this.maojinweizhi = 0;
-        this.shuiweiweizhi = 0;
+        this.maojinweizhi = -1;
+        this.shuiweiweizhi = -1;
+        this.answer_dispaly[2]=true;
+        this.answer_dispaly[3]=true;
       }
       if (this.current == 5) {
         this.list = [];
+        this.answer_dispaly[4]=true;
+        this.answer_dispaly[5]=true;
+      }
+      if (this.current == 6) {
+        this.list = [];
+        this.nexttext='提交答案';
+        this.answer_dispaly[6]=true;
+        this.answer_dispaly[7]=true;
+      }
+      if (this.current == 7) {
+        this.answer_dispaly[8]=true;
+        this.answer_dispaly[9]=true;
+        this.fulfill=true;
+        this.current--;
+      }
+      if(this.nexttext=='提交答案' && this.fulfill){
+        this.answer_dispaly[9]=true;
       }
     },
     back() {
       this.current--;
+      //给学生回去看答案的时候
+      if(this.current==5){
+        this.nexttext='下一步';
+        this.answer_dispaly[9]=false;
+      }
     },
   },
 };

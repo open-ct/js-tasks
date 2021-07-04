@@ -1,12 +1,13 @@
 <template>
   <a-layout-content class="bg-white h-4/5 p-6 flex">
        
-        <div class="text-xl text-left align-middle mt-32 ml-4 text">
-          在某些家庭中，常会使用生态鱼缸来饲养观赏鱼。<br/>
-          根据经验知道，在饲养某类观赏鱼时，<br/>当鱼缸中的溶氧量(水中氧气的溶解量，单位mg/L)过低时观赏鱼会因缺氧而死亡；<br/>
-          有人认为，鱼缸中的水量、鱼的数量以及水草数量等因素会影响鱼缸中的溶氧量。
+        <div class="text-xl text-left align-middle mt-32 ml-4 text byellow">
+          一些家庭常用生态鱼缸饲养观赏鱼。<br/>
+          鱼缸中水的溶氧量(水中分子态氧气的浓度，单位mg/L)是影响鱼存活的重要因素之一。<br/>
+          经过调查知道，水中的氧气主要来自于空气和水生植物。<br/>
+          有人根据经验猜测，鱼缸中的水量、温度、水草数量以及鱼的数量等都有可能会对水的溶氧量造成影响。<br/>
            <div>
-          <img src="../assets/head1.png" width=640px height=280px>
+          <img src="../assets/head.png" width=640px height=280px>
         </div>
         </div>
       </a-layout-content>
@@ -15,7 +16,7 @@
 <script>
 const columns = [
   {
-    title: "水面高度",
+    title: "水面位置",
     dataIndex: "water",
     key: "water",
   },
@@ -25,7 +26,7 @@ const columns = [
     key: "volume",
   },
   {
-    title: "溶氧量",
+    title: "溶氧量（mg/L）",
     dataIndex: "do",
     key: "do",
   },

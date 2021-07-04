@@ -1,33 +1,34 @@
 <template>
   <a-layout-content class="bg-white h-4/5 p-6 flex">
-    <div class="w-1/2">
+    <div class="w-1/2 byellow text-lg mb-8">
       <div class="text-lg text-left mb-8">
-        2.4 某位同学的实验记录如下表所示，请根据他的实验数据，猜测他选择的结论
-
+        2.3 根据你上述的实验设计数据结果，你认为哪位同学的观点更合理<br />
       </div>
       <a-radio-group
-        v-model="answer.q4Radio"
-        name="radioGroup2"
-        :default-value="-1"
+        v-model="$store.state.answer.radio4"
         @change="q33RadioChange"
+        name="radioGroup"
+        :default-value="-1"
         class="text-left"
+        :disabled="answer_dispaly[6]"
       >
-        <br />
-        <a-radio :value="1">学生A：鱼缸放入多量水草时，鱼缸中溶氧量高； </a-radio>
-        <a-radio :value="2">学生B：鱼缸放入少量水草时，鱼缸中溶氧量高；</a-radio> 
-        <a-radio :value="3">学生C：水草对鱼缸中溶氧量没有影响;</a-radio> 
-        </a-radio-group
-      ><br /><br />
-      <div class="text-left mb-4">并对他的结论，做出相应的解释。</div>
-      <a-textarea v-model="answer.text" @change="textareaChange" class="mt-4" placeholder="" :rows="4" />
+        <a-radio :value="1">学生A: 鱼缸放入较多水草时，鱼缸中溶氧量高；</a-radio>
+        <a-radio :value="2">学生B: 鱼缸放入少量水草时，鱼缸中溶氧量高；</a-radio> <br/>
+        <a-radio :value="3">学生C: 水草对鱼缸中溶氧量没有影响;</a-radio> <br/></a-radio-group
+      ><br /><br /><br />
+      <div class="text-left mb-4">通过你的实验结果，能得出什么结论。<br/>
+      并根据你所学的科学原理，说明你选择观点更合理的原因。
+</div>
+      <a-textarea v-model="$store.state.answer.text4" @change="textareaChange" class="mt-4" placeholder="" :rows="8" :disabled="answer_dispaly[7]"/>
     </div>
-    <div class="w-1/2">
-
+    <div class="w-1/2 bgreen">
+    
       <a-table
         :scroll="{ y: 480 }"
         :pagination="false"
-        :columns="q4Columns"
-        :data-source="q4TableData"
+        :columns="columns"
+        :data-source="tableData || []"
+        style="margin-top:3rem"
       >
       </a-table>
     </div>
@@ -35,14 +36,14 @@
 </template>
 
 <script>
-const q4Columns = [
+const columns = [
   {
     title: "鱼的数量",
     dataIndex: "fish",
     key: "fish",
   },
   {
-    title: "水面高度",
+    title: "水面位置",
     dataIndex: "water",
     key: "water",
   },
@@ -52,32 +53,19 @@ const q4Columns = [
     key: "grass",
   },
   {
-    title: "溶氧量（mg/L）",
-    dataIndex: "do",
-    key: "do",
-  },
-];
-const columns = [
-  {
-    title: "水面高度",
-    dataIndex: "water",
-    key: "water",
-  },
-  {
-    title: "水的体积",
-    dataIndex: "volume",
-    key: "volume",
-  },
-  {
-    title: "溶氧量",
+    title: "溶氧量(mg/L)",
     dataIndex: "do",
     key: "do",
   },
 ];
 
 export default {
+  props:['tableData','processData','answer_dispaly'],
   components: {},
   provide: {},
+  updated(){
+    // this.$forceUpdate()
+  },
   computed: {
     getImg() {
       return this.imgList[this.maojinweizhi + "" + this.shuiweiweizhi];
@@ -159,7 +147,6 @@ export default {
         5: '5'
       },
       columns,
-      q4Columns,
       answer: {},
       q4TableData: [
         { fish: 3, water: 4, grass: 0, do: 6.6 },
@@ -408,30 +395,29 @@ export default {
     };
   },
   name: "app",
-  mounted() {},
-  props:['processData'],
+  mounted() {
+    this.answer.q32TableData=JSON.parse(localStorage.getItem('q32TableData'))
+    
+    this.$forceUpdate()
+  },
   methods: {
-    textareaChange(){
+    textareaChange(e){
       // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
-      
-      this.processData.answer[17]=this.answer.text
+      this.$store.state.answer.text4=e.target.value
+      this.processData.answer[15]=[e.target.value]
       // localStorage.setItem('processData',JSON.stringify(recordProcessData))
       this.$emit('recordProcessData',this.processData)
     },
+    
     q33RadioChange(e) {
-      if (e.target.value == 1 && this.steps.length == 8) {
-        this.steps.push({
-          index: 8,
-          title: "问题4",
-        });
-      } else if (e.target.value == 2 && this.steps.length == 9) {
-        this.steps.pop();
-      }
+      console.log(e)
+      this.$store.state.answer.radio4=e.target.value
+      this.$emit('nextStep',e);
       // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
-      
-      this.processData.answer[16]=[e.target.value]
+      this.processData.answer[14]=[e.target.value]
       // localStorage.setItem('processData',JSON.stringify(recordProcessData))
       this.$emit('recordProcessData',this.processData)
+      this.$forceUpdate()
     },
     updateQ1Table() {
       if (!this.answer.q1TableData) {
