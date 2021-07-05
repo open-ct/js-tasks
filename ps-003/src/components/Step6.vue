@@ -1,36 +1,99 @@
 <template>
-  <a-layout-content class="bg-white h-4/5 p-6 flex">
-    <div class="w-1/2 byellow text-lg mb-8">
-      <div class="text-lg text-left mb-8">
-        2.3 根据你上述的实验设计数据结果，你认为哪位同学的观点更合理<br />
+  <a-layout-content class="bg-white h-4/5 p-6 flex w-full">
+    <div class="w-1/2 byellow">
+      <div class="text-lg leading-relaxed text-left mb-8">
+        2.2 请你利用实验模拟器，设计实验并收集至少三组数据，验证你的观点。<br/><br/>
+        实验设计：
       </div>
-      <a-radio-group
-        v-model="$store.state.answer.radio4"
-        @change="q33RadioChange"
-        name="radioGroup"
-        :default-value="-1"
-        class="text-left"
-        :disabled="answer_dispaly[6]"
-      >
-        <a-radio :value="1">学生A: 鱼缸放入较多水草时，鱼缸中溶氧量高；</a-radio>
-        <a-radio :value="2">学生B: 鱼缸放入少量水草时，鱼缸中溶氧量高；</a-radio> <br/>
-        <a-radio :value="3">学生C: 水草对鱼缸中溶氧量没有影响;</a-radio> <br/></a-radio-group
-      ><br /><br /><br />
-      <div class="text-left mb-4">通过你的实验结果，能得出什么结论。<br/>
-      并根据你所学的科学原理，说明你选择观点更合理的原因。
-</div>
-      <a-textarea v-model="$store.state.answer.text4" @change="textareaChange" class="mt-4" placeholder="" :rows="8" :disabled="answer_dispaly[7]"/>
+      <a-textarea v-model="$store.state.answer.text3" @change="textareaChange" class="mt-4" placeholder="" :rows="8" :disabled="answer_dispaly[5]"/>
     </div>
-    <div class="w-1/2 bgreen">
     
-      <a-table
-        :scroll="{ y: 480 }"
-        :pagination="false"
-        :columns="columns"
-        :data-source="tableData || []"
-        style="margin-top:3rem"
+    <div class="w-1/2 bgreen">
+      <a-form-model
+        class="w-2/3"
+        :model="form"
+        :label-col="labelCol"
+        :wrapper-col="wrapperCol"
       >
-      </a-table>
+        <a-form-model-item label="鱼的数量">
+          <a-slider
+            v-model="fish"
+            id="test"
+            :default-value="1"
+            :dots="true"
+            :min="1"
+            :max="5"
+            :marks="marks2"
+          />
+        </a-form-model-item>
+        <a-form-model-item label="水面位置">
+          <a-slider
+            v-model="water"
+            id="test"
+            :default-value="1"
+            :dots="true"
+            :min="1"
+            :max="5"
+            :marks="marks2"
+          />
+        </a-form-model-item>
+        <a-form-model-item label="水草数量">
+          <a-slider
+            v-model="grass"
+            id="test"
+            :default-value="0"
+            :dots="true"
+            :max="4"
+            :marks="marks1"
+          />
+        </a-form-model-item>
+      </a-form-model>
+        <div class="w-1/3 relative" style="float:right;right:5rem;bottom:10rem;">
+          <img
+          v-if="grass > 0"
+          class="absolute"
+          style="width: 416px"
+          :src="grassImg[grass + '']"
+          alt=""
+        /><img
+          v-if="fish > 0"
+          class="absolute"
+          style="width: 416px"
+          :src="fishImg[fish + '']"
+          alt=""
+        />
+          <img v-if="water == 1" src="../assets/straight1.png" alt="" />
+          <img v-if="water == 2" src="../assets/straight2.png" alt="" />
+          <img v-if="water == 3" src="../assets/straight3.png" alt="" />
+          <img v-if="water == 4" src="../assets/straight4.png" alt="" />
+          <img v-if="water == 5" src="../assets/straight5.png" alt="" />
+        </div>
+      <div class="flex ml-6 mt-4">
+        <a-statistic
+          title="溶氧量（mg/L）"
+          :value="getDo"
+          style="margin-right: 50px"
+        />
+        <a-button @click="updateQ1Table" type="primary">
+          <a-icon type="edit" />记录
+        </a-button>
+      </div>
+      <div class="flex flex-1 w-full">
+        
+
+        <div class="w-1/2" style="margin-top:-5rem;">
+          <a-table
+            :scroll="{ y: 280 }"
+            :pagination="false"
+            :columns="columns"
+            :data-source="$store.state.answer.q3TableData || []"
+          >
+            <p slot="tags" slot-scope="text,tags,i">
+              <a-button @click="deleteQ1Tabledata(i)">删除</a-button>
+            </p>
+          </a-table>
+        </div>
+      </div>
     </div>
   </a-layout-content>
 </template>
@@ -57,15 +120,18 @@ const columns = [
     dataIndex: "do",
     key: "do",
   },
+  {
+    title: "删除数据",
+    dataIndex: "delete",
+    key: "delete",
+    scopedSlots: { customRender: 'tags' },
+  },
 ];
 
 export default {
-  props:['tableData','processData','answer_dispaly'],
   components: {},
   provide: {},
-  updated(){
-    // this.$forceUpdate()
-  },
+  props:['processData','answer_dispaly'],
   computed: {
     getImg() {
       return this.imgList[this.maojinweizhi + "" + this.shuiweiweizhi];
@@ -394,53 +460,59 @@ export default {
       },
     };
   },
-  name: "app",
-  mounted() {
-    this.answer.q32TableData=JSON.parse(localStorage.getItem('q32TableData'))
-    
-    this.$forceUpdate()
-  },
+  name: "step-6",
+  mounted() {},
   methods: {
+    deleteQ1Tabledata(index){
+      this.$store.state.answer.q3TableData.splice(index, 1);
+      this.$forceUpdate();
+    },
     textareaChange(e){
       // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
-      this.$store.state.answer.text4=e.target.value
-      this.processData.answer[15]=[e.target.value]
+      this.$store.state.answer.text3=e.target.value
+      this.processData.answer[11]=[e.target.value]
       // localStorage.setItem('processData',JSON.stringify(recordProcessData))
       this.$emit('recordProcessData',this.processData)
     },
-    
     q33RadioChange(e) {
-      console.log(e)
-      this.$store.state.answer.radio4=e.target.value
-      this.$emit('nextStep',e);
-      // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
-      this.processData.answer[14]=[e.target.value]
-      // localStorage.setItem('processData',JSON.stringify(recordProcessData))
-      this.$emit('recordProcessData',this.processData)
-      this.$forceUpdate()
+      if (e.target.value == 1 && this.steps.length == 8) {
+        this.steps.push({
+          index: 8,
+          title: "问题4",
+        });
+      } else if (e.target.value == 2 && this.steps.length == 9) {
+        this.steps.pop();
+      }
     },
     updateQ1Table() {
-      if (!this.answer.q1TableData) {
-        this.answer.q1TableData = [
-          {
-            key: 0,
-            fish: 0,
-            water: 1,
-            grass: 0,
-            volume: this.getVolumeStraight,
-            do: this.getDoStraight,
-          },
-        ];
+      if (!this.$store.state.answer.q3TableData) {
+        this.$store.state.answer.q3TableData = [
+          {key: 0,
+          fish: 1,
+          water: 1,
+          grass: 0,
+          volume: this.getVolume,
+          do: this.getDo,}
+        ]
       }
-      this.answer.q1TableData.push({
-        key: this.answer.q1TableData.length,
+      this.$store.state.answer.q3TableData.push({
+        key: this.$store.state.answer.q3TableData.length,
         fish: this.fish,
         water: this.water,
         grass: this.grass,
-        volume: this.getVolumeStraight,
-        do: this.getDoStraight,
-      });
-      this.$forceUpdate();
+        volume: this.getVolume,
+        do: this.getDo,
+      })
+      // localStorage.setItem('q32TableData',JSON.stringify(this.answer.q1TableData))
+      this.$emit('updateTableData',this.$store.state.answer.q3TableData)
+      this.$forceUpdate(); 
+      // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
+      
+      this.processData.answer[12]=[this.fish]
+      this.processData.answer[13]=[this.water]
+      this.processData.answer[14]=[this.grass+1]
+      // localStorage.setItem('processData',JSON.stringify(recordProcessData))
+      this.$emit('recordProcessData',this.processData)
     },
     updateQ32Table() {
       if (this.current == 6) {
@@ -506,4 +578,7 @@ export default {
 </script>
 
 <style>
+  .ant-table-wrapper{
+    width: 600px;
+  }
 </style>

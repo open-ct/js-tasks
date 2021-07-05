@@ -2,8 +2,9 @@
   <a-layout-content class="bg-white h-4/5 p-6 flex">
        
         <div class="text-lg leading-relaxed text-left mb-8 w-1/2 byellow">
-          1.2右表为小明同学通过“实验模拟器”记录的数据。<br/>
-          请你运用所学的科学原理，解释水温在7℃比在35℃时，水中溶氧量高的原因。
+          1.2右表为小明同学通过“实验模拟器”记录的数据。<br/><br/>
+          根据右表中的数据，你能得出什么结论，请写出你的结论并运用所学的科学知识作出解释。
+
            <div><br/>
         <a-textarea  class="mt-4" placeholder="" :rows="8"  v-model="$store.state.answer.text1" @change="textareaChange" :disabled="answer_dispaly[2]"/>
         
@@ -57,15 +58,15 @@ export default {
         text:'text'?this.processData.answer[7]:[]
       },
       TableData:[
-        {key:0, water: 1, temperature: 7, do: 12.11},
-        {key:1, water: 2, temperature: 7, do: 12.11},
-        {key:2, water: 3, temperature: 7, do: 12.11},
-        {key:3, water: 4, temperature: 7, do: 12.11},
-        {key:4, water: 5, temperature: 7, do: 12.11},
-        {key:5, water: 1, temperature: 35, do: 6.95},
-        {key:6, water: 2, temperature: 35, do: 6.95},
-        {key:7, water: 3, temperature: 35, do: 6.95},
-        {key:8, water: 4, temperature: 35, do: 6.95},
+        {key:0, water: 2, temperature: 7, do: 12.11},
+        {key:1, water: 2, temperature: 14, do: 10.30},
+        {key:2, water: 2, temperature: 21, do: 8.90},
+        {key:3, water: 2, temperature: 28, do: 7.82},
+        {key:4, water: 2, temperature: 35, do: 6.95},
+        {key:5, water: 5, temperature: 7, do: 12.11},
+        {key:6, water: 5, temperature: 14, do: 10.30},
+        {key:7, water: 5, temperature: 21, do: 8.90},
+        {key:8, water: 5, temperature: 28, do: 7.82},
         {key:9, water: 5, temperature: 35, do: 6.95},
       ],
       fish: 1,

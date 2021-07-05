@@ -256,9 +256,10 @@
       </a-layout-content> -->
       <step3 v-if="current==3" ref="step3" @recordProcessData="recordProcessData" :processData="processData" :answer_dispaly="answer_dispaly"/>
       <step4 v-if="current==4" ref="step4" @recordProcessData="recordProcessData" :processData="processData" :answer_dispaly="answer_dispaly"/>
-      <step5 v-if="current==5" ref="step5" @recordProcessData="recordProcessData" @updateTableData="handleInfo" :processData="processData" :answer_dispaly="answer_dispaly"/>
-      <step6 @recordProcessData="recordProcessData" ref="step6" v-if="current==6" @nextStep="nextStep" :tableData="answer.s7TableData" :processData="processData" :answer_dispaly="answer_dispaly"/>
-      <step7 @recordProcessData="recordProcessData" ref="step7" v-if="current==7" :processData="processData" :answer_dispaly="answer_dispaly"/>
+      <step5 v-if="current==5" ref="step5" @recordProcessData="recordProcessData" :processData="processData" :answer_dispaly="answer_dispaly"/>
+      <step6 v-if="current==6" ref="step6" @recordProcessData="recordProcessData" @updateTableData="handleInfo" :processData="processData" :answer_dispaly="answer_dispaly"/>
+      <step7 @recordProcessData="recordProcessData" ref="step7" v-if="current==7" @nextStep="nextStep" :tableData="answer.s7TableData" :processData="processData" :answer_dispaly="answer_dispaly"/>
+      <step8 @recordProcessData="recordProcessData" ref="step8" v-if="current==8" :processData="processData" :answer_dispaly="answer_dispaly"/>
       <a-layout-content class="justify-between flex bg-white">
         <a-button @click="back" :disabled="current == 0" type="primary">
           <a-icon type="left" />上一步
@@ -351,12 +352,14 @@ import step4 from './components/Step4'
 import step5 from './components/Step5'
 import step6 from './components/Step6'
 import step7 from './components/Step7'
+import step8 from './components/Step8'
+
 export default {
-  components: {step0, step1, step2, step3, step4, step5, step6, step7},
+  components: {step0, step1, step2, step3, step4, step5, step6, step7, step8},
   provide: {},
   computed: {
     nexttext(){
-      if(this.current==6){
+      if(this.current==7){
         if(this.answer23==1 || !this.answer23){
           return '提交答案'
         }
@@ -364,7 +367,7 @@ export default {
           return '下一步'
         }
       }
-      if(this.current==7){
+      if(this.current==8){
         return '提交答案'
       }
       return '下一步'
@@ -450,6 +453,7 @@ export default {
         answer: [
           [1],[1],[1],
           [-1],[-1],[1],[1],
+          "text",
           "text",
           [-1],"text",
           "text",[1],[1],[1],
@@ -643,14 +647,18 @@ export default {
         },
         {
           index: 4,
-          title: "问题2.1",
+          title: "问题1.3",
         },
         {
           index: 5,
-          title: "问题2.2",
+          title: "问题2.1",
         },
         {
           index: 6,
+          title: "问题2.2",
+        },
+        {
+          index: 7,
           title: "问题2.3",
         },
       ],
@@ -729,12 +737,12 @@ export default {
     nextStep(e) {
       console.log(e.target.value)
       this.answer23=e.target.value
-      if ((e.target.value==2 || e.target.value==3) && this.steps.length==7) {
+      if ((e.target.value==2 || e.target.value==3) && this.steps.length==8) {
         this.steps.push({
           index: 6,
           title: "问题2.4",
         });
-      } else if(this.steps.length==8 && e.target.value==1) {
+      } else if(this.steps.length==9 && e.target.value==1) {
         this.steps.pop();
       }
     },
@@ -791,50 +799,35 @@ export default {
         this.answer_dispaly[2]=true;
       }
       if(this.current==5){
+        this.$store.state.disabled.step4answer=true;
+      }
+      if(this.current==6){
         this.answer_dispaly[3]=true;
         this.answer_dispaly[4]=true;
       }
-      if(this.current==6){
+      if(this.current==7){
         this.answer_dispaly[5]=true;
       }
-      if(this.current==7){
+      if(this.current==8){
         this.answer_dispaly[6]=true;
         this.answer_dispaly[7]=true;
       }
-      if(this.current==8){
+      if(this.current==9){
         this.answer_dispaly[8]=true;
         this.answer_dispaly[9]=true;
       }
-      // switch(this.current){
-      //   case 3:
-      //     this.answer_dispaly[0]=true;
-      //     this.answer_dispaly[1]=true;
-      //   case 4:
-      //     this.answer_dispaly[2]=true;
-      //   case 5:
-      //     this.answer_dispaly[3]=true;
-      //     this.answer_dispaly[4]=true;
-      //   case 6:
-      //     this.answer_dispaly[5]=true;
-      //   case 7:
-      //     this.answer_dispaly[6]=true;
-      //     this.answer_dispaly[7]=true;
-      //   case 8:
-      //     this.answer_dispaly[8]=true;
-      //     this.answer_dispaly[9]=true;
-      // }
       //处理提交的逻辑
-      if(this.current==7 && (!this.answer23 || this.answer23==1)){
+      if(this.current==8 && (!this.answer23 || this.answer23==1)){
         this.current--;
         this.fulfill=true
         this.answer_dispaly[10]=true;
       }
-      if(this.current==8){
+      if(this.current==9){
         this.current--;
         this.fulfill=true
         this.answer_dispaly[10]=true;
       }
-      if((this.current==6&&this.fulfill&&this.answer23==1)||(this.current==7&&this.fulfill)){
+      if((this.current==7&&this.fulfill&&this.answer23==1)||(this.current==8&&this.fulfill)){
         this.answer_dispaly[10]=true;
       }
       // console.log(this.processData.answer)

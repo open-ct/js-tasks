@@ -5,11 +5,11 @@
       小明同学依次将水加入至鱼缸内不同水位，分别测量出不同温度下鱼缸中水的溶氧量。<br/>
       请你使用“实验模拟器”，拖动“水温”与“水面位置”按钮，记录实验数据；
 <br /><br />
-      根据你的实验数据，鱼缸中水温与水的溶氧量之间的关系是：
+      根据你的实验数据，鱼缸中水量与水的溶氧量之间关系是：
           <a-radio-group  name="radioGroup" v-model="$store.state.answer.radio1" @change="radioChange1" :default-value="-1" :disabled="answer_dispaly[0]">
-            <a-radio :value="1" style="display: block"> A.水温越高，水的溶氧量越高</a-radio>
-            <a-radio :value="2" style="display: block"> B.水温越高，水的溶氧量越低</a-radio>
-            <a-radio :value="3" style="display: block"> C.水温对水的溶氧量没有影响</a-radio>
+            <a-radio :value="1" style="display: block"> A.水量越高，水的溶氧量越高</a-radio>
+            <a-radio :value="2" style="display: block"> B.水量越高，水的溶氧量越低</a-radio>
+            <a-radio :value="3" style="display: block"> C.水温量对水的溶氧量没有影响</a-radio>
           </a-radio-group><br/><br/>
       <!-- <a-dropdown :disabled="answer_dispaly[0]">
             <a-button style="margin-left: 8px;"> {{ answer.q1a1 || "" }} <a-icon type="down" /> </a-button>
@@ -52,11 +52,12 @@
           </a-dropdown> -->
           
 
-      <br />鱼缸中水量与水的溶氧量之间关系是:
+      <br />请你推测，当水温为25℃时，鱼缸水中的溶氧量最有可能是：
           <a-radio-group name="radioGroup" v-model="$store.state.answer.radio2" @change="radioChange2" :default-value="-1" :disabled="answer_dispaly[1]">
-            <a-radio :value="1" style="display: block"> A.水量越多，水的溶氧量越高</a-radio>
-            <a-radio :value="2" style="display: block"> B.水量越多，水的溶氧量越低 </a-radio>
-            <a-radio :value="3" style="display: block"> C.水量对水的溶氧量没有影响</a-radio>
+            <a-radio :value="1" style="display: block"> A 7.43mg/L</a-radio>
+            <a-radio :value="2" style="display: block"> B.7.82mg/L</a-radio>
+            <a-radio :value="3" style="display: block"> C 8.25mg/L</a-radio>
+            <a-radio :value="4" style="display: block"> D.9.66mg/L</a-radio>
           </a-radio-group><br/><br/>
             <!-- <a-dropdown :disabled="answer_dispaly[1]">
             <a-button style="margin-left: 8px;"> {{ processData.answer[4]=='text'?'': processData.answer[4]}} <a-icon type="down" /> </a-button>
