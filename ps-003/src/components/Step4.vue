@@ -1,292 +1,79 @@
 <template>
   <a-layout-content class="bg-white h-4/5 p-6 flex">
-        <div class="text-lg text-left mb-8 w-1/2 byellow">
-          2.1 为进一步探究鱼缸中鱼的数量和水草数量与水中溶氧量的关系。
-          小明同学向鱼缸中，分别加入不同量的鱼和水草。
-          <br />
-          学生A认为：鱼缸放入较多水草时，鱼缸中溶氧量会更高；<br />
-          学生B认为：鱼缸放入少量水草时，鱼缸中溶氧量会更高；<br />
-          学生C认为：水草数量对鱼缸中溶氧量没有影响;<br/>
-          <br />
-          你认为哪位同学的观点更合理？<br />
-          <a-radio-group name="radioGroup" v-model="$store.state.answer.radio3" @change="radioChange" :default-value="-1" :disabled="answer_dispaly[3]">
-            <a-radio :value="1"> 学生A </a-radio>
-            <a-radio :value="2"> 学生B </a-radio>
-            <a-radio :value="3"> 学生C </a-radio>
-          </a-radio-group><br/><br/>
-          请说明你选择该观点的理由：<br/><br/>
-          <a-textarea  class="mt-4" placeholder="" :rows="8" :v-model="$store.state.answer.text2" @change="textareaChange" :disabled="answer_dispaly[4]"/>
+       
+        <div class="text-lg leading-relaxed text-left mb-8 w-1/2 byellow">
+          1.3小明同学记录了某鱼缸中水的溶氧量在一天中的变化，如右表。<br/><br/>
+          根据右表中的数据，你能得出什么结论，请写出你的结论并运用所学的科学知识作出解释。
+           <div><br/>
+        <a-textarea  class="mt-4" placeholder="" :rows="8"  v-model="$store.state.answer.textstep4" @change="textareaChange" :disabled="$store.state.disabled.step4answer"/>
+        
         </div>
-        <div class="w-1/2 flex bgreen">
-          <img
-            class="relative"
-            style="width: 506px;height:331px;top:10rem;"
-            src="../assets/head.png"
-            alt=""
-          />
-          <!-- <img
-            class="absolute"
-            style="width: 616px"
-            :src="grassImg[1]"
-            alt=""
-          />
-          <img class="absolute" style="width: 616px" :src="fishImg[2]" alt="" /> -->
+        </div>
+        <div class="w-1/2 bgreen" >
+          <a-table
+              style="margin-top:2rem"
+              :scroll="{ y:550 }"
+              :pagination="false"
+              :columns="columns"
+              :data-source="TableData || []"
+            />
         </div>
       </a-layout-content>
 </template>
 
 <script>
-const columns = [
-  {
-    title: "水面位置",
-    dataIndex: "water",
-    key: "water",
-  },
-  {
-    title: "水的体积",
-    dataIndex: "volume",
-    key: "volume",
-  },
-  {
-    title: "溶氧量",
-    dataIndex: "do",
-    key: "do",
-  },
-];
-
 export default {
   components: {},
   provide: {},
   computed: {
-    getImg() {
-      return this.imgList[this.maojinweizhi + "" + this.shuiweiweizhi];
-    },
-    getVolume() {
-      switch (this.water) {
-        case 1:
-          return 5;
-        case 2:
-          return 10;
-        case 3:
-          return 15;
-        case 4:
-          return 20;
-        case 5:
-          return 25;
-      }
-    },
-    getDo() {
-      let fish = this.fish;
-      let water = this.water;
-      let grass = this.grass;
-      for (const element of this.doData) {
-        if (
-          element.fish == fish &&
-          element.water == water &&
-          element.grass == grass
-        ) {
-          return element.do;
-        }
-      }
-      // this.doData.forEach(element => {
-      // 	debugger
-      // 	if(element.fish==fish&&element.water==water&&element.grass==grass){
-      // 		return element.do
-      // 	}
-      // 	return '暂无数据'
-      // });
-    },
-    getVolumeStraight() {
-       switch (this.water) {
-        case 1:
-          return 5;
-        case 2:
-          return 10;
-        case 3:
-          return 15;
-        case 4:
-          return 20;
-        case 5:
-          return 25;
-      }
-    },
-    getDoStraight() {
-      return 9;
-      // this.doData.forEach(element => {
-      // 	debugger
-      // 	if(element.fish==fish&&element.water==water&&element.grass==grass){
-      // 		return element.do
-      // 	}
-      // 	return '暂无数据'
-      // });
-    },
+  },
+  created() {
+    if(this.answer.text==='text'){
+      return this.answer.text=''
+    }else{
+      return this.answer.text=this.processData.answer[8]+''
+    }
   },
   data() {
     return {
-      marks1: {
-        0: '0',
-        1: '1',
-        2: '2',
-        3: '3',
-        4: '4'
-      },
-      marks2: {
-        1: '1',
-        2: '2',
-        3: '3',
-        4: '4',
-        5: '5'
-      },
-      columns,
-      answer: {},
-      q4TableData: [
-        { fish: 3, water: 4, grass: 0, do: 6.6 },
-        { fish: 3, water: 4, grass: 1, do: 7.1 },
-        { fish: 3, water: 4, grass: 2, do: 7.6 },
-        { fish: 3, water: 4, grass: 3, do: 8.1 },
-        { fish: 3, water: 4, grass: 4, do: 8.6 },
+         columns:[
+        {
+          title: "时间",
+          dataIndex: "time",
+          key: "time",
+        },
+        {
+          title: "水温（℃）",
+          dataIndex: "temperature",
+          key: "temperature",
+        },
+        {
+          title: "水中的溶氧量（mg/L)",
+          dataIndex: "do",
+          key: "do",
+        },
+        {
+          title: "鱼的数量",
+          dataIndex: "fishernum",
+          key: "fishernum",
+        },
+        {
+          title: "水草数量",
+          dataIndex: "grassnum",
+          key: "grassnum",
+        },
       ],
-      doData: [
-        { fish: 1, water: 1, grass: 0, do: 7.0 },
-        { fish: 1, water: 1, grass: 1, do: 7.5 },
-        { fish: 1, water: 1, grass: 2, do: 8.0 },
-        { fish: 1, water: 1, grass: 3, do: 8.5 },
-        { fish: 1, water: 1, grass: 4, do: 9.0 },
-        { fish: 1, water: 2, grass: 0, do: 7.0 },
-        { fish: 1, water: 2, grass: 1, do: 7.5 },
-        { fish: 1, water: 2, grass: 2, do: 8.0 },
-        { fish: 1, water: 2, grass: 3, do: 8.5 },
-        { fish: 1, water: 2, grass: 4, do: 9.0 },
-        { fish: 1, water: 3, grass: 0, do: 7.0 },
-        { fish: 1, water: 3, grass: 1, do: 7.5 },
-        { fish: 1, water: 3, grass: 2, do: 8.0 },
-        { fish: 1, water: 3, grass: 3, do: 8.5 },
-        { fish: 1, water: 3, grass: 4, do: 9.0 },
-        { fish: 1, water: 4, grass: 0, do: 7.0 },
-        { fish: 1, water: 4, grass: 1, do: 7.5 },
-        { fish: 1, water: 4, grass: 2, do: 8.0 },
-        { fish: 1, water: 4, grass: 3, do: 8.5 },
-        { fish: 1, water: 4, grass: 4, do: 9.0 },
-        { fish: 1, water: 5, grass: 0, do: 7.0 },
-        { fish: 1, water: 5, grass: 1, do: 7.5 },
-        { fish: 1, water: 5, grass: 2, do: 8.0 },
-        { fish: 1, water: 5, grass: 3, do: 8.5 },
-        { fish: 1, water: 5, grass: 4, do: 9.0 },
-        { fish: 2, water: 1, grass: 0, do: 6.8 },
-        { fish: 2, water: 1, grass: 1, do: 7.3 },
-        { fish: 2, water: 1, grass: 2, do: 7.8 },
-        { fish: 2, water: 1, grass: 3, do: 8.3 },
-        { fish: 2, water: 1, grass: 4, do: 8.8 },
-        { fish: 2, water: 2, grass: 0, do: 6.8 },
-        { fish: 2, water: 2, grass: 1, do: 7.3 },
-        { fish: 2, water: 2, grass: 2, do: 7.8 },
-        { fish: 2, water: 2, grass: 3, do: 8.3 },
-        { fish: 2, water: 2, grass: 4, do: 8.8 },
-        { fish: 2, water: 3, grass: 0, do: 6.8 },
-        { fish: 2, water: 3, grass: 1, do: 7.3 },
-        { fish: 2, water: 3, grass: 2, do: 7.8 },
-        { fish: 2, water: 3, grass: 3, do: 8.3 },
-        { fish: 2, water: 3, grass: 4, do: 8.8 },
-        { fish: 2, water: 4, grass: 0, do: 6.8 },
-        { fish: 2, water: 4, grass: 1, do: 7.3 },
-        { fish: 2, water: 4, grass: 2, do: 7.8 },
-        { fish: 2, water: 4, grass: 3, do: 8.3 },
-        { fish: 2, water: 4, grass: 4, do: 8.8 },
-        { fish: 2, water: 5, grass: 0, do: 6.8 },
-        { fish: 2, water: 5, grass: 1, do: 7.3 },
-        { fish: 2, water: 5, grass: 2, do: 7.8 },
-        { fish: 2, water: 5, grass: 3, do: 8.3 },
-        { fish: 2, water: 5, grass: 4, do: 8.8 },
-        { fish: 3, water: 1, grass: 0, do: 6.6 },
-        { fish: 3, water: 1, grass: 1, do: 7.1 },
-        { fish: 3, water: 1, grass: 2, do: 7.6 },
-        { fish: 3, water: 1, grass: 3, do: 8.1 },
-        { fish: 3, water: 1, grass: 4, do: 8.6 },
-        { fish: 3, water: 2, grass: 0, do: 6.6 },
-        { fish: 3, water: 2, grass: 1, do: 7.1 },
-        { fish: 3, water: 2, grass: 2, do: 7.6 },
-        { fish: 3, water: 2, grass: 3, do: 8.1 },
-        { fish: 3, water: 2, grass: 4, do: 8.6 },
-        { fish: 3, water: 3, grass: 0, do: 6.6 },
-        { fish: 3, water: 3, grass: 1, do: 7.1 },
-        { fish: 3, water: 3, grass: 2, do: 7.6 },
-        { fish: 3, water: 3, grass: 3, do: 8.1 },
-        { fish: 3, water: 3, grass: 4, do: 8.6 },
-        { fish: 3, water: 4, grass: 0, do: 6.6 },
-        { fish: 3, water: 4, grass: 1, do: 7.1 },
-        { fish: 3, water: 4, grass: 2, do: 7.6 },
-        { fish: 3, water: 4, grass: 3, do: 8.1 },
-        { fish: 3, water: 4, grass: 4, do: 8.6 },
-        { fish: 3, water: 5, grass: 0, do: 6.6 },
-        { fish: 3, water: 5, grass: 1, do: 7.1 },
-        { fish: 3, water: 5, grass: 2, do: 7.6 },
-        { fish: 3, water: 5, grass: 3, do: 8.1 },
-        { fish: 3, water: 5, grass: 4, do: 8.6 },
-        { fish: 4, water: 1, grass: 0, do: 6.4 },
-        { fish: 4, water: 1, grass: 1, do: 6.9 },
-        { fish: 4, water: 1, grass: 2, do: 7.4 },
-        { fish: 4, water: 1, grass: 3, do: 7.9 },
-        { fish: 4, water: 1, grass: 4, do: 8.4 },
-        { fish: 4, water: 2, grass: 0, do: 6.4 },
-        { fish: 4, water: 2, grass: 1, do: 6.9 },
-        { fish: 4, water: 2, grass: 2, do: 7.4 },
-        { fish: 4, water: 2, grass: 3, do: 7.9 },
-        { fish: 4, water: 2, grass: 4, do: 8.4 },
-        { fish: 4, water: 3, grass: 0, do: 6.4 },
-        { fish: 4, water: 3, grass: 1, do: 6.9 },
-        { fish: 4, water: 3, grass: 2, do: 7.4 },
-        { fish: 4, water: 3, grass: 3, do: 7.9 },
-        { fish: 4, water: 3, grass: 4, do: 8.4 },
-        { fish: 4, water: 4, grass: 0, do: 6.4 },
-        { fish: 4, water: 4, grass: 1, do: 6.9 },
-        { fish: 4, water: 4, grass: 2, do: 7.4 },
-        { fish: 4, water: 4, grass: 3, do: 7.9 },
-        { fish: 4, water: 4, grass: 4, do: 8.4 },
-        { fish: 4, water: 5, grass: 0, do: 6.4 },
-        { fish: 4, water: 5, grass: 1, do: 6.9 },
-        { fish: 4, water: 5, grass: 2, do: 7.4 },
-        { fish: 4, water: 5, grass: 3, do: 7.9 },
-        { fish: 4, water: 5, grass: 4, do: 8.4 },
-        { fish: 5, water: 1, grass: 0, do: 6.2 },
-        { fish: 5, water: 1, grass: 1, do: 6.7 },
-        { fish: 5, water: 1, grass: 2, do: 7.2 },
-        { fish: 5, water: 1, grass: 3, do: 7.7 },
-        { fish: 5, water: 1, grass: 4, do: 8.2 },
-        { fish: 5, water: 2, grass: 0, do: 6.2 },
-        { fish: 5, water: 2, grass: 1, do: 6.7 },
-        { fish: 5, water: 2, grass: 2, do: 7.2 },
-        { fish: 5, water: 2, grass: 3, do: 7.7 },
-        { fish: 5, water: 2, grass: 4, do: 8.2 },
-        { fish: 5, water: 3, grass: 0, do: 6.2 },
-        { fish: 5, water: 3, grass: 1, do: 6.7 },
-        { fish: 5, water: 3, grass: 2, do: 7.2 },
-        { fish: 5, water: 3, grass: 3, do: 7.7 },
-        { fish: 5, water: 3, grass: 4, do: 8.2 },
-        { fish: 5, water: 4, grass: 0, do: 6.2 },
-        { fish: 5, water: 4, grass: 1, do: 6.7 },
-        { fish: 5, water: 4, grass: 2, do: 7.2 },
-        { fish: 5, water: 4, grass: 3, do: 7.7 },
-        { fish: 5, water: 4, grass: 4, do: 8.2 },
-        { fish: 5, water: 5, grass: 0, do: 6.2 },
-        { fish: 5, water: 5, grass: 1, do: 6.7 },
-        { fish: 5, water: 5, grass: 2, do: 7.2 },
-        { fish: 5, water: 5, grass: 3, do: 7.7 },
-        { fish: 5, water: 5, grass: 4, do: 8.2 },
+      answer: {
+        text:'text'?this.processData.answer[8]:[]
+      },
+      TableData:[
+        {key:0, time: '9:00', temperature: 28, do: 4.59,fishernum:2,grassnum:2,},
+        {key:1, time: '11:00', temperature: 32, do: 5.53,fishernum:2,grassnum:2,},
+        {key:2, time: '12:00', temperature: 32, do: 6.22,fishernum:2,grassnum:2,},
+        {key:3, time: '13:00', temperature: 32, do: 6.68,fishernum:2,grassnum:2,},
+        {key:4, time: '17:00', temperature: 28, do: 5.50,fishernum:2,grassnum:2,},
+        {key:5, time: '23:00', temperature: 26, do: 4.38,fishernum:2,grassnum:2,},
       ],
-      fishImg: {
-        1: "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-7d0ddff0-472c-48e1-ad19-ad0d117424d9/64e6cc69-d67a-417d-b81b-04f08f13ead9.png",
-        2: "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-7d0ddff0-472c-48e1-ad19-ad0d117424d9/cd63efd6-fe59-4f99-b2c8-a3d3758bea5c.png",
-        3: "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-7d0ddff0-472c-48e1-ad19-ad0d117424d9/5d10f9a2-0cc7-49b7-941a-917342aeffd6.png",
-        4: "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-7d0ddff0-472c-48e1-ad19-ad0d117424d9/776e93db-1fba-49e1-9d52-2ee9cbb95faf.png",
-        5: "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-7d0ddff0-472c-48e1-ad19-ad0d117424d9/d70123b0-d36d-4517-961b-c807b2564272.png",
-      },
-      grassImg: {
-        1: "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-7d0ddff0-472c-48e1-ad19-ad0d117424d9/73193e6a-b2f3-4ce9-a331-4b20208cd984.png",
-        2: "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-7d0ddff0-472c-48e1-ad19-ad0d117424d9/8fab4485-d1c7-46a8-9218-1208a39d7ca3.png",
-        3: "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-7d0ddff0-472c-48e1-ad19-ad0d117424d9/084703b8-8908-4629-b57c-ada64db12019.png",
-        4: "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-7d0ddff0-472c-48e1-ad19-ad0d117424d9/ff44a2bc-f3ee-4599-bacf-7965c27f38de.png",
-        5: "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-7d0ddff0-472c-48e1-ad19-ad0d117424d9/67214545-76ec-4c90-867b-9a5f47057e35.png",
-      },
       fish: 1,
       grass: 0,
       water: 1,
@@ -361,144 +148,32 @@ export default {
         23: "28.4℃",
         24: "27.9℃",
       },
-      imgList: {
-        "00":
-          "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-4c3346ea-97a1-4ca8-84cd-109211a993c9/5ce8a0e7-59d0-4d88-90f2-330fd3dd90e0.png",
-        "01":
-          "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-4c3346ea-97a1-4ca8-84cd-109211a993c9/5cc94332-39ec-48b8-a43c-dcc2ccf166e2.png",
-        "02":
-          "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-4c3346ea-97a1-4ca8-84cd-109211a993c9/0fd665aa-ce6c-45dc-9b66-f1895a4517ff.png",
-        "03":
-          "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-4c3346ea-97a1-4ca8-84cd-109211a993c9/0add29fc-4229-4d57-b048-763c16e7b9ec.png",
-        "04":
-          "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-4c3346ea-97a1-4ca8-84cd-109211a993c9/73260064-3f05-4e27-8e18-66fe3a62d342.png",
-        10: "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-4c3346ea-97a1-4ca8-84cd-109211a993c9/fcd77f75-dbc5-4a9a-958e-d686015767f1.png",
-        11: "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-4c3346ea-97a1-4ca8-84cd-109211a993c9/21c23e2d-0523-4851-9fd6-9ff8d08d8755.png",
-        12: "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-4c3346ea-97a1-4ca8-84cd-109211a993c9/fdff9229-ade1-4e1f-8294-fa2db11d7c54.png",
-        13: "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-4c3346ea-97a1-4ca8-84cd-109211a993c9/329ee909-2f25-45df-9be9-732cd417cb50.png",
-        14: "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-4c3346ea-97a1-4ca8-84cd-109211a993c9/5a0e94c4-6d89-4df5-87b7-3c63e82f993a.png",
-        20: "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-4c3346ea-97a1-4ca8-84cd-109211a993c9/1881ca9d-767f-4e63-ae4c-5a6c7edec9f7.png",
-        21: "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-4c3346ea-97a1-4ca8-84cd-109211a993c9/3d537444-1b14-4cdf-af68-7c3e8216125a.png",
-        22: "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-4c3346ea-97a1-4ca8-84cd-109211a993c9/dc32ef67-02b7-423c-9790-1bf761db304b.png",
-        23: "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-4c3346ea-97a1-4ca8-84cd-109211a993c9/a5fa8038-22d6-4eed-89bb-53bb78470193.png",
-        24: "https://vkceyugu.cdn.bspapp.com/VKCEYUGU-4c3346ea-97a1-4ca8-84cd-109211a993c9/a45c4e6c-61c3-467a-8d12-efbf79f54de5.png",
-      },
     };
   },
+  props:['processData','answer_dispaly'],
   name: "app",
   mounted() {},
-  props:['processData','answer_dispaly'],
   methods: {
     textareaChange(e){
-      // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
-      this.$store.state.answer.radio3=e.target.value
-      this.processData.answer[9]=[e.target.value]
-      // localStorage.setItem('processData',JSON.stringify(recordProcessData))
-      this.$emit('recordProcessData',this.processData)
-    },
-    radioChange(e){
-      // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
-      this.$store.state.answer.text2=e.target.value
+      this.$store.state.textstep4=e.target.value
       this.processData.answer[8]=[e.target.value]
-      // localStorage.setItem('processData',JSON.stringify(recordProcessData))
       this.$emit('recordProcessData',this.processData)
-      this.$forceUpdate()
     },
-    q33RadioChange(e) {
-      if (e.target.value == 1 && this.steps.length == 8) {
-        this.steps.push({
-          index: 8,
-          title: "问题4",
-        });
-      } else if (e.target.value == 2 && this.steps.length == 9) {
-        this.steps.pop();
-      }
-    },
-    updateQ1Table() {
-      if (!this.answer.q1TableData) {
-        this.answer.q1TableData = [
-          {
-            key: 0,
-            fish: 0,
-            water: 1,
-            grass: 0,
-            volume: this.getVolumeStraight,
-            do: this.getDoStraight,
-          },
-        ];
-      }
-      this.answer.q1TableData.push({
-        key: this.answer.q1TableData.length,
-        fish: this.fish,
-        water: this.water,
-        grass: this.grass,
-        volume: this.getVolumeStraight,
-        do: this.getDoStraight,
-      });
-      this.$forceUpdate();
-    },
-    updateQ32Table() {
-      if (this.current == 6) {
-        if (!this.answer.q32TableData) {
-          this.answer.q32TableData = [];
-        }
-        this.answer.q32TableData.push({
-          key: this.answer.q32TableData.length,
-          fish: this.fish,
-          water: this.water,
-          grass: this.grass,
-          volume: this.getVolume,
-          do: this.getDo,
-        });
-        this.$forceUpdate();
-      }
-    },
-    select1(e) {
-      console.log(e);
-    },
+
     next() {
       this.current++;
     },
     back() {
       this.current--;
     },
-    expert() {
-      if (this.maojinweizhi == undefined) {
-        alert("请选择毛巾位置");
-        return;
-      }
-      if (this.shuiweiweizhi == undefined) {
-        alert("请选择水位位置");
-        return;
-      }
-      let item = {};
-
-      if (this.maojinweizhi == 0) {
-        item.maojin = "无毛巾";
-      } else if (this.maojinweizhi == 1) {
-        item.maojin = "毛巾未进入水中";
-      } else if (this.maojinweizhi == 2) {
-        item.maojin = "毛巾进入水中";
-      }
-      if (this.shuiweiweizhi == 0) {
-        item.shuiwei = "水位0";
-      } else if (this.shuiweiweizhi == 1) {
-        item.shuiwei = "水位1";
-      } else if (this.shuiweiweizhi == 2) {
-        item.shuiwei = "水位2";
-      } else if (this.shuiweiweizhi == 3) {
-        item.shuiwei = "水位3";
-      } else if (this.shuiweiweizhi == 4) {
-        item.shuiwei = "水位4";
-      }
-      item.temperature = this.tempData[
-        this.maojinweizhi + "" + this.shuiweiweizhi
-      ];
-      this.list.push(item);
-    },
   },
 };
 </script>
 
-<style>
+<style  scoped>
+  .text{
+    margin-top: -30px;
+
+    line-height: 3rem;
+  }
 </style>

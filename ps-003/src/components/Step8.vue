@@ -1,51 +1,68 @@
 <template>
   <a-layout-content class="bg-white h-4/5 p-6 flex">
-        <div class="text-lg text-left mb-8 w-1/2 byellow">
-          2.1 为进一步探究鱼缸中鱼的数量和水草数量与水中溶氧量的关系。
-          小明同学向鱼缸中，分别加入不同量的鱼和水草。
-          <br />
-          学生A认为：鱼缸放入较多水草时，鱼缸中溶氧量会更高；<br />
-          学生B认为：鱼缸放入少量水草时，鱼缸中溶氧量会更高；<br />
-          学生C认为：水草数量对鱼缸中溶氧量没有影响;<br/>
-          <br />
-          你认为哪位同学的观点更合理？<br />
-          <a-radio-group name="radioGroup" v-model="$store.state.answer.radio3" @change="radioChange" :default-value="-1" :disabled="answer_dispaly[3]">
-            <a-radio :value="1"> 学生A </a-radio>
-            <a-radio :value="2"> 学生B </a-radio>
-            <a-radio :value="3"> 学生C </a-radio>
-          </a-radio-group><br/><br/>
-          请说明你选择该观点的理由：<br/><br/>
-          <a-textarea  class="mt-4" placeholder="" :rows="8" v-model="$store.state.answer.text2" @change="textareaChange" :disabled="answer_dispaly[4]"/>
-        </div>
-        <div class="w-1/2 flex bgreen">
-          <img
-            class="relative"
-            style="width: 506px;height:331px;top:10rem;"
-            src="../assets/head.png"
-            alt=""
-          />
-          <!-- <img
-            class="absolute"
-            style="width: 616px"
-            :src="grassImg[1]"
-            alt=""
-          />
-          <img class="absolute" style="width: 616px" :src="fishImg[2]" alt="" /> -->
-        </div>
-      </a-layout-content>
+    <div class="w-1/2 text-lg byellow">
+      <div class="text-lg text-left mb-8">
+        2.4 某位同学的实验记录如下表所示，请根据他的实验数据，猜测他选择的结论
+
+      </div>
+      <a-radio-group
+        v-model="$store.state.answer.radio5"
+        name="radioGroup2"
+        :default-value="-1"
+        @change="q33RadioChange"
+        class="text-left"
+        :disabled="answer_dispaly[8]"
+      >
+        <a-radio :value="1">学生A：鱼缸放入多量水草时，鱼缸中溶氧量高； </a-radio>
+        <a-radio :value="2">学生B：鱼缸放入少量水草时，鱼缸中溶氧量高；</a-radio> 
+        <a-radio :value="3">学生C：水草对鱼缸中溶氧量没有影响;</a-radio> 
+        </a-radio-group
+      ><br /><br /><br />
+      <div class="text-left mb-4">并对他的结论，做出相应的解释。</div>
+      <a-textarea v-model="$store.state.answer.text5" @change="textareaChange" class="mt-4" placeholder="" :rows="8" :disabled="answer_dispaly[9]"/>
+    </div>
+    <div class="w-1/2 bgreen">
+
+      <a-table
+        :scroll="{ y: 480 }"
+        :pagination="false"
+        :columns="q4Columns"
+        :data-source="q4TableData"
+        style="margin-top:5rem;"
+      >
+      </a-table>
+    </div>
+  </a-layout-content>
 </template>
 
 <script>
-const columns = [
+const q4Columns = [
+  {
+    title: "鱼的数量",
+    dataIndex: "fish",
+    key: "fish",
+  },
   {
     title: "水面位置",
     dataIndex: "water",
     key: "water",
   },
   {
-    title: "水的体积",
-    dataIndex: "volume",
-    key: "volume",
+    title: "水草数量",
+    dataIndex: "grass",
+    key: "grass",
+  },
+  {
+    title: "溶氧量（mg/L）",
+    dataIndex: "do",
+    key: "do",
+  },
+];
+const columns = [
+  {
+    title: "水面位置",
+    dataIndex: "water",
+    key: "water",
   },
   {
     title: "溶氧量",
@@ -97,7 +114,7 @@ export default {
       // });
     },
     getVolumeStraight() {
-       switch (this.water) {
+      switch (this.water) {
         case 1:
           return 5;
         case 2:
@@ -138,13 +155,14 @@ export default {
         5: '5'
       },
       columns,
+      q4Columns,
       answer: {},
       q4TableData: [
-        { fish: 3, water: 4, grass: 0, do: 6.6 },
-        { fish: 3, water: 4, grass: 1, do: 7.1 },
-        { fish: 3, water: 4, grass: 2, do: 7.6 },
-        { fish: 3, water: 4, grass: 3, do: 8.1 },
-        { fish: 3, water: 4, grass: 4, do: 8.6 },
+        {key:0, fish: 3, water: 4, grass: 0, do: 6.6 },
+        {key:1, fish: 3, water: 4, grass: 1, do: 7.1 },
+        {key:2, fish: 3, water: 4, grass: 2, do: 7.6 },
+        {key:3, fish: 3, water: 4, grass: 3, do: 8.1 },
+        {key:4, fish: 3, water: 4, grass: 4, do: 8.6 },
       ],
       doData: [
         { fish: 1, water: 1, grass: 0, do: 7.0 },
@@ -391,18 +409,10 @@ export default {
   methods: {
     textareaChange(e){
       // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
-      this.$store.state.answer.radio3=e.target.value
-      this.processData.answer[10]=[e.target.value]
+      this.$store.state.answer.text5=e.target.value
+      this.processData.answer[18]=[e.target.value]
       // localStorage.setItem('processData',JSON.stringify(recordProcessData))
       this.$emit('recordProcessData',this.processData)
-    },
-    radioChange(e){
-      // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
-      this.$store.state.answer.text2=e.target.value
-      this.processData.answer[9]=[e.target.value]
-      // localStorage.setItem('processData',JSON.stringify(recordProcessData))
-      this.$emit('recordProcessData',this.processData)
-      this.$forceUpdate()
     },
     q33RadioChange(e) {
       if (e.target.value == 1 && this.steps.length == 8) {
@@ -413,6 +423,12 @@ export default {
       } else if (e.target.value == 2 && this.steps.length == 9) {
         this.steps.pop();
       }
+      // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
+      this.$store.state.answer.radio5=e.target.value
+      this.processData.answer[17]=[e.target.value]
+      // localStorage.setItem('processData',JSON.stringify(recordProcessData))
+      this.$emit('recordProcessData',this.processData)
+      this.$forceUpdate()
     },
     updateQ1Table() {
       if (!this.answer.q1TableData) {
@@ -452,9 +468,6 @@ export default {
         });
         this.$forceUpdate();
       }
-    },
-    select1(e) {
-      console.log(e);
     },
     next() {
       this.current++;
