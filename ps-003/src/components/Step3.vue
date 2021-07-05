@@ -3,7 +3,7 @@
        
         <div class="text-lg leading-relaxed text-left mb-8 w-1/2 byellow">
           1.2右表为小明同学通过“实验模拟器”记录的数据。<br/><br/>
-          根据右表中的数据，你能得出什么结论，并请你运用所学的科学知识，作出，相应的解释。
+          根据右表中的数据，你能得出什么结论，请写出你的结论并运用所学的科学知识作出解释。
 
            <div><br/>
         <a-textarea  class="mt-4" placeholder="" :rows="8"  v-model="$store.state.answer.text1" @change="textareaChange" :disabled="answer_dispaly[2]"/>
