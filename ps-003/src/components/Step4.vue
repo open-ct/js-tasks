@@ -72,7 +72,7 @@ export default {
         {key:2, time: '12:00', temperature: 32, do: 6.22,fishernum:2,grassnum:2,},
         {key:3, time: '13:00', temperature: 32, do: 6.68,fishernum:2,grassnum:2,},
         {key:4, time: '17:00', temperature: 28, do: 5.50,fishernum:2,grassnum:2,},
-        {key:5, time: '23:00', temperature: 26, do: 4.38,fishernum:2,grassnum:2,},
+        {key:5, time: '20:00', temperature: 26, do: 4.38,fishernum:2,grassnum:2,},
       ],
       fish: 1,
       grass: 0,
