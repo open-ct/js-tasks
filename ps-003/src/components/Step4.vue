@@ -1,8 +1,9 @@
 <template>
-  <a-layout-content class="bg-white h-4/5 p-6 flex">
+  <a-layout-content class="bg-white h-4/5 flex">
        
         <div class="text-lg leading-relaxed text-left mb-8 w-1/2 byellow">
-          1.3小明同学记录了某鱼缸中水的溶氧量在一天中的变化，如右表。<br/><br/>
+          2.1为进一步探究鱼缸中水草与水中溶氧量的关系，
+          小明同学记录了某鱼缸中水的溶氧量在一天中的变化，如右表。<br/><br/>
           根据右表中的数据，你能得出什么结论，请写出你的结论并运用所学的科学知识作出解释。
            <div><br/>
         <a-textarea  class="mt-4" placeholder="" :rows="8"  v-model="$store.state.answer.textstep4" @change="textareaChange" :disabled="$store.state.disabled.step4answer"/>

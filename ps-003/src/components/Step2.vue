@@ -1,5 +1,5 @@
 <template>
-  <a-layout-content class="bg-white h-4/5 p-6 flex w-full">
+  <a-layout-content class="bg-white h-4/5 flex w-full">
     <div class="text-lg leading-relaxed text-left mb-8 w-1/2 byellow">
       1.1为了探究水的溶氧量是否与水量和水温有关。
       小明同学依次将水加入至鱼缸内不同水位，分别测量出不同温度下鱼缸中水的溶氧量。<br/>
@@ -9,7 +9,7 @@
           <a-radio-group  name="radioGroup" v-model="$store.state.answer.radio1" @change="radioChange1" :default-value="-1" :disabled="answer_dispaly[0]">
             <a-radio :value="1" style="display: block"> A.水量越高，水的溶氧量越高</a-radio>
             <a-radio :value="2" style="display: block"> B.水量越高，水的溶氧量越低</a-radio>
-            <a-radio :value="3" style="display: block"> C.水温量对水的溶氧量没有影响</a-radio>
+            <a-radio :value="3" style="display: block"> C.水量对水的溶氧量没有影响</a-radio>
           </a-radio-group><br/><br/>
       <!-- <a-dropdown :disabled="answer_dispaly[0]">
             <a-button style="margin-left: 8px;"> {{ answer.q1a1 || "" }} <a-icon type="down" /> </a-button>
@@ -52,7 +52,7 @@
           </a-dropdown> -->
           
 
-      <br />请你推测，当水温为25℃时，鱼缸水中的溶氧量最有可能是：
+      <br />请你推测，当水温为25℃时，鱼缸中水的溶氧量最有可能是：
           <a-radio-group name="radioGroup" v-model="$store.state.answer.radio2" @change="radioChange2" :default-value="-1" :disabled="answer_dispaly[1]">
             <a-radio :value="1" style="display: block"> A 7.43mg/L</a-radio>
             <a-radio :value="2" style="display: block"> B.7.82mg/L</a-radio>

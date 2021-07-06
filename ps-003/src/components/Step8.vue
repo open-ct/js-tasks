@@ -1,8 +1,8 @@
 <template>
-  <a-layout-content class="bg-white h-4/5 p-6 flex">
+  <a-layout-content class="bg-white h-4/5 flex">
     <div class="w-1/2 text-lg byellow">
       <div class="text-lg text-left mb-8">
-        2.4 某位同学的实验记录如下表所示，请根据他的实验数据，猜测他选择的结论
+        2.5 某位同学的实验记录如下表所示，请根据他的实验数据，猜测他选择的结论
 
       </div>
       <a-radio-group
@@ -158,11 +158,11 @@ export default {
       q4Columns,
       answer: {},
       q4TableData: [
-        {key:0, fish: 3, water: 4, grass: 0, do: 6.6 },
-        {key:1, fish: 3, water: 4, grass: 1, do: 7.1 },
-        {key:2, fish: 3, water: 4, grass: 2, do: 7.6 },
-        {key:3, fish: 3, water: 4, grass: 3, do: 8.1 },
-        {key:4, fish: 3, water: 4, grass: 4, do: 8.6 },
+        {key:0, fish: 3, water: 4, grass: 0, do: 6.2 },
+        {key:1, fish: 3, water: 4, grass: 1, do: 6.7 },
+        {key:2, fish: 3, water: 4, grass: 2, do: 7.2 },
+        {key:3, fish: 3, water: 4, grass: 3, do: 7.7 },
+        {key:4, fish: 3, water: 4, grass: 4, do: 8.2 },
       ],
       doData: [
         { fish: 1, water: 1, grass: 0, do: 7.0 },

@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="">
-    <a-layout class="h-full">
+    <a-layout class="h-full" style="background:white">
       <a-layout-content class="bg-white">
         <a-steps v-model="current" type="navigation" :style="stepStyle">
           <a-step
@@ -13,7 +13,7 @@
           />
         </a-steps>
       </a-layout-content>
-      <a-layout-content v-if="current == 0" class="bg-white h-4/5 p-6">
+      <a-layout-content v-if="current == 0" class="h-4/5 byellow">
         <div class="text-xl text-left align-middle ml-4 leading-loose">
           我国南方地区夏季普遍高温多雨。
           以南方某市为例，夏季室外平均气温可达36℃，平均湿度为80％。
@@ -23,9 +23,9 @@
         </div>
         <img class="float-right" src="./assets/0.jpg" alt="" />
       </a-layout-content>
-      <a-layout-content v-if="current == 1" class="bg-white h-4/5 p-6">
+      <a-layout-content v-if="current == 1" class="bg-white h-4/5">
         <div class="flex flex-1">
-          <div class="text-xl text-left mb-4 w-1/2">
+          <div class="text-xl text-left mb-4 w-1/2  byellow">
               右图是一个实验模拟器，可以用来探究食物冷藏效果。<br/>
               如果你想了解实验模拟器如何使用，可以尝试下列操作:<br/>
               1. 拖动“毛巾位置”按钮；<br/>
@@ -33,7 +33,7 @@
               3. 点击“记录”按钮，表格中会呈现实验数据。<br/>
               若模拟练习完成，请点击“下一步”。<br/>
           </div>
-          <div class="w-1/2">
+          <div class="w-1/2 bgreen">
             <div class="">
               <div class="">
                 <!-- <div class="text-2xl">毛巾位置</div> -->
@@ -87,6 +87,7 @@
                   <div class="w-1/6 text-xl">毛巾位置</div>
                   <div class="w-full">
                     <a-slider
+                      class="w-4/5"
                       v-model="maojinweizhi"
                       id="test"
                       :default-value="0"
@@ -102,6 +103,7 @@
                   <div class="w-1/6 text-xl">水位高度</div>
                   <div class="w-full">
                     <a-slider
+                      class="w-4/5"
                       v-model="shuiweiweizhi"
                       :default-value="0"
                       :dots="true"
@@ -237,7 +239,7 @@
               <div class="text-2xl">实验数据</div>
 
               <a-table
-                :scroll="{ y: 240 }"
+                :scroll="{ y: 220 }"
                 :pagination="false"
                 :columns="columns"
                 :data-source="answer.expertData || []"
@@ -254,9 +256,9 @@
           </div> -->
         </div>
       </a-layout-content>
-      <a-layout-content v-if="current == 2" class="bg-white h-4/5 p-6">
+      <a-layout-content v-if="current == 2" class="bg-white h-4/5">
         <div class="flex flex-1">
-          <div class="text-xl text-left mb-4">
+          <div class="text-xl text-left mb-4 w-1/2 byellow">
             （1）室温为30℃，碗内食物的初始温度为45℃，
             需要冷藏保鲜，<br/>碗内温度越低冷藏效果越好，
             请探究冷藏效果最好的毛巾位置、水位高度。<br/><br/>
@@ -374,7 +376,7 @@
             </a-dropdown><br/><br/><br/>
             若完成作答，请点击“下一步”。
           </div>
-          <div class="w-1/2">
+          <div class="w-1/2 bgreen">
             <div class="">
               <div class="">
                 <!-- <div class="text-2xl">毛巾位置</div> -->
@@ -428,6 +430,7 @@
                   <div class="w-1/6 text-xl">毛巾位置</div>
                   <div class="w-full">
                     <a-slider
+                      class="w-4/5"
                       v-model="maojinweizhi"
                       id="test"
                       :default-value="0"
@@ -443,6 +446,7 @@
                   <div class="w-1/6 text-xl">水位高度</div>
                   <div class="w-full">
                     <a-slider
+                      class="w-4/5"
                       v-model="shuiweiweizhi"
                       :default-value=-1
                       :dots="true"
@@ -578,7 +582,7 @@
             <div class="max-h-96">
               <div class="text-2xl">实验数据</div>
               <a-table
-                :scroll="{ y: 240 }"
+                :scroll="{ y: 220 }"
                 :pagination="false"
                 :columns="columns"
                 :data-source="answer.expertData1 || []"
@@ -595,9 +599,9 @@
           </div> -->
         </div>
       </a-layout-content>
-      <a-layout-content v-if="current == 3" class="bg-white h-4/5 p-6">
+      <a-layout-content v-if="current == 3" class="bg-white h-4/5">
         <div class="flex">
-          <div class="text-xl text-left mb-4 w-1/2">
+          <div class="text-xl text-left mb-4 w-1/2 byellow">
             （2）小红对这个冷藏装置也很感兴趣，她做了一组实验，
             得出如右图所示的数据。根据数据，你认为水位在哪里时冷藏效果最好？<br/>
             <a-radio-group
@@ -626,7 +630,7 @@
               :disabled="answer_dispaly[4]"
             />
           </div>
-          <div class="w-1/2">
+          <div class="w-1/2 bgreen">
             <div class="">
               <div class="">
                 <!-- <div class="text-2xl">毛巾位置</div> -->
@@ -680,6 +684,7 @@
                   <div class="w-1/6 text-xl">毛巾位置</div>
                   <div class="w-full">
                     <a-slider
+                      class="w-4/5"
                       v-model="maojinweizhi"
                       id="test"
                       :default-value="0"
@@ -695,6 +700,7 @@
                   <div class="w-1/6 text-xl">水位高度</div>
                   <div class="w-full">
                     <a-slider
+                      class="w-4/5"
                       v-model="shuiweiweizhi"
                       :default-value="0"
                       :dots="true"
@@ -826,7 +832,7 @@
               <div class="text-2xl">小红的实验数据</div>
 
               <a-table
-                :scroll="{ y: 240 }"
+                :scroll="{ y: 300 }"
                 :pagination="false"
                 :columns="columns"
                 :data-source="q3TableData || []"
@@ -843,9 +849,9 @@
           </div> -->
         </div>
       </a-layout-content>
-      <a-layout-content v-if="current == 4" class="bg-white h-4/5 p-6">
+      <a-layout-content v-if="current == 4" class="bg-white h-4/5">
         <div class="flex">
-          <div class="text-xl text-left mb-4 w-1/2">
+          <div class="text-xl text-left mb-4 w-1/2 byellow">
             （3）小红继续探究，得出如右图所示的数据。根据数据，你认为毛巾位置在哪里时冷藏效果最好？<br/>
              <a-radio-group
               v-model="answer.q3radioGroup"
@@ -870,7 +876,7 @@
               :disabled="answer_dispaly[5]"
             />
           </div>
-          <div class="w-1/2">
+          <div class="w-1/2 bgreen">
             <div class="">
               <div class="">
                 <!-- <div class="text-2xl">毛巾位置</div> -->
@@ -924,6 +930,7 @@
                   <div class="w-1/6 text-xl">毛巾位置</div>
                   <div class="w-full">
                     <a-slider
+                      class="w-4/5"
                       v-model="maojinweizhi"
                       id="test"
                       :default-value="0"
@@ -939,6 +946,7 @@
                   <div class="w-1/6 text-xl">水位高度</div>
                   <div class="w-full">
                     <a-slider
+                      class="w-4/5"
                       v-model="shuiweiweizhi"
                       :default-value="0"
                       :dots="true"
@@ -1070,7 +1078,7 @@
               <div class="text-2xl">小红的实验数据</div>
 
               <a-table
-                :scroll="{ y: 240 }"
+                :scroll="{ y: 220 }"
                 :pagination="false"
                 :columns="columns"
                 :data-source="q2TableData || []"
@@ -1445,9 +1453,9 @@
           
         </div>
       </a-layout-content> -->
-      <a-layout-content v-if="current == 5" class="bg-white h-4/5 p-6">
+      <a-layout-content v-if="current == 5" class="bg-white h-4/5">
         <div class="flex">
-          <div class="text-xl text-left mb-4 w-1/2">
+          <div class="text-xl text-left mb-4 w-1/2 byellow">
             （4）现在你认为：冷藏效果最好的毛巾位置
             <a-dropdown :disabled="answer_dispaly[6]">
               <a-button class="ant-dropdown-link">
@@ -1560,7 +1568,7 @@
               </a-menu>
             </a-dropdown>
           </div>
-          <div class="w-1/2 ml-24">
+          <div class="w-1/2 mb-4 bgreen">
             <div class="">
               <div class="">
                 <!-- <div class="text-2xl">毛巾位置</div> -->
@@ -1614,6 +1622,7 @@
                   <div class="w-1/6 text-xl">毛巾位置</div>
                   <div class="w-full">
                     <a-slider
+                      class="w-4/5"
                       v-model="maojinweizhi"
                       id="test"
                       :default-value="0"
@@ -1629,6 +1638,7 @@
                   <div class="w-1/6 text-xl">水位高度</div>
                   <div class="w-full">
                     <a-slider
+                      class="w-4/5"
                       v-model="shuiweiweizhi"
                       :default-value="0"
                       :dots="true"
@@ -1758,8 +1768,8 @@
           </div>
         </div>
       </a-layout-content>
-      <a-layout-content v-if="current == 6" class="bg-white h-4/5 p-6 flex">
-        <div class="w-1/2">
+      <a-layout-content v-if="current == 6" class="bg-white h-4/5 flex">
+        <div class="w-1/2 byellow">
           <div class="text-xl text-left mb-4">
             （5）请根据第（4）题的作答，用你所学的科学原理解释此时冷藏效果最好的原因。<br/>
             将答案填写于方框中，作答完毕请点击“提交答案”并“进入下一题”。
@@ -1767,7 +1777,7 @@
           <a-textarea v-model="answer.q6Text" @change="q6Change" class="mt-4" placeholder="" :rows="4" :disabled="answer_dispaly[8]"/>
         </div>
 
-        <div class="w-1/2 ml-24">
+        <div class="w-1/2 mb-4 bgreen">
           <div class="">
             <div class="">
               <!-- <div class="text-2xl">毛巾位置</div> -->
@@ -1819,6 +1829,7 @@
                 <div class="w-1/6 text-xl">毛巾位置</div>
                 <div class="w-full">
                   <a-slider
+                    class="w-4/5"
                     v-model="maojinweizhi"
                     id="test"
                     :default-value="0"
@@ -1834,6 +1845,7 @@
                 <div class="w-1/6 text-xl">水位高度</div>
                 <div class="w-full">
                   <a-slider
+                    class="w-4/5"
                     v-model="shuiweiweizhi"
                     :default-value="0"
                     :dots="true"
@@ -2052,13 +2064,13 @@ export default {
           key: 0,
           maojinweizhi: "无毛巾",
           shuiweiweizhi: "水位2",
-          temperature: '30.0℃',
+          temperature: '29.7℃',
         },
         {
           key: 1,
           maojinweizhi: "毛巾未进入水中",
           shuiweiweizhi: "水位2",
-          temperature:'30.0℃',
+          temperature:'29.8℃',
         },
         {
           key: 2,
@@ -2076,13 +2088,13 @@ export default {
           key: 4,
           maojinweizhi: "毛巾未进入水中",
           shuiweiweizhi: "水位4",
-          temperature: '29.2℃',
+          temperature: '29.3℃',
         },
         {
           key: 5,
           maojinweizhi: "毛巾进入水中",
           shuiweiweizhi: "水位4",
-          temperature: '26.3℃',
+          temperature: '26.1℃',
         },
       ],
       q3TableData: [
@@ -2090,7 +2102,7 @@ export default {
           key: 0,
           maojinweizhi: "毛巾进入水中",
           shuiweiweizhi: "水位0",
-          temperature: '30.0℃',
+          temperature: '30.1℃',
         },
         {
           key: 1,
@@ -2114,7 +2126,7 @@ export default {
           key: 4,
           maojinweizhi: "毛巾进入水中",
           shuiweiweizhi: "水位4",
-          temperature: '26.3℃',
+          temperature: '26.1℃',
         },
       ],
       list2: [
@@ -2309,20 +2321,20 @@ export default {
       //问题1的数据表
       tempData1: {
         "00": "30.0℃",
-        "01": "30.0℃",
-        "02": "30.0℃",
-        "03": "29.5℃",
+        "01": "29.8℃",
+        "02": "29.7℃",
+        "03": "29.3℃",
         "04": "29.1℃",
-        10: "30.0℃",
+        10: "30.1℃",
         11: "30.0℃",
-        12: "30.0℃",
-        13: "29.6℃",
-        14: "29.2℃",
-        20: "30.0℃",
+        12: "29.8℃",
+        13: "29.5℃",
+        14: "29.3℃",
+        20: "30.1℃",
         21: "23.8℃",
         22: "22.2℃",
         23: "26.0℃",
-        24: "26.3℃",
+        24: "26.1℃",
       },
       imgList: {
         "00":
@@ -2541,5 +2553,22 @@ export default {
 }
 .anticon {
   vertical-align: 0.125em !important;
+}
+
+.byellow{
+  border: 0.1rem solid #353b48;
+  border-radius: 5%;
+  padding: 2rem;
+  margin: 0.5rem;
+  background-color:#f6e58d;
+  height: 40rem;
+}
+.bgreen{
+  border: 0.1rem solid #353b48;
+  border-radius: 5%;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  background-color:#55E6C1;
+  height: 40rem;
 }
 </style>

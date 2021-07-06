@@ -631,11 +631,11 @@ export default {
       steps: [
         {
           index: 0,
-          title: "前言",
+          title: "前言1",
         },
         {
           index: 1,
-          title: "前言",
+          title: "前言2",
         },
         {
           index: 2,
@@ -647,19 +647,19 @@ export default {
         },
         {
           index: 4,
-          title: "问题1.3",
-        },
-        {
-          index: 5,
           title: "问题2.1",
         },
         {
-          index: 6,
+          index: 5,
           title: "问题2.2",
         },
         {
-          index: 7,
+          index: 6,
           title: "问题2.3",
+        },
+        {
+          index: 7,
+          title: "问题2.4",
         },
       ],
       current: 0,
@@ -739,8 +739,8 @@ export default {
       this.answer23=e.target.value
       if ((e.target.value==2 || e.target.value==3) && this.steps.length==8) {
         this.steps.push({
-          index: 6,
-          title: "问题2.4",
+          index: 8,
+          title: "问题2.5",
         });
       } else if(this.steps.length==9 && e.target.value==1) {
         this.steps.pop();
@@ -881,7 +881,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  height: 900px;
+  height: 800px;
   width: 1280px;
 }
 
@@ -894,7 +894,7 @@ export default {
     padding: 2rem;
     margin: 0.5rem;
     background-color:#f6e58d;
-    height: 43rem;
+    height: 40rem;
   }
   .bgreen{
     border: 0.1rem solid #353b48;
@@ -902,6 +902,6 @@ export default {
     padding: 0.5rem;
     margin: 0.5rem;
     background-color:#55E6C1;
-    height: 43rem;
+    height: 40rem;
   }
 </style>
