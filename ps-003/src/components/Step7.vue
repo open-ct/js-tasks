@@ -1,5 +1,5 @@
 <template>
-  <a-layout-content class="bg-white h-4/5 p-6 flex">
+  <a-layout-content class="bg-white h-4/5 flex">
     <div class="w-1/2 byellow text-lg mb-8">
       <div class="text-lg text-left mb-8">
         2.4 根据你上述的实验设计数据结果，你认为哪位同学的观点更合理<br />

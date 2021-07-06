@@ -1,5 +1,5 @@
 <template>
-  <a-layout-content class="bg-white h-4/5 p-6 flex">
+  <a-layout-content class="bg-white h-4/5 flex">
        
         <div class="text-lg leading-relaxed text-left mb-8 w-1/2 byellow">
           1.2右表为小明同学通过“实验模拟器”记录的数据。<br/><br/>
@@ -12,7 +12,7 @@
         </div>
         <div class="w-1/2 bgreen" >
           <a-table
-              style="margin-top:2rem"
+              style="margin-top:1rem"
               :scroll="{ y:550 }"
               :pagination="false"
               :columns="columns"

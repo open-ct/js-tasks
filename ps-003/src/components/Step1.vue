@@ -1,5 +1,5 @@
 <template>
-  <a-layout-content class="bg-white h-4/5 p-6 flex w-full">
+  <a-layout-content class="bg-white h-4/5 flex w-full">
     <div class="text-lg leading-relaxed text-left mb-8 w-1/2 byellow answer">
       右图是一个实验模拟器，可以用来测量鱼缸中的溶氧量。<br/><br/>
       如果你想了解实验模拟器如何使用，可以尝试下列操作：<br/>
@@ -83,11 +83,10 @@
       </div>
       <div class="w-1/2">
           <a-table
-            :scroll="{ y: 280 }"
+            :scroll="{ y: 260 }"
             :pagination="false"
             :columns="columns"
             :data-source="answer.q1TableData || []"
-            size="middle"
           >
             <p slot="tags" slot-scope="text,tags,i">
               <a-button @click="deleteQ1Tabledata(i)">删除</a-button>

@@ -1,5 +1,5 @@
 <template>
-  <a-layout-content class="bg-white h-4/5 p-6 flex w-full">
+  <a-layout-content class="bg-white h-4/5 flex w-full">
     <div class="w-1/2 byellow">
       <div class="text-lg leading-relaxed text-left mb-8">
         2.3 请你利用实验模拟器，设计实验并收集至少三组数据，验证你的观点。<br/><br/>
@@ -83,7 +83,7 @@
 
         <div class="w-1/2" style="margin-top:-5rem;">
           <a-table
-            :scroll="{ y: 280 }"
+            :scroll="{ y: 250 }"
             :pagination="false"
             :columns="columns"
             :data-source="$store.state.answer.q3TableData || []"

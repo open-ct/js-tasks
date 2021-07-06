@@ -1,5 +1,5 @@
 <template>
-  <a-layout-content class="bg-white h-4/5 p-6 flex w-full">
+  <a-layout-content class="bg-white h-4/5 flex w-full">
     <div class="text-lg leading-relaxed text-left mb-8 w-1/2 byellow">
       1.1为了探究水的溶氧量是否与水量和水温有关。
       小明同学依次将水加入至鱼缸内不同水位，分别测量出不同温度下鱼缸中水的溶氧量。<br/>

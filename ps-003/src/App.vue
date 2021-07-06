@@ -881,7 +881,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  height: 900px;
+  height: 800px;
   width: 1280px;
 }
 
@@ -894,7 +894,7 @@ export default {
     padding: 2rem;
     margin: 0.5rem;
     background-color:#f6e58d;
-    height: 43rem;
+    height: 40rem;
   }
   .bgreen{
     border: 0.1rem solid #353b48;
@@ -902,6 +902,6 @@ export default {
     padding: 0.5rem;
     margin: 0.5rem;
     background-color:#55E6C1;
-    height: 43rem;
+    height: 40rem;
   }
 </style>

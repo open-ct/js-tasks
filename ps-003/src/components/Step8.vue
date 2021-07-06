@@ -1,5 +1,5 @@
 <template>
-  <a-layout-content class="bg-white h-4/5 p-6 flex">
+  <a-layout-content class="bg-white h-4/5 flex">
     <div class="w-1/2 text-lg byellow">
       <div class="text-lg text-left mb-8">
         2.5 某位同学的实验记录如下表所示，请根据他的实验数据，猜测他选择的结论

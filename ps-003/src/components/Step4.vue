@@ -1,5 +1,5 @@
 <template>
-  <a-layout-content class="bg-white h-4/5 p-6 flex">
+  <a-layout-content class="bg-white h-4/5 flex">
        
         <div class="text-lg leading-relaxed text-left mb-8 w-1/2 byellow">
           2.1为进一步探究鱼缸中水草与水中溶氧量的关系，
