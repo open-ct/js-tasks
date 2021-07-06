@@ -390,14 +390,14 @@ export default {
   methods: {
     textareaChange(e){
       // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
-      this.$store.state.answer.radio3=e.target.value
+      this.$store.state.answer.text2=e.target.value
       this.processData.answer[10]=[e.target.value]
       // localStorage.setItem('processData',JSON.stringify(recordProcessData))
       this.$emit('recordProcessData',this.processData)
     },
     radioChange(e){
       // let recordProcessData=JSON.parse(localStorage.getItem('processData'))
-      this.$store.state.answer.text2=e.target.value
+      this.$store.state.answer.radio3=e.target.value
       this.processData.answer[9]=[e.target.value]
       // localStorage.setItem('processData',JSON.stringify(recordProcessData))
       this.$emit('recordProcessData',this.processData)
