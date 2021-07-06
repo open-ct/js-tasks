@@ -2554,6 +2554,7 @@ export default {
 .anticon {
   vertical-align: 0.125em !important;
 }
+
 .byellow{
   border: 0.1rem solid #353b48;
   border-radius: 5%;
