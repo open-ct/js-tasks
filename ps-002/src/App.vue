@@ -13,7 +13,7 @@
           />
         </a-steps>
       </a-layout-content>
-      <a-layout-content v-if="current == 0" class="h-4/5 p-6 byellow">
+      <a-layout-content v-if="current == 0" class="h-4/5 byellow">
         <div class="text-xl text-left align-middle ml-4 leading-loose">
           我国南方地区夏季普遍高温多雨。
           以南方某市为例，夏季室外平均气温可达36℃，平均湿度为80％。
@@ -23,7 +23,7 @@
         </div>
         <img class="float-right" src="./assets/0.jpg" alt="" />
       </a-layout-content>
-      <a-layout-content v-if="current == 1" class="bg-white h-4/5 p-6">
+      <a-layout-content v-if="current == 1" class="bg-white h-4/5">
         <div class="flex flex-1">
           <div class="text-xl text-left mb-4 w-1/2  byellow">
               右图是一个实验模拟器，可以用来探究食物冷藏效果。<br/>
@@ -239,7 +239,7 @@
               <div class="text-2xl">实验数据</div>
 
               <a-table
-                :scroll="{ y: 240 }"
+                :scroll="{ y: 220 }"
                 :pagination="false"
                 :columns="columns"
                 :data-source="answer.expertData || []"
@@ -256,7 +256,7 @@
           </div> -->
         </div>
       </a-layout-content>
-      <a-layout-content v-if="current == 2" class="bg-white h-4/5 p-6">
+      <a-layout-content v-if="current == 2" class="bg-white h-4/5">
         <div class="flex flex-1">
           <div class="text-xl text-left mb-4 w-1/2 byellow">
             （1）室温为30℃，碗内食物的初始温度为45℃，
@@ -582,7 +582,7 @@
             <div class="max-h-96">
               <div class="text-2xl">实验数据</div>
               <a-table
-                :scroll="{ y: 240 }"
+                :scroll="{ y: 220 }"
                 :pagination="false"
                 :columns="columns"
                 :data-source="answer.expertData1 || []"
@@ -599,7 +599,7 @@
           </div> -->
         </div>
       </a-layout-content>
-      <a-layout-content v-if="current == 3" class="bg-white h-4/5 p-6">
+      <a-layout-content v-if="current == 3" class="bg-white h-4/5">
         <div class="flex">
           <div class="text-xl text-left mb-4 w-1/2 byellow">
             （2）小红对这个冷藏装置也很感兴趣，她做了一组实验，
@@ -849,7 +849,7 @@
           </div> -->
         </div>
       </a-layout-content>
-      <a-layout-content v-if="current == 4" class="bg-white h-4/5 p-6">
+      <a-layout-content v-if="current == 4" class="bg-white h-4/5">
         <div class="flex">
           <div class="text-xl text-left mb-4 w-1/2 byellow">
             （3）小红继续探究，得出如右图所示的数据。根据数据，你认为毛巾位置在哪里时冷藏效果最好？<br/>
@@ -1078,7 +1078,7 @@
               <div class="text-2xl">小红的实验数据</div>
 
               <a-table
-                :scroll="{ y: 300 }"
+                :scroll="{ y: 220 }"
                 :pagination="false"
                 :columns="columns"
                 :data-source="q2TableData || []"
@@ -1453,7 +1453,7 @@
           
         </div>
       </a-layout-content> -->
-      <a-layout-content v-if="current == 5" class="bg-white h-4/5 p-6">
+      <a-layout-content v-if="current == 5" class="bg-white h-4/5">
         <div class="flex">
           <div class="text-xl text-left mb-4 w-1/2 byellow">
             （4）现在你认为：冷藏效果最好的毛巾位置
@@ -1768,7 +1768,7 @@
           </div>
         </div>
       </a-layout-content>
-      <a-layout-content v-if="current == 6" class="bg-white h-4/5 p-6 flex">
+      <a-layout-content v-if="current == 6" class="bg-white h-4/5 flex">
         <div class="w-1/2 byellow">
           <div class="text-xl text-left mb-4">
             （5）请根据第（4）题的作答，用你所学的科学原理解释此时冷藏效果最好的原因。<br/>
@@ -2548,7 +2548,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  height: 900px;
+  height: 800px;
   width: 1280px;
 }
 .anticon {
@@ -2560,7 +2560,7 @@ export default {
   padding: 2rem;
   margin: 0.5rem;
   background-color:#f6e58d;
-  height: 42rem;
+  height: 40rem;
 }
 .bgreen{
   border: 0.1rem solid #353b48;
@@ -2568,6 +2568,6 @@ export default {
   padding: 0.5rem;
   margin: 0.5rem;
   background-color:#55E6C1;
-  height: 42rem;
+  height: 40rem;
 }
 </style>
