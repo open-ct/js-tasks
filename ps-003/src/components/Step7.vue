@@ -1,6 +1,18 @@
 <template>
   <a-layout-content class="bg-white h-4/5 flex">
+    <div class="w-1/2 bgreen">
+
+      <a-table
+          :scroll="{ y: 480 }"
+          :pagination="false"
+          :columns="columns"
+          :data-source="tableData || []"
+          style="margin-top:3rem"
+      >
+      </a-table>
+    </div>
     <div class="w-1/2 byellow text-lg mb-8">
+
       <div class="text-lg text-left mb-8">
         2.4 根据你上述的实验设计数据结果，你认为哪位同学的观点更合理<br />
       </div>
@@ -21,17 +33,7 @@
 </div>
       <a-textarea v-model="$store.state.answer.text4" @change="textareaChange" class="mt-4" placeholder="" :rows="8" :disabled="answer_dispaly[7]"/>
     </div>
-    <div class="w-1/2 bgreen">
-    
-      <a-table
-        :scroll="{ y: 480 }"
-        :pagination="false"
-        :columns="columns"
-        :data-source="tableData || []"
-        style="margin-top:3rem"
-      >
-      </a-table>
-    </div>
+
   </a-layout-content>
 </template>
 

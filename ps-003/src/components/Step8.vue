@@ -1,9 +1,21 @@
 <template>
   <a-layout-content class="bg-white h-4/5 flex">
-    <div class="w-1/2 text-lg byellow">
-      <div class="text-lg text-left mb-8">
-        2.5 某位同学的实验记录如下表所示，请根据他的实验数据，猜测他选择的结论
+    <div class="w-1/2 bgreen">
 
+      <a-table
+          :scroll="{ y: 480 }"
+          :pagination="false"
+          :columns="q4Columns"
+          :data-source="q4TableData"
+          style="margin-top:5rem;"
+      >
+      </a-table>
+    </div>
+    <div class="w-1/2 text-lg byellow">
+
+
+      <div class="text-lg text-left mb-8">
+       2.5 某位同学的实验记录如左表所示，请根据他的实验数据，猜测他选择的结论
       </div>
       <a-radio-group
         v-model="$store.state.answer.radio5"
@@ -21,17 +33,7 @@
       <div class="text-left mb-4">并对他的结论，做出相应的解释。</div>
       <a-textarea v-model="$store.state.answer.text5" @change="textareaChange" class="mt-4" placeholder="" :rows="8" :disabled="answer_dispaly[9]"/>
     </div>
-    <div class="w-1/2 bgreen">
 
-      <a-table
-        :scroll="{ y: 480 }"
-        :pagination="false"
-        :columns="q4Columns"
-        :data-source="q4TableData"
-        style="margin-top:5rem;"
-      >
-      </a-table>
-    </div>
   </a-layout-content>
 </template>
 

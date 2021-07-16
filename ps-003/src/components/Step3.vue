@@ -1,16 +1,6 @@
 <template>
   <a-layout-content class="bg-white h-4/5 flex">
-       
-        <div class="text-lg leading-relaxed text-left mb-8 w-1/2 byellow">
-          1.2右表为小明同学通过“实验模拟器”记录的数据。<br/><br/>
-          根据右表中的数据，你能得出什么结论，请写出你的结论并运用所学的科学知识作出解释。
-
-           <div><br/>
-        <a-textarea  class="mt-4" placeholder="" :rows="8"  v-model="$store.state.answer.text1" @change="textareaChange" :disabled="answer_dispaly[2]"/>
-        
-        </div>
-        </div>
-        <div class="w-1/2 bgreen" >
+    <div class="w-1/2 bgreen" >
           <a-table
               style="margin-top:1rem"
               :scroll="{ y:550 }"
@@ -19,7 +9,17 @@
               :data-source="TableData || []"
             />
         </div>
-      </a-layout-content>
+    <div class="text-lg leading-relaxed text-left mb-8 w-1/2 byellow">
+      1.2左表为小明同学通过“实验模拟器”记录的数据。<br/><br/>
+      根据左表中的数据，你能得出什么结论，请写出你的结论并运用所学的科学知识作出解释。
+
+      <div><br/>
+        <a-textarea  class="mt-4" placeholder="" :rows="8"  v-model="$store.state.answer.text1" @change="textareaChange" :disabled="answer_dispaly[2]"/>
+
+      </div>
+    </div>
+
+  </a-layout-content>
 </template>
 
 <script>

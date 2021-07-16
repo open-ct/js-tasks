@@ -1,6 +1,22 @@
 <template>
   <a-layout-content class="bg-white h-4/5 flex">
-        <div class="text-lg text-left mb-8 w-1/2 byellow">
+    <div class="w-1/2 flex bgreen">
+      <img
+          class="relative"
+          style="width: 506px;height:331px;top:10rem;"
+          src="../assets/head.png"
+          alt=""
+      />
+      <!-- <img
+        class="absolute"
+        style="width: 616px"
+        :src="grassImg[1]"
+        alt=""
+      />
+      <img class="absolute" style="width: 616px" :src="fishImg[2]" alt="" /> -->
+    </div>
+    <div class="text-lg text-left mb-8 w-1/2 byellow">
+
           2.2 小明同学想向鱼缸中加入不同数量的水草
           <br />
           学生A认为：鱼缸放入较多水草时，鱼缸中溶氧量会更高；<br />
@@ -16,21 +32,7 @@
           请说明你选择该观点的理由：<br/><br/>
           <a-textarea  class="mt-4" placeholder="" :rows="8" v-model="$store.state.answer.text2" @change="textareaChange" :disabled="answer_dispaly[4]"/>
         </div>
-        <div class="w-1/2 flex bgreen">
-          <img
-            class="relative"
-            style="width: 506px;height:331px;top:10rem;"
-            src="../assets/head.png"
-            alt=""
-          />
-          <!-- <img
-            class="absolute"
-            style="width: 616px"
-            :src="grassImg[1]"
-            alt=""
-          />
-          <img class="absolute" style="width: 616px" :src="fishImg[2]" alt="" /> -->
-        </div>
+
       </a-layout-content>
 </template>
 

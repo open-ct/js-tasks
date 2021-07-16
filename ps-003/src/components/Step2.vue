@@ -1,15 +1,84 @@
 <template>
   <a-layout-content class="bg-white h-4/5 flex w-full">
+    <div class="w-1/2 bgreen">
+      <a-form-model
+          class="w-2/3"
+          :model="form"
+          :label-col="labelCol"
+          :wrapper-col="wrapperCol"
+      >
+        <a-form-model-item label="水面位置">
+          <a-slider
+              v-model="water"
+              id="test"
+              :default-value="1"
+              :dots="true"
+              :min="1"
+              :max="5"
+              :marks="marks1"
+          />
+        </a-form-model-item>
+        <a-form-model-item label="水温">
+          <a-slider
+              v-model="temperature"
+              id="test"
+              :default-value="1"
+              :dots="true"
+              :step="7"
+              :min="7"
+              :max="35"
+              :marks="marks2"
+          />
+        </a-form-model-item>
+      </a-form-model>
+      <div class="w-1/3 relative" style="float:right;right:5rem;bottom:10rem;">
+        <img v-if="water == 1" src="../assets/straight1.png" alt="" />
+        <img v-if="water == 2" src="../assets/straight2.png" alt="" />
+        <img v-if="water == 3" src="../assets/straight3.png" alt="" />
+        <img v-if="water == 4" src="../assets/straight4.png" alt="" />
+        <img v-if="water == 5" src="../assets/straight5.png" alt="" />
+      </div>
+      <!-- <a-statistic
+        class="w-1/5"
+        style="margin-left: 30px"
+        title="水的体积（L）"
+        :value="getVolumeStraight"
+      /> -->
+      <a-statistic
+          class="w-1/3"
+          style="margin-left: 30px"
+          title="溶氧量（mg/L）"
+          :value="getDoStraight"
+      />
+      <a-button @click="updateQ1Table" type="primary" style="position: relative;bottom:3rem;left:5rem">
+        <a-icon type="edit" />记录
+      </a-button>
+      <div class="flex flex-1 w-full mt-4">
+
+        <div class="w-1/2 relative" style="bottom:5rem;">
+          <a-table
+              :scroll="{ y: 280 }"
+              :pagination="false"
+              :columns="columns"
+              :data-source="$store.state.answer.q2TableData || []"
+          >
+            <p slot="tags" slot-scope="text,tags,i">
+              <a-button @click="deleteQ1Tabledata(i)">删除</a-button>
+            </p>
+          </a-table>
+        </div>
+      </div>
+    </div>
     <div class="text-lg leading-relaxed text-left mb-8 w-1/2 byellow">
-      1.1为了探究水的溶氧量是否与水量和水温有关。
+      1.1为了探究水的溶氧量是否与水位和水温有关。
       小明同学依次将水加入至鱼缸内不同水位，分别测量出不同温度下鱼缸中水的溶氧量。<br/>
       请你使用“实验模拟器”，拖动“水温”与“水面位置”按钮，记录实验数据；
 <br /><br />
-      根据你的实验数据，鱼缸中水量与水的溶氧量之间关系是：
+      根据你的实验数据，鱼缸中水位与水的溶氧量之间关系是：
           <a-radio-group  name="radioGroup" v-model="$store.state.answer.radio1" @change="radioChange1" :default-value="-1" :disabled="answer_dispaly[0]">
-            <a-radio :value="1" style="display: block"> A.水量越高，水的溶氧量越高</a-radio>
-            <a-radio :value="2" style="display: block"> B.水量越高，水的溶氧量越低</a-radio>
-            <a-radio :value="3" style="display: block"> C.水量对水的溶氧量没有影响</a-radio>
+            <a-radio :value="1" style="display: block"> A.水位越高，水的溶氧量越高</a-radio>
+            <a-radio :value="2" style="display: block"> B.水位越高，水的溶氧量越低</a-radio>
+            <a-radio :value="3" style="display: block"> C.水位对水的溶氧量没有影响</a-radio>
           </a-radio-group><br/><br/>
       <!-- <a-dropdown :disabled="answer_dispaly[0]">
             <a-button style="margin-left: 8px;"> {{ answer.q1a1 || "" }} <a-icon type="down" /> </a-button>
@@ -65,111 +134,42 @@
               <a-menu-item
                 @click="
                   () => {
-                    this.processData.answer[4]= 'A.水量越多，水的溶氧量越高 ';
+                    this.processData.answer[4]= 'A.水位越多，水的溶氧量越高 ';
                     this.$emit('recordProcessData',this.processData)
                     $forceUpdate();
                     
                   }
                 "
               >
-                <a>A.水量越多，水的溶氧量越高</a>
+                <a>A.水位越多，水的溶氧量越高</a>
               </a-menu-item>
               <a-menu-item
                 @click="
                   () => {
-                    this.processData.answer[4]='B.水量越多，水的溶氧量越低';
+                    this.processData.answer[4]='B.水位越多，水的溶氧量越低';
                     this.$emit('recordProcessData',this.processData)
                     $forceUpdate();
                   }
                 "
               >
-                <a>B.水量越多，水的溶氧量越低</a>
+                <a>B.水位越多，水的溶氧量越低</a>
               </a-menu-item>
               <a-menu-item
                 @click="
                   () => {
-                    this.processData.answer[4]='C.水量对水的溶氧量没有影响'
+                    this.processData.answer[4]='C.水位对水的溶氧量没有影响'
                     this.$emit('recordProcessData',this.processData)
                     $forceUpdate();
                   }
                 "
               >
-                <a>C.水量对水的溶氧量没有影响</a>
+                <a>C.水位对水的溶氧量没有影响</a>
               </a-menu-item>
             </a-menu>
           </a-dropdown> -->
       <!-- <a-textarea v-model="answer.textarea" @change="textareaChange" class="mt-4" placeholder="" :rows="12" :disabled="answer_dispaly[1]"/> -->
     </div>
-    <div class="w-1/2 bgreen">
-      <a-form-model
-        class="w-2/3"
-        :model="form"
-        :label-col="labelCol"
-        :wrapper-col="wrapperCol"
-      >
-        <a-form-model-item label="水面位置">
-          <a-slider
-            v-model="water"
-            id="test"
-            :default-value="1"
-            :dots="true"
-            :min="1"
-            :max="5"
-            :marks="marks1"
-          />
-        </a-form-model-item>
-        <a-form-model-item label="水温">
-          <a-slider
-            v-model="temperature"
-            id="test"
-            :default-value="1"
-            :dots="true"
-            :step="7"
-            :min="7"
-            :max="35"
-            :marks="marks2"
-          />
-        </a-form-model-item>
-      </a-form-model>
-        <div class="w-1/3 relative" style="float:right;right:5rem;bottom:10rem;">
-          <img v-if="water == 1" src="../assets/straight1.png" alt="" />
-          <img v-if="water == 2" src="../assets/straight2.png" alt="" />
-          <img v-if="water == 3" src="../assets/straight3.png" alt="" />
-          <img v-if="water == 4" src="../assets/straight4.png" alt="" />
-          <img v-if="water == 5" src="../assets/straight5.png" alt="" />
-        </div>
-      <!-- <a-statistic
-        class="w-1/5"
-        style="margin-left: 30px"
-        title="水的体积（L）"
-        :value="getVolumeStraight"
-      /> -->
-      <a-statistic
-        class="w-1/3"
-        style="margin-left: 30px"
-        title="溶氧量（mg/L）"
-        :value="getDoStraight"
-      />
-        <a-button @click="updateQ1Table" type="primary" style="position: relative;bottom:3rem;left:5rem">
-          <a-icon type="edit" />记录
-        </a-button>
-      <div class="flex flex-1 w-full mt-4">
-
-        <div class="w-1/2 relative" style="bottom:5rem;">
-          <a-table
-            :scroll="{ y: 280 }"
-            :pagination="false"
-            :columns="columns"
-            :data-source="$store.state.answer.q2TableData || []"
-          >
-          <p slot="tags" slot-scope="text,tags,i">
-              <a-button @click="deleteQ1Tabledata(i)">删除</a-button>
-            </p>
-          </a-table>
-        </div>
-      </div>
-    </div>
-  </a-layout-content>
+    </a-layout-content>
 </template>
 
 <script>

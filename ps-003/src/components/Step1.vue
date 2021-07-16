@@ -1,15 +1,5 @@
 <template>
   <a-layout-content class="bg-white h-4/5 flex w-full">
-    <div class="text-lg leading-relaxed text-left mb-8 w-1/2 byellow answer">
-      右图是一个实验模拟器，可以用来测量鱼缸中的溶氧量。<br/><br/>
-      如果你想了解实验模拟器如何使用，可以尝试下列操作：<br/>
-      1.拖动“鱼的数量”按钮；<br/>
-      2.拖动“水面位置”按钮；<br/>
-      3.拖动“水草数量”按钮；<br/>
-      4.点击“记录”按钮，表格中会呈现实验数据；<br/><br/><br/>
-      注：实验模拟器显示的结果是根据一个多次实验形成的简化数学模型得来，模拟器估计了每天12点时在不同条件下水的溶氧量。
-
-    </div>
     <div class="w-1/2 bgreen">
       <a-form-model
         class="w-2/3"
@@ -83,7 +73,7 @@
       </div>
       <div class="w-1/2">
           <a-table
-            :scroll="{ y: 260 }"
+            :scroll="{ y: 390 }"
             :pagination="false"
             :columns="columns"
             :data-source="answer.q1TableData || []"
@@ -94,6 +84,19 @@
           </a-table>
         </div>
     </div>
+    <div class="text-lg leading-relaxed text-left mb-8 w-1/2 byellow answer">
+      左图是一个实验模拟器，可以用来测量鱼缸中的溶氧量。<br/><br/>
+      如果你想了解实验模拟器如何使用，可以尝试下列操作：<br/>
+      1.拖动“鱼的数量”按钮；<br/>
+      2.拖动“水面位置”按钮；<br/>
+      3.拖动“水草数量”按钮；<br/>
+      4.点击“记录”按钮，表格中会呈现实验数据；<br/>
+      现在请你尝试操作，当你尝试完成后，请点击“下一步”，开始进入正式作答。
+      <br/><br/><br/>
+      注：实验模拟器显示的结果是根据一个多次实验形成的简化数学模型得来，模拟器估计了每天12点时在不同条件下水的溶氧量。
+
+    </div>
+
   </a-layout-content>
 </template>
 
